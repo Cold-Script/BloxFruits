@@ -266,7 +266,7 @@ mainopens.Parent = mainopen
  local yoo = string.gsub(tostring(keybind),"Enum.KeyCode.","")
  
  local ZENHUB = Instance.new("ScreenGui")
- ZENHUB.Name = "UniverseHub"
+ ZENHUB.Name = "YOU HUB [BLOX FRUITS]"
  ZENHUB.Parent = game.CoreGui
  ZENHUB.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
  
