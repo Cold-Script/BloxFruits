@@ -266,7 +266,7 @@ mainopens.Parent = mainopen
  local yoo = string.gsub(tostring(keybind),"Enum.KeyCode.","")
  
  local ZENHUB = Instance.new("ScreenGui")
- ZENHUB.Name = "YOU HUB [BLOX FRUITS]"
+ ZENHUB.Name = "You Hub"
  ZENHUB.Parent = game.CoreGui
  ZENHUB.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
  
@@ -566,7 +566,7 @@ local NotifHolderUIStroke = Instance.new("UIStroke")
 local Line = Instance.new("Frame")
 
 NotificationHold.Name = "NotificationHold"
-NotificationHold.Parent = UniverseHub
+NotificationHold.Parent = YouHub
 NotificationHold.BackgroundColor3 = _G.WindowBackgroundColor
 NotificationHold.BackgroundTransparency = 1
 NotificationHold.BorderSizePixel = 0
