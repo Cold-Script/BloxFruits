@@ -3799,7 +3799,7 @@ end)
 
  
 --------------------------------------------------------------------
-local Library = Update:Window("Universe  ","")
+local Library = Update:Window("YOU HUB  ","")
 ------------------------------------------
 
 spawn(function()
@@ -5865,7 +5865,7 @@ spawn(function()
 			function toTargetWait(a)local b=(a.p-game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).Magnitude;tweenrach=game:GetService('TweenService'):Create(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"),TweenInfo.new(b/250,Enum.EasingStyle.Linear),{CFrame=a})tweenrach:Play()end;toTargetWait(workspace.Map.MysticIsland.PrimaryPart.CFrame*CFrame.new(0,250,0))
 			else
 				game.StarterGui:SetCore("SendNotification", {
-					Title = "Universe Hub";
+					Title = "YOU HUB";
 					Text = "Mirage not Found!";
 					Icon = "http://www.roblox.com/asset/?id=11818627057";
 					Duration = 3;
