@@ -266,7 +266,7 @@ mainopens.Parent = mainopen
  local yoo = string.gsub(tostring(keybind),"Enum.KeyCode.","")
  
  local ZENHUB = Instance.new("ScreenGui")
- ZENHUB.Name = "You Hub"
+ ZENHUB.Name = "YOU HUB"
  ZENHUB.Parent = game.CoreGui
  ZENHUB.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
  
@@ -321,15 +321,15 @@ mainopens.Parent = mainopen
  Name.TextSize = 14.000
  
  local Hub = Instance.new("TextLabel")
- Hub.Name = "Hub"
+ Hub.Name = "YOU HUB"
  Hub.Parent = Top
- Hub.BackgroundColor3 = Color3.fromRGB(224,224,224)
+ Hub.BackgroundColor3 = Color3.new(7,9.9)
  Hub.BackgroundTransparency = 1.000
  Hub.Position = UDim2.new(0, 110, 0, 0)
  Hub.Size = UDim2.new(0, 81, 0, 27)
  Hub.Font = Enum.Font.Code
- Hub.Text = "Hub"
- Hub.TextColor3 = Color3.fromRGB(255,0,255)
+ Hub.Text = "YOU HUB"
+ Hub.TextColor3 = Color3.new(7,9.9)
  Hub.TextSize = 16.000
  Hub.TextXAlignment = Enum.TextXAlignment.Left
  
@@ -3799,7 +3799,7 @@ end)
 
  
 --------------------------------------------------------------------
-local Library = Update:Window("YOU HUB  ","")
+local Library = Update:Window("","")
 ------------------------------------------
 
 spawn(function()
