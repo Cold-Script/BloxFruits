@@ -4206,18 +4206,18 @@ spawn(function()
 end)
 
 --------------------------
-local Main = Library:Tab("Main","rbxassetid://11446825283")
-local Setting = Library:Tab("Settings","rbxassetid://11446835336")
-local Weapon = Library:Tab("Weapons","rbxassetid://11446859498")
-local Race = Library:Tab("Race V4","rbxassetid://11446900930")
-local Stats = Library:Tab("Stats","rbxassetid://11447069304")
-local P = Library:Tab("Player","rbxassetid://11446900930")
-local Teleport = Library:Tab("Teleport","rbxassetid://11446920523")
-local Dungeon = Library:Tab("Dungeon","rbxassetid://11446957539")
-local DevilFruit = Library:Tab("Fruit+Esp","rbxassetid://11446965348")
-local Shop = Library:Tab("Shop","rbxassetid://6031265976")
-local Misc = Library:Tab("Misc","rbxassetid://11447063791")
-local Op = Library:Tab("Status", "rbxassetid://7040410130")
+local Main = Library:Tab("MAIN","rbxassetid://11446825283")
+local Setting = Library:Tab("SETTING","rbxassetid://11446835336")
+local Weapon = Library:Tab("WEAPON","rbxassetid://11446859498")
+local Race = Library:Tab("RACE V4 + MYSTERIOS ISLAND","rbxassetid://11446900930")
+local Stats = Library:Tab("STAT","rbxassetid://11447069304")
+local P = Library:Tab("BOUNTY + COMBAT","rbxassetid://11446900930")
+local Teleport = Library:Tab("TELEPORT","rbxassetid://11446920523")
+local Dungeon = Library:Tab("RAID","rbxassetid://11446957539")
+local DevilFruit = Library:Tab("FRUITS + ESP","rbxassetid://11446965348")
+local Shop = Library:Tab("SHOP","rbxassetid://6031265976")
+local Misc = Library:Tab("MISC","rbxassetid://11447063791")
+local Op = Library:Tab("STATUE", "rbxassetid://7040410130")
 --------------------------------------------------------------------
 
 Setting:Seperator(" Setting ")
@@ -4521,7 +4521,7 @@ end)
 			_G.FastAttack1 = value
 		end)
 		
-		_G.AttackDelay = 0.1
+		_G.AttackDelay = 0
 
 		spawn(function()
 			while wait(0.5) do
@@ -4539,9 +4539,9 @@ end)
 		spawn(function()
 			while true do
 				wait(1)
-				_G.AttackDelay = 0.1
+				_G.AttackDelay = 0
 				wait(9)
-				_G.AttackDelay = 0.01
+				_G.AttackDelay = 0
 			end
 		end)
 
@@ -4803,7 +4803,7 @@ local GameTime = math.floor(workspace.DistributedGameTime+0.5)
 local Hour = math.floor(GameTime/(60^2))%24
 local Minute = math.floor(GameTime/(60^1))%60
 local Second = math.floor(GameTime/(60^0))%60
-Time:Set("[GameTime] : Hours : "..Hour.." Minutes : "..Minute.." Seconds : "..Second)
+Time:Set("[GameTime] : Hours : " ..Hour.. " Minutes : " ..Minute.. " Seconds : " ..Second )
 end
 
 spawn(function()
@@ -4818,7 +4818,7 @@ Client = Main:Label1("Client")
 
 function UpdateClient()
 local Fps = workspace:GetRealPhysicsFPS()
-Client:Refresh("[Fps] : "..Fps)
+Client:Refresh("[FPS] : "..Fps)
 end
 
 spawn(function()
@@ -4831,7 +4831,7 @@ Client1 = Main:Label1("Client")
 
 function UpdateClient1()
 local Ping = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
-Client1:Refresh("[Ping] : "..Ping)
+Client1:Refresh("[PING] : "..Ping)
 end
 
 spawn(function()
@@ -5880,7 +5880,7 @@ end
 end)
 end)
 
-Main:Button("Mirage Gear",function()
+Main:Button("Tp Gear",function()
 topos(game:GetService("Workspace").Map.MysticIsland:FindFirstChildOfClass("MeshPart").CFrame)
 end)
 
@@ -5962,7 +5962,7 @@ Main:Button("Check Bone", function()
 	local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/EITAPORRA2/BloxFruits/main/Notification%20Holder"))()
 	wait(0.5)
 	Notification:Notify(
-	   {Title = "Universe HUB", Description = ("Your Bone : "..(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones","Check")))},
+	   {Title = "YOU HUB", Description = ("Your Bone : "..(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones","Check")))},
 	   {OutlineColor = Color3.fromRGB(255, 0, 255),Time = 5, Type = "option"},
 	   {Image = "https://i.pinimg.com/564x/08/25/06/082506876327d31cb742bdfa55ebef87.jpg", ImageColor = Color3.fromRGB(255, 0, 0), Callback = function(State) print(tostring(State)) end}
 	)
@@ -6019,7 +6019,7 @@ local NotificationHolder = loadstring(game:HttpGet("https://raw.githubuserconten
 local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/EITAPORRA2/BloxFruits/main/Notification%20Holder.lua"))()
 wait(1)
 Notification:Notify(
-   {Title = "Universe HUB", Description = "You Have Max Observation"},
+   {Title = "YOU HUB", Description = "You Have Max Observation"},
    {OutlineColor = Color3.fromRGB(255, 0, 255),Time = 5, Type = "option"},
    {Image = "https://i.pinimg.com/564x/08/25/06/082506876327d31cb742bdfa55ebef87.jpg", ImageColor = Color3.fromRGB(255, 0, 0), Callback = function(State) print(tostring(State)) end}
 )
@@ -7299,7 +7299,7 @@ end)
 
 Weapon:Seperator(" Legendary Sword ")
 
-Weapon:Toggle("Auto Buy Legendary Sword",_G.AutoBuyLegendarySword,function(Value)
+Weapon:Toggle("Auto Buy 3 Legendary Sword",_G.AutoBuyLegendarySword,function(Value)
 			_G.AutoBuyLegendarySword = Value
 		end)
 		spawn(function()
@@ -9927,7 +9927,7 @@ end
   "Spike-Spike",
   "Chop-Chop",
   "Spring-Spring",
-  "Kilo-Kilo",
+  "Rocket-Rocket",
   "Spin-Spin",
   "Bird: Falcon",
   "Smoke-Smoke",
@@ -9942,19 +9942,21 @@ end
   "Rubber-Rubber",
   "Barrier-Barrier",
   "Magma-Magma",
-  "Door-Door",
+  "Portal-Portal",
   "Quake-Quake",
   "Human-Human: Buddha",
   "String-String",
   "Bird-Bird: Phoenix",
+  "Sound-Sound",
+  "Mammoth-Mammoth",
   "Rumble-Rumble",
-  "Paw-Paw",
+  "Pain-Pain",
   "Gravity-Gravity",
   "Dough-Dough",
   "Venom-Venom",
   "Shadow-Shadow",
   "Control-Control",
-  "Soul-Soul",
+  "Spirit-Spirit",
   "Dragon-Dragon",
   "Leopard-Leopard"
  }
@@ -10965,7 +10967,7 @@ Misc:Seperator(" Player Misc ")
         end
     end)
 
-Misc:Toggle("No Clip",_G.No_clip,function(value)
+Misc:Toggle("NoClip",_G.No_clip,function(value)
  _G.No_clip = value
 end)
 
@@ -11190,7 +11192,7 @@ spawn(function()
     
         
     Misc:Button("Unlock FPS",function()
-        setfpscap(100)
+        setfpscap(1000)
     end)
 Misc:Button("Invisible",function()
         game:GetService("Players").LocalPlayer.Character.LowerTorso:Destroy()
