@@ -10359,8 +10359,8 @@ function UpdateIslandESP()
   if not v.Handle:FindFirstChild('NameEsp'..Number) then
   local bill = Instance.new('BillboardGui',v.Handle)
   bill.Name = 'NameEsp'..Number
-  bill.ExtentsOffset = Vector3.new(0, 1, 0)
-  bill.Size = UDim2.new(1,200,1,30)
+  bill.ExtentsOffset = Vector3.new(0, 3, 0)
+  bill.Size = UDim2.new(1,100,1,5)
   bill.Adornee = v.Handle
   bill.AlwaysOnTop = true
   local name = Instance.new('TextLabel',bill)
@@ -10875,16 +10875,6 @@ Misc:Button("Devil Fruit Shop",function()
 		game.Players.localPlayer.PlayerGui.Main.FruitShop.Visible = true
 end)
 
-
-Misc:Button("Title Name",function()
- local args = {
-			[1] = "getTitles"
-		}
-		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-		game.Players.localPlayer.PlayerGui.Main.Titles.Visible = true
-end)
-
-
 Misc:Button("Color Haki",function()
  game.Players.localPlayer.PlayerGui.Main.Colors.Visible = true
 end)
@@ -11094,7 +11084,7 @@ Misc:Toggle("Dodge No Cooldown",false,function(value)
         end
     end)
     
-    Misc:Toggle("Infinite Geppo",getgenv().InfGeppo,function(value)
+    Misc:Toggle("Infinite Dash",getgenv().InfGeppo,function(value)
         getgenv().InfGeppo = value
     end)
     
@@ -11104,7 +11094,7 @@ Misc:Toggle("Dodge No Cooldown",false,function(value)
                 if getgenv().InfGeppo then
                     for i,v in next, getgc() do
                         if game:GetService("Players").LocalPlayer.Character.Skyjump then
-                            if typeof(v) == "function" and getfenv(v).script == game:GetService("Players").LocalPlayer.Character.Skyjump then
+                            if typeof(v) == "function" and getfenv(v).script == game:GetService("Players").LocalPlayer.Character.Dash then
                                 for i2,v2 in next, getupvalues(v) do
                                     if tostring(i2) == "9" then
                                         repeat wait(.1)
@@ -11151,7 +11141,7 @@ Misc:Toggle("Dodge No Cooldown",false,function(value)
     end)
     
     if World2 then
-		Misc:Button("Remove Lava",function()
+		Misc:Toggle("Remove Lava",true,function()
 			for i,v in pairs(game.Workspace:GetDescendants()) do
 				if v.Name == "Lava" then   
 					v:Destroy()
@@ -11176,19 +11166,6 @@ spawn(function()
 				end)
 			end
 		end)
-    Misc:Toggle("Fly",false,function(value)
-        Fly = value
-    end)
-    
-    spawn(function()
-        while wait() do
-            pcall(function()
-                if Fly then
-                    fly()
-                end
-            end)
-        end
-    end)
     
         
     Misc:Button("Unlock FPS",function()
