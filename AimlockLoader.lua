@@ -6,8 +6,8 @@ getgenv().UniverseHubLoadingTime = true
 
 getgenv().SeparateNotify = function(title, text, icon, time) 
     SGui:SetCore("SendNotification",{
-        Title = title;
-        Text = text;
+        Title = ;
+        Text = 100% Anti Ban;
         Icon = "";
         Duration = time;
     })
@@ -17,8 +17,8 @@ getgenv().Notify = function(title, text, icon, time)
     if CanNotify == true then 
         if not time or not type(time) == "number" then time = 3 end
         SGui:SetCore("SendNotification",{
-            Title = title;
-            Text = text;
+            Title = ;
+            Text = Loading...;
             Icon = "";
             Duration = time;
         }) 
@@ -91,13 +91,13 @@ Uis.InputBegan:Connect(function(Key)
                 local Target;Target = GetNearestTarget()
                 if Target ~= nil then 
                     AimlockTarget = Target
-                    Notify("Universe Hub", "Aimlock Target: "..tostring(AimlockTarget), "", 3)
+                    Notify("YOU HUB", "Aimlock Target: "..tostring(AimlockTarget), "", 3)
                 end
             end)
         end
         if Key.KeyCode == Enum.KeyCode[EnableBind] then 
             Aimlock = not Aimlock
-            Notify("Universe Hub", "Aimlock: "..tostring(Aimlock), "", 3)
+            Notify("YOU HUB", "Aimlock: "..tostring(Aimlock), "", 3)
         end
     end
 end)
