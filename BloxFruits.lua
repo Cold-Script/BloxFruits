@@ -3799,7 +3799,7 @@ end)
 
  
 --------------------------------------------------------------------
-local Library = Update:Window(                    "","")
+local Library = Update:Window( "","")
 ------------------------------------------
 
 spawn(function()
@@ -4211,10 +4211,10 @@ local Setting = Library:Tab("SETTING","rbxassetid://11446835336")
 local Weapon = Library:Tab("WEAPON","rbxassetid://11446859498")
 local Race = Library:Tab("RACE V4 + MYSTERIOS ISLAND","rbxassetid://11446900930")
 local Stats = Library:Tab("STAT","rbxassetid://11447069304")
-local P = Library:Tab("BOUNTY + COMBAT","rbxassetid://11446900930")
+local P = Library:Tab("COMBAT PVP","rbxassetid://11446900930")
 local Teleport = Library:Tab("TELEPORT","rbxassetid://11446920523")
 local Dungeon = Library:Tab("RAID","rbxassetid://11446957539")
-local DevilFruit = Library:Tab("FRUITS + ESP","rbxassetid://11446965348")
+local DevilFruit = Library:Tab("FRUIT+ESP","rbxassetid://11446965348")
 local Shop = Library:Tab("SHOP","rbxassetid://6031265976")
 local Misc = Library:Tab("MISC","rbxassetid://11447063791")
 local Op = Library:Tab("STATUE", "rbxassetid://7040410130")
@@ -4524,7 +4524,7 @@ end)
 		_G.AttackDelay = 0
 
 		spawn(function()
-			while wait(0.5) do
+			while wait(0.01) do
 				pcall(function()
 					if _G.FastAttack1 then
 						repeat
@@ -4538,9 +4538,9 @@ end)
 		
 		spawn(function()
 			while true do
-				wait(1)
+				wait(0.01)
 				_G.AttackDelay = 0
-				wait(9)
+				wait(0.01)
 				_G.AttackDelay = 0
 			end
 		end)
@@ -4581,7 +4581,7 @@ end)
 		end)
 		
 		spawn(function()
-			while wait(0.5) do
+			while wait(0.005) do
 				pcall(function()
 					if _G.FastAttack2 then
 						repeat
@@ -4603,13 +4603,13 @@ spawn(function()
 		pcall(function()
 			if _G.Auto_Ken then
 				game:GetService("ReplicatedStorage").Remotes.CommE:FireServer("Ken",true)
-				wait(7)
+				wait(0.01)
 			end
 		end)
 	end
 end)
 
-Setting:Toggle("Auto Click",false,function(value)
+Setting:Toggle("Auto Click",true,function(value)
  _G.click = value
 end)
 
@@ -4803,7 +4803,7 @@ local GameTime = math.floor(workspace.DistributedGameTime+0.5)
 local Hour = math.floor(GameTime/(60^2))%24
 local Minute = math.floor(GameTime/(60^1))%60
 local Second = math.floor(GameTime/(60^0))%60
-Time:Set("[GameTime] : Hours : " ..Hour.. " Minutes : " ..Minute.. " Seconds : " ..Second )
+Time:Set("Hours : " ..Hour.. " Minutes : " ..Minute.. " Seconds : " ..Second )
 end
 
 spawn(function()
@@ -6017,10 +6017,10 @@ end)
                     if game:GetService("Players").LocalPlayer.VisionRadius.Value >= 3000 then
 local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/EITAPORRA2/BloxFruits/main/Notification.lua"))()
 local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/EITAPORRA2/BloxFruits/main/Notification%20Holder.lua"))()
-wait(1)
+wait(0.01)
 Notification:Notify(
    {Title = "YOU HUB", Description = "You Have Max Observation"},
-   {OutlineColor = Color3.fromRGB(255, 0, 255),Time = 5, Type = "option"},
+   {OutlineColor = Color3.fromRGB(255, 0, 255),Time = 10, Type = "option"},
    {Image = "https://i.pinimg.com/564x/08/25/06/082506876327d31cb742bdfa55ebef87.jpg", ImageColor = Color3.fromRGB(255, 0, 0), Callback = function(State) print(tostring(State)) end}
 )
                     else
@@ -6095,7 +6095,7 @@ Notification:Notify(
 						if game.Players.LocalPlayer.Character.HasBuso then
 							for i,v in pairs(game.Players.LocalPlayer.Character.Humanoid:GetChildren()) do
 								if v.Name == "RightLowerArm_BusoLayer1" or v.Name == "RightLowerArm_BusoLayer2" or v.Name == "RightHand_BusoLayer1" or v.Name == "RightHand_BusoLayer2" or v.Name == "LeftLowerArm_BusoLayer1" or v.Name == "LeftLowerArm_BusoLayer2" or v.Name == "LeftHand_BusoLayer1" or v.Name == "LeftHand_BusoLayer2" or v.Name == "LeftHand_BusoLayer1" or v.Name == "RightUpperArm_BusoLayer1" or v.Name == "RightUpperArm_BusoLayer2" or v.Name == "LeftUpperArm_BusoLayer1" or v.Name == "LeftUpperArm_BusoLayer2" or v.Name == "UpperTorso_BusoLayer1" or v.Name == "UpperTorso_BusoLayer2" or v.Name == "LowerTorso_BusoLayer1" or v.Name == "LowerTorso_BusoLayer2" or v.Name == "Head_BusoLayer1" or v.Name == "Head_BusoLayer2" or v.Name == "RightUpperLeg_BusoLayer1" or v.Name == "RightUpperLeg_BusoLayer2" or v.Name == "LeftUpperLeg_BusoLayer1" or v.Name == "LeftUpperLeg_BusoLayer2" or v.Name == "RightLowerLeg_BusoLayer1" or v.Name == "RightLowerLeg_BusoLayer2" or v.Name == "LeftLowerLeg_BusoLayer1" or v.Name == "LeftLowerLeg_BusoLayer2" or v.Name == "LeftFoot_BusoLayer1" or v.Name == "LeftFoot_BusoLayer2" or v.Name == "RightFoot_BusoLayer1" or v.Name == "RightFoot_BusoLayer2" then
-									v.Color = Color3.fromHSV(tick() * 24 % 255/255, 1, 1)
+									v.Color = Color3.fromHSV(tick() * 100 % 255/255, 1, 1)
 								end
 							end
 						end
