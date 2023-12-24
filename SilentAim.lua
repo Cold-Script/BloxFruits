@@ -219,7 +219,7 @@ end
 
 
 -- ui creating & handling
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/CQWEO/GuiCQWEO/patch-8/Gui Lib %5BLibrary%5D"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/Library.lua"))()
 local Window = Library:CreateWindow("YOUHUB")
 local GeneralTab = Window:AddTab("General")
 local MainBOX = GeneralTab:AddLeftTabbox("Main") do
