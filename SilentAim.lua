@@ -27,7 +27,7 @@ local SilentAimSettings = {
 
 -- variables
 getgenv().SilentAimSettings = Settings
-local MainFileName = "UniverseSilentAim"
+local MainFileName = "YouHub"
 local SelectedFile, FileToSave = "", ""
 
 local Camera = workspace.CurrentCamera
@@ -221,7 +221,7 @@ end
 -- ui creating & handling
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/CQWEO/COLORS/main/README.md"))()
 local Save = loadstring(game:HttpGet("https://raw.githubusercontent.com/KINGHUB01/Gui/main/Gui%20Lib%20%5BSaveManager%5D"))()
-local Window = Library:CreateWindow("Silent Cuzin")
+local Window = Library:CreateWindow("YOUHUB")
 local GeneralTab = Window:AddTab("General")
 local MainBOX = GeneralTab:AddLeftTabbox("Main") do
 local Main = MainBOX:AddTab("Main")
