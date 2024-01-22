@@ -2504,3 +2504,130 @@ do
 			end
 		end
 end
+--Attack Mastery
+	function NormalAttack()
+		if not _G.NormalAttack then
+			local L_297_ = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework)
+			local L_298_ = debug.getupvalues(L_297_)[2]
+			local L_299_ = require(game.ReplicatedStorage.Util.CameraShaker)
+			L_299_:Stop()
+			L_298_.activeController.attacking = false
+			L_298_.activeController.timeToNextAttack = 0
+			L_298_.activeController.hitboxMagnitude = 180
+			game:GetService'VirtualUser':CaptureController()
+			game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+		end
+	end
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+--Sword Weapon
+	function GetWeaponInventory(L_300_arg0)
+		for L_301_forvar0, L_302_forvar1 in pairs(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventory")) do
+			if type(L_302_forvar1) == "table" then
+				if L_302_forvar1.Type == "Sword" then
+					if L_302_forvar1.Name == L_300_arg0 then
+						return true
+					end
+				end
+			end
+		end
+		return false
+	end
+
+---Method Farm
+	Type1 = 1
+	spawn(function()
+		while wait(.1) do
+			if Type == 1 then
+				Pos = CFrame.new(10, 40, 10)
+			elseif Type == 2 then
+				Pos = CFrame.new(-30, 10, -30)
+			elseif Type == 3 then
+				Pos = CFrame.new(10, 10, -40)
+			elseif Type == 4 then
+				Pos = CFrame.new(-40, 10, 10)
+			end
+		end
+	end)
+	spawn(function()
+		while wait(.1) do
+			Type = 1
+			wait(1)
+			Type = 2
+			wait(1)
+			Type = 3
+			wait(1)
+			Type = 4
+			wait(1)
+		end
+	end)
+--auto turn haki
+	function AutoHaki()
+		if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+		end
+	end
+---Bypass Teleport
+	function BTP(L_303_arg0)
+		repeat
+			wait(0.5)
+			game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_303_arg0
+			task.wait()
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_303_arg0
+		until (L_303_arg0.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
+	end
+	function BTP(L_304_arg0)
+		pcall(function()
+			if (L_304_arg0.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 2000 and not Auto_Raid and game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
+				if NameMon == "FishmanQuest" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
+				elseif Mon == "God's Guard" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(- 4607.82275, 872.54248, - 1667.55688))
+				elseif NameMon == "SkyExp1Quest" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(- 7894.6176757813, 5547.1416015625, - 380.29119873047))
+				elseif NameMon == "ShipQuest1" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+				elseif NameMon == "ShipQuest2" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+				elseif NameMon == "FrostQuest" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(- 6508.5581054688, 89.034996032715, - 132.83953857422))
+				else
+					repeat
+						wait(0.5)
+						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_304_arg0
+						wait(.05)
+						game.Players.LocalPlayer.Character.Head:Destroy()
+						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_304_arg0
+					until (L_304_arg0.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2500 and game.Players.LocalPlayer.Character.Humanoid.Health > 0
+					wait()
+				end
+			end
+		end)
+	end
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+--Remove Effect
+	if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
+		game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
+	end
+	if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
+		game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
+	end
+--------------------------------------------------------------------------------------------------------------------------------------------
+-- Hehe
+--------------------------------------------------------------------------------------------------------------------------------------------
