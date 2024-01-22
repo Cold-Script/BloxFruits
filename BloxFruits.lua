@@ -2338,3 +2338,105 @@ do
 		end
 		return L_267_
 	end
+
+--select weapon
+	function EquipTool(L_268_arg0)
+		if game.Players.LocalPlayer.Backpack:FindFirstChild(L_268_arg0) then
+			local L_269_ = game.Players.LocalPlayer.Backpack:FindFirstChild(L_268_arg0)
+			wait(0.5)
+			game.Players.LocalPlayer.Character.Humanoid:EquipTool(L_269_)
+		end
+	end
+    
+    --aimbot mastery
+
+	spawn(function()
+		local L_270_ = getrawmetatable(game)
+		local L_271_ = L_270_.__namecall
+		setreadonly(L_270_, false)
+		L_270_.__namecall = newcclosure(function(...)
+			local L_272_ = getnamecallmethod()
+			local L_273_ = {
+				...
+			}
+			if tostring(L_272_) == "FireServer" then
+				if tostring(L_273_[1]) == "RemoteEvent" then
+					if tostring(L_273_[2]) ~= "true" and tostring(L_273_[2]) ~= "false" then
+						if _G.UseSkill then
+							if type(L_273_[2]) == "vector" then
+								L_273_[2] = PositionSkillMasteryDevilFruit
+							else
+								L_273_[2] = CFrame.new(PositionSkillMasteryDevilFruit)
+							end
+							return L_271_(unpack(L_273_))
+						end
+					end
+				end
+			end
+			return L_271_(...)
+		end)
+	end)
+--Equip Gun
+	spawn(function()
+		pcall(function()
+			while task.wait() do
+				for L_274_forvar0, L_275_forvar1 in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+					if L_275_forvar1:IsA("Tool") then
+						if L_275_forvar1:FindFirstChild("RemoteFunctionShoot") then
+							CurrentEquipGun = L_275_forvar1.Name
+						end
+					end
+				end
+			end
+		end)
+	end)
+
+-- [Body Gyro]
+	spawn(function()
+		while task.wait() do
+			pcall(function()
+				if _G.TeleportIsland or AutoFarmChest or _G.chestsea2 or _G.chestsea3 or _G.CastleRaid or _G.CollectAzure or _G.TweenToKitsune or _G.AutoCandy or _G.GhostShip or _G.Ship or _G.SailBoat or _G.Auto_Holy_Torch or _G.FindMirageIsland or _G.TeleportPly or _G.Tweenfruit or _G.AutoFishCrew or _G.AutoShark or _G.AutoCakeV2 or _G.AutoMysticIsland or _G.AutoQuestRace or _G.AutoBuyBoat or _G.dao or _G.AutoMirage or AutoFarmAcient or _G.AutoQuestRace or Auto_Law or _G.AutoAllBoss or AutoTushita or _G.AutoHolyTorch or _G.AutoTerrorshark or _G.farmpiranya or _G.DriveMytic or _G.AutoCakeV2V2 or PirateShip or _G.AutoSeaBeast or _G.AutoNear or _G.BossRaid or _G.GrabChest or AutoCitizen or _G.Ectoplasm or AutoEvoRace or AutoBartilo or AutoFactory or BringChestz or BringFruitz or _G.AutoLevel or _G.Clip2 or AutoFarmNoQuest or _G.AutoBone or AutoFarmSelectMonsterQuest or AutoFarmSelectMonsterNoQuest or _G.AutoBoss or AutoFarmBossQuest or AutoFarmMasGun or AutoFarmMasDevilFruit or AutoFarmSelectArea or AutoSecondSea or AutoThirdSea or AutoDeathStep or AutoSuperhuman or AutoSharkman or AutoElectricClaw or AutoDragonTalon or AutoGodhuman or AutoRengoku or AutoBuddySword or AutoPole or AutoHallowSycthe or AutoCavander or AutoTushita or AutoDarkDagger or _G.CakePrince or _G.AutoElite or AutoRainbowHaki or AutoSaber or AutoFarmKen or AutoKenHop or AutoKenV2 or _G.AutoKillPlayerMelee or _G.AutoKillPlayerGun or _G.AutoKillPlayerFruit or AutoDungeon or AutoNextIsland or AutoAdvanceDungeon or Musketeer or RipIndra or Auto_Serpent_Bow or AutoTorch or AutoSoulGuitar or Auto_Cursed_Dual_Katana or _G.AutoMaterial or Auto_Quest_Yama_1 or Auto_Quest_Yama_2 or Auto_Quest_Yama_3 or Auto_Quest_Tushita_1 or Auto_Quest_Tushita_2 or Auto_Quest_Tushita_3 or _G.Factory or _G.SwanGlasses or AutoBartilo or AutoEvoRace or _G.Ectoplasm then
+					if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+						local L_276_ = Instance.new("BodyVelocity")
+						L_276_.Name = "BodyClip"
+						L_276_.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+						L_276_.MaxForce = Vector3.new(100000, 100000, 100000)
+						L_276_.Velocity = Vector3.new(0, 0, 0)
+					end
+				else
+					game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+				end
+			end)
+		end
+	end)
+
+	
+--No CLip Auto Farm
+	spawn(function()
+		pcall(function()
+			game:GetService("RunService").Stepped:Connect(function()
+				if _G.TeleportIsland or _G.CastleRaid or AutoFarmChest or _G.CollectAzure or _G.TweenToKitsune or _G.AutoCandy or _G.GhostShip or _G.Ship or _G.SailBoat or _G.Auto_Holy_Torch or _G.Tweenfruit or _G.FindMirageIsland or _G.TeleportPly or _G.AutoFishCrew or _G.AutoShark or _G.AutoMysticIsland or _G.AutoCakeV2 or _G.AutoQuestRace or _G.AutoBuyBoat or _G.dao or AutoFarmAcient or _G.AutoMirage or Auto_Law or _G.AutoQuestRace or _G.AutoAllBoss or _G.AutoHolyTorch or AutoTushita or _G.farmpiranya or _G.AutoTerrorshark or _G.AutoNear or _G.AutoCakeV2V2 or PirateShip or _G.AutoSeaBeast or _G.DriveMytic or _G.BossRaid or _G.GrabChest or AutoCitizen or _G.Ectoplasm or AutoEvoRace or AutoBartilo or AutoFactory or BringChestz or BringFruitz or _G.AutoLevel or _G.Clip2 or AutoFarmNoQuest or _G.AutoBone or AutoFarmSelectMonsterQuest or AutoFarmSelectMonsterNoQuest or _G.AutoBoss or AutoFarmBossQuest or AutoFarmMasGun or AutoFarmMasDevilFruit or AutoFarmSelectArea or AutoSecondSea or AutoThirdSea or AutoDeathStep or AutoSuperhuman or AutoSharkman or AutoElectricClaw or AutoDragonTalon or AutoGodhuman or AutoRengoku or AutoBuddySword or AutoPole or AutoHallowSycthe or AutoCavander or AutoTushita or AutoDarkDagger or _G.CakePrince or _G.AutoElite or AutoRainbowHaki or AutoSaber or AutoFarmKen or AutoKenHop or AutoKenV2 or _G.AutoKillPlayerMelee or _G.AutoKillPlayerGun or _G.AutoKillPlayerFruit or AutoDungeon or AutoNextIsland or AutoAdvanceDungeon or Musketeer or RipIndra or Auto_Serpent_Bow or AutoTorch or AutoSoulGuitar or Auto_Cursed_Dual_Katana or _G.AutoMaterial or Auto_Quest_Yama_1 or Auto_Quest_Yama_2 or Auto_Quest_Yama_3 or Auto_Quest_Tushita_1 or Auto_Quest_Tushita_2 or Auto_Quest_Tushita_3 or _G.Factory or _G.SwanGlasses or AutoBartilo or AutoEvoRace or _G.Ectoplasm then
+					for L_277_forvar0, L_278_forvar1 in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+						if L_278_forvar1:IsA("BasePart") then
+							L_278_forvar1.CanCollide = false
+						end
+					end
+				end
+			end)
+		end)
+	end)
+
+
+--Check Material
+	function CheckMaterial(L_279_arg0)
+		for L_280_forvar0, L_281_forvar1 in pairs(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventory")) do
+			if type(L_281_forvar1) == "table" then
+				if L_281_forvar1.Type == "Material" then
+					if L_281_forvar1.Name == L_279_arg0 then
+						return L_281_forvar1.Count
+					end
+				end
+			end
+		end
+		return 0
+	end
