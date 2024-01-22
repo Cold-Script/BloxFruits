@@ -741,3 +741,140 @@ do
 		end
 	end
  
+--// Select Monster
+	if First_Sea then
+		tableMon = {
+			"Bandit",
+			"Monkey",
+			"Gorilla",
+			"Pirate",
+			"Brute",
+			"Desert Bandit",
+			"Desert Officer",
+			"Snow Bandit",
+			"Snowman",
+			"Chief Petty Officer",
+			"Sky Bandit",
+			"Dark Master",
+			"Prisoner",
+			"Dangerous Prisoner",
+			"Toga Warrior",
+			"Gladiator",
+			"Military Soldier",
+			"Military Spy",
+			"Fishman Warrior",
+			"Fishman Commando",
+			"God's Guard",
+			"Shanda",
+			"Royal Squad",
+			"Royal Soldier",
+			"Galley Pirate",
+			"Galley Captain"
+		}
+	elseif Second_Sea then
+		tableMon = {
+			"Raider",
+			"Mercenary",
+			"Swan Pirate",
+			"Factory Staff",
+			"Marine Lieutenant",
+			"Marine Captain",
+			"Zombie",
+			"Vampire",
+			"Snow Trooper",
+			"Winter Warrior",
+			"Lab Subordinate",
+			"Horned Warrior",
+			"Magma Ninja",
+			"Lava Pirate",
+			"Ship Deckhand",
+			"Ship Engineer",
+			"Ship Steward",
+			"Ship Officer",
+			"Arctic Warrior",
+			"Snow Lurker",
+			"Sea Soldier",
+			"Water Fighter"
+		}
+	elseif Third_Sea then
+		tableMon = {
+			"Pirate Millionaire",
+			"Dragon Crew Warrior",
+			"Dragon Crew Archer",
+			"Female Islander",
+			"Giant Islander",
+			"Marine Commodore",
+			"Marine Rear Admiral",
+			"Fishman Raider",
+			"Fishman Captain",
+			"Forest Pirate",
+			"Mythological Pirate",
+			"Jungle Pirate",
+			"Musketeer Pirate",
+			"Reborn Skeleton",
+			"Living Zombie",
+			"Demonic Soul",
+			"Posessed Mummy",
+			"Peanut Scout",
+			"Peanut President",
+			"Ice Cream Chef",
+			"Ice Cream Commander",
+			"Cookie Crafter",
+			"Cake Guard",
+			"Baking Staff",
+			"Head Baker",
+			"Cocoa Warrior",
+			"Chocolate Bar Battler",
+			"Sweet Thief",
+			"Candy Rebel",
+			"Candy Pirate",
+			"Snow Demon",
+			"Isle Outlaw",
+			"Island Boy",
+			"Isle Champion"
+		}
+	end
+
+--// Select Island
+	if First_Sea then
+		AreaList = {
+			'Jungle',
+			'Buggy',
+			'Desert',
+			'Snow',
+			'Marine',
+			'Sky',
+			'Prison',
+			'Colosseum',
+			'Magma',
+			'Fishman',
+			'Sky Island',
+			'Fountain'
+		}
+	elseif Second_Sea then
+		AreaList = {
+			'Area 1',
+			'Area 2',
+			'Zombie',
+			'Marine',
+			'Snow Mountain',
+			'Ice fire',
+			'Ship',
+			'Frost',
+			'Forgotten'
+		}
+	elseif Third_Sea then
+		AreaList = {
+			'Pirate Port',
+			'Amazon',
+			'Marine Tree',
+			'Deep Forest',
+			'Haunted Castle',
+			'Nut Island',
+			'Ice Cream Island',
+			'Cake Island',
+			'Choco Island',
+			'Candy Island',
+			'Tiki Outpost'
+		}
+	end
