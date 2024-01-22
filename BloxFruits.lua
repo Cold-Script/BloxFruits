@@ -2440,3 +2440,67 @@ do
 		end
 		return 0
 	end
+-----------------------------------------------------------------------------------------------------------------------------------------------
+------AttackNoCD
+	local L_88_ = game.Players.LocalPlayer
+	local L_89_ = getupvalues(require(L_88_.PlayerScripts.CombatFramework))
+	local L_90_ = L_89_[2]
+	function GetCurrentBlade()
+		local L_282_ = L_90_.activeController
+		local L_283_ = L_282_.blades[1]
+		if not L_283_ then
+			return
+		end
+		while L_283_.Parent ~= game.Players.LocalPlayer.Character do
+			L_283_ = L_283_.Parent
+		end
+		return L_283_
+	end
+	function AttackNoCD()
+		if not AutoFarmMasDevilFruit or AutoFarmMasGun then
+			if not Auto_Raid then
+				local L_284_ = L_90_.activeController
+				for L_285_forvar0 = 1, 1 do
+					local L_286_ = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
+                        L_88_.Character, {
+						L_88_.Character.HumanoidRootPart
+					}, 60)
+					local L_287_ = {}
+					local L_288_ = {}
+					for L_289_forvar0, L_290_forvar1 in pairs(L_286_) do
+						if L_290_forvar1.Parent:FindFirstChild("HumanoidRootPart") and not L_288_[L_290_forvar1.Parent] then
+							table.insert(L_287_, L_290_forvar1.Parent.HumanoidRootPart)
+							L_288_[L_290_forvar1.Parent] = true
+						end
+					end
+					L_286_ = L_287_
+					if # L_286_ > 0 then
+						local L_291_ = debug.getupvalue(L_284_.attack, 5)
+						local L_292_ = debug.getupvalue(L_284_.attack, 6)
+						local L_293_ = debug.getupvalue(L_284_.attack, 4)
+						local L_294_ = debug.getupvalue(L_284_.attack, 7)
+						local L_295_ = (L_291_ * 798405 + L_293_ * 727595) % L_292_
+						local L_296_ = L_293_ * 798405
+						(function()
+							L_295_ = (L_295_ * L_292_ + L_296_) % 1099511627776
+							L_291_ = math.floor(L_295_ / L_292_)
+							L_293_ = L_295_ - L_291_ * L_292_
+						end)()
+						L_294_ = L_294_ + 1
+						debug.setupvalue(L_284_.attack, 5, L_291_)
+						debug.setupvalue(L_284_.attack, 6, L_292_)
+						debug.setupvalue(L_284_.attack, 4, L_293_)
+						debug.setupvalue(L_284_.attack, 7, L_294_)
+						pcall(function()
+							if L_88_.Character:FindFirstChildOfClass("Tool") and L_284_.blades and L_284_.blades[1] then
+								L_284_.animator.anims.basic[1]:Play(0.01, 0.01, 0.01)
+								game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange", tostring(GetCurrentBlade()))
+								game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(L_295_ / 1099511627776 * 16777215), L_294_)
+								game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", L_286_, L_285_forvar0, "")
+							end
+						end)
+					end
+				end
+			end
+		end
+end
