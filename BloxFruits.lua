@@ -2124,3 +2124,217 @@ do
 		wait(L_235_ / Speed)
 		_G.Clip2 = false
 	end
+
+	--BTP
+	function BTP(L_236_arg0)
+		game.Players.LocalPlayer.Character.Head:Destroy()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_236_arg0
+		wait(0.5)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_236_arg0
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+	end
+--BTPZ
+	function BTPZ(L_237_arg0)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_237_arg0
+		task.wait()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_237_arg0
+	end
+------Bypass TP 2
+	function GetIsLand(...)
+		local L_238_ = {
+			...
+		}
+		local L_239_ = L_238_[1]
+		local L_240_
+		if type(L_239_) == "vector" then
+			L_240_ = L_239_
+		elseif type(L_239_) == "userdata" then
+			L_240_ = L_239_.Position
+		elseif type(L_239_) == "number" then
+			L_240_ = CFrame.new(unpack(L_238_))
+			L_240_ = L_240_.p
+		end
+		local L_241_
+		local L_242_ = math.huge;
+		if game.Players.LocalPlayer.Team then
+			for L_243_forvar0, L_244_forvar1 in pairs(game.Workspace._WorldOrigin.PlayerSpawns:FindFirstChild(tostring(game.Players.LocalPlayer.Team)):GetChildren()) do
+				local L_245_ = (L_240_ - L_244_forvar1:GetModelCFrame().p).Magnitude;
+				if L_245_ < L_242_ then
+					L_242_ = L_245_;
+					L_241_ = L_244_forvar1.Name
+				end
+			end
+			if L_241_ then
+				return L_241_
+			end
+		end
+	end
+	function toTarget(...)
+		local L_246_ = {
+			...
+		}
+		local L_247_ = L_246_[1]
+		local L_248_
+		if type(L_247_) == "vector" then
+			L_248_ = CFrame.new(L_247_)
+		elseif type(L_247_) == "userdata" then
+			L_248_ = L_247_
+		elseif type(L_247_) == "number" then
+			L_248_ = CFrame.new(unpack(L_246_))
+		end
+		if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health == 0 then
+			if tween then
+				tween:Cancel()
+			end
+			repeat
+				wait()
+			until game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health > 0;
+			wait(0.2)
+		end
+		local L_249_ = {}
+		local L_250_ = (L_248_.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position)
+        .Magnitude
+		if L_250_ < 1000 then
+			Speed = 315
+		elseif L_250_ >= 1000 then
+			Speed = 300
+		end
+		if BypassTP then
+			if L_250_ > 3000 and not AutoNextIsland and not (game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip") or game.Players.LocalPlayer.Character:FindFirstChild("Special Microchip") or game.Players.LocalPlayer.Backpack:FindFirstChild("God's Chalice") or game.Players.LocalPlayer.Character:FindFirstChild("God's Chalice") or game.Players.LocalPlayer.Backpack:FindFirstChild("Hallow Essence") or game.Players.LocalPlayer.Character:FindFirstChild("Hallow Essence") or game.Players.LocalPlayer.Character:FindFirstChild("Sweet Chalice") or game.Players.LocalPlayer.Backpack:FindFirstChild("Sweet Chalice")) and not (Name == "Fishman Commando" or Name == "Fishman Warrior") then
+				pcall(function()
+					tween:Cancel()
+					fkwarp = false
+					if game:GetService("Players")["LocalPlayer"].Data:FindFirstChild("SpawnPoint").Value == tostring(GetIsLand(L_248_)) then
+						wait(.1)
+						Com("F_", "TeleportToSpawn")
+					elseif game:GetService("Players")["LocalPlayer"].Data:FindFirstChild("LastSpawnPoint").Value == tostring(GetIsLand(L_248_)) then
+						game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
+						wait(0.1)
+						repeat
+							wait()
+						until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0
+					else
+						if game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0 then
+							if fkwarp == false then
+								game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_248_
+							end
+							fkwarp = true
+						end
+						wait(.08)
+						game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
+						repeat
+							wait()
+						until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0
+						wait(.1)
+						Com("F_", "SetSpawnPoint")
+					end
+					wait(0.2)
+					return
+				end)
+			end
+		end
+		local L_251_ = game:service"TweenService"
+		local L_252_ = TweenInfo.new((L_248_.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position)
+        .Magnitude / Speed, Enum.EasingStyle.Linear)
+		local L_253_, L_254_ = pcall(function()
+			tween = L_251_:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], L_252_, {
+				CFrame = L_248_
+			})
+			tween:Play()
+		end)
+		function L_249_:Stop()
+			tween:Cancel()
+		end
+		function L_249_:Wait()
+			tween.Completed:Wait()
+		end
+		return L_249_
+	end
+
+------
+	function Tween(L_255_arg0)
+		Distance = (L_255_arg0.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+		if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+			game.Players.LocalPlayer.Character.Humanoid.Sit = false
+		end
+		pcall(function()
+			tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance / 300, Enum.EasingStyle.Linear), {
+				CFrame = L_255_arg0
+			})
+		end)
+		tween:Play()
+		if Distance <= 300 then
+			tween:Cancel()
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_255_arg0
+		end
+		if _G.StopTween == true then
+			tween:Cancel()
+			_G.Clip = false
+		end
+	end
+
+---------
+	function toTargetP(L_256_arg0)
+		if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health <= 0 or not game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") then
+			tween:Cancel()
+			repeat
+				wait()
+			until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") and game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0
+			wait(7)
+			return
+		end
+		if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - L_256_arg0.Position).Magnitude <= 150 then
+			pcall(function()
+				tween:Cancel()
+				game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.CFrame = L_256_arg0
+				return
+			end)
+		end
+		local L_257_ = game:service"TweenService"
+		local L_258_ = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - L_256_arg0.Position).Magnitude / 325, Enum.EasingStyle.Linear)
+		tween = L_257_:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], L_258_, {
+			CFrame = L_256_arg0
+		})
+		tween:Play()
+		local L_259_ = {}
+		function L_259_:Stop()
+			tween:Cancel()
+		end
+		return L_259_
+	end
+
+    --function TP to Boat/Ship
+	function TweenShip(L_260_arg0)
+		local L_261_ = game:service"TweenService"
+		local L_262_ = TweenInfo.new((game:GetService("Workspace").Boats.MarineBrigade.VehicleSeat.CFrame.Position - L_260_arg0.Position).Magnitude / 300, Enum.EasingStyle.Linear)
+		tween = L_261_:Create(game:GetService("Workspace").Boats.MarineBrigade.VehicleSeat, L_262_, {
+			CFrame = L_260_arg0
+		})
+		tween:Play()
+		local L_263_ = {}
+		function L_263_:Stop()
+			tween:Cancel()
+		end
+		return L_263_
+	end
+	function TweenBoat(L_264_arg0)
+		if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health <= 0 or not game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") then
+			tween:Cancel()
+			repeat
+				wait()
+			until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") and game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0
+			wait(7)
+			return
+		end
+		local L_265_ = game:service"TweenService"
+		local L_266_ = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - L_264_arg0.Position).Magnitude / 325, Enum.EasingStyle.Linear)
+		tween = L_265_:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], L_266_, {
+			CFrame = L_264_arg0
+		})
+		tween:Play()
+		local L_267_ = {}
+		function L_267_:Stop()
+			tween:Cancel()
+		end
+		return L_267_
+	end
