@@ -4378,4 +4378,731 @@ if Third_Sea then
 			end
 		end)
 	end
+local L_115_ = L_5_.Main:AddSection("Items Farm")
+	if Third_Sea then
+		local L_483_ = L_5_.Main:AddToggle("ToggleHallow", {
+			Title = "Auto Hallow Scythe [Fully]",
+			Default = false
+		})
+		L_483_:OnChanged(function(L_487_arg0)
+			AutoHallowSycthe = L_487_arg0
+		end)
+		L_6_.ToggleHallow:SetValue(false)
+		spawn(function()
+			while wait() do
+				if AutoHallowSycthe then
+					pcall(function()
+						if game:GetService("Workspace").Enemies:FindFirstChild("Soul Reaper") then
+							for L_488_forvar0, L_489_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+								if string.find(L_489_forvar1.Name, "Soul Reaper") then
+									repeat
+										wait(_G.Fast_Delay)
+										AttackNoCD()
+										AutoHaki()
+										EquipTool(SelectWeapon)
+										L_489_forvar1.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+										Tween(L_489_forvar1.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
+										L_489_forvar1.HumanoidRootPart.Transparency = 1
+										sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+									--Click
+									until L_489_forvar1.Humanoid.Health <= 0 or AutoHallowSycthe == false
+								end
+							end
+						elseif game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hallow Essence") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Hallow Essence") then
+							repeat
+								Tween(CFrame.new(- 8932.322265625, 146.83154296875, 6062.55078125))
+								wait()
+							until (CFrame.new(- 8932.322265625, 146.83154296875, 6062.55078125).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 8
+							EquipTool("Hallow Essence")
+						else
+							if game:GetService("ReplicatedStorage"):FindFirstChild("Soul Reaper") then
+								Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Soul Reaper").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+							else
+							end
+						end
+					end)
+				end
+			end
+		end)
+		spawn(function()
+			while wait(0.001) do
+				if AutoHallowSycthe then
+					local L_490_ = {
+						[1] = "Bones",
+						[2] = "Buy",
+						[3] = 1,
+						[4] = 1
+					}
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(L_490_))
+				end
+			end
+		end)
+local Frozen = L_5_.Status:AddSection("Frozen Dimension : Spawn")
+spawn(function()
+    while wait() do
+        if game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') then
+            Frozen:Set("Frozen Dimension : Spawn")
+        else
+            Frozen:Set("Frozen Dimension : Not Spawn")
+        end
+    end
+end)
+
+local Moon = L_5_.Status:AddSection("Moon Status : 100%")
+spawn(function()
+    while wait() do
+        if game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149431" then
+            Moon:Set(":full_moon:: Full Moon 100%")
+        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149052" then
+            Moon:Set(":waning_gibbous_moon:’ : Full Moon 75%")
+        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709143733" then
+            Moon:Set(":last_quarter_moon:“ : Full Moon 50%")
+        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709150401" then
+            Moon:Set(":waning_crescent_moon: : Full Moon 25%")
+        elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149680" then
+            Moon:Set(":waning_crescent_moon:: Full Moon 15%")
+        else
+            Moon:Set("Full Moon 0%")
+        end
+    end
+end)
+
+local Dough = L_5_.Status:AddSection("Dough Status : Spawn")
+spawn(function()
+    while wait() do
+        pcall(function()
+            if string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 88 then
+                MobKatakuri:Set("Defeat : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,41))
+            elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 87 then
+                MobKatakuri:Set("Defeat : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,40))
+            elseif string.len(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner")) == 86 then
+                MobKatakuri:Set("Defeat : "..string.sub(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner"),39,39))
+            else
+                MobKatakuri:Set("Dough King V1 : Spawn")
+            end
+        end)
+    end
+end)
+
+local Mirage = L_5_.Status:AddSection("Mirage : Spawn")
+spawn(function()
+    while wait() do
+        if game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
+            Mirrage:Set("Mirrage : Spawn")
+        else
+            Mirrage:Set("Mirrage : Not Spawn")
+        end
+    end
+end)
+
+local Kitsune = L_5_.Status:AddSection("Kitsune Island : Spawn")
+spawn(function()
+    while wait() do
+        if game:GetService("Workspace").Map:FindFirstChild('KitsuneIsland') then
+            Kitsune:Set("Kitsune Island : Spawn")
+        else
+            Kitsune:Set("Kitsune Island : Not Spawn")
+        end
+    end
+end)
+
+local Elit = L_5_.Status:AddSection("Elit : Spawn")
+spawn(function()
+    while wait() do
+        if game:GetService("ReplicatedStorage"):FindFirstChild("Diablo") or game:GetService("ReplicatedStorage"):FindFirstChild("Deandre") or game:GetService("ReplicatedStorage"):FindFirstChild("Urban") or game:GetService("Workspace").Enemies:FindFirstChild("Diablo") or game:GetService("Workspace").Enemies:FindFirstChild("Deandre") or game:GetService("Workspace").Enemies:FindFirstChild("Urban") then
+            Elite:Set("Elite : Spawn")    
+        else
+            Elite:Set("Elite : Not Spawn")    
+        end
+    end
+end)
+		local L_484_ = L_5_.Main:AddToggle("ToggleYama", {
+			Title = "Auto Get Yama",
+			Default = false
+		})
+		L_484_:OnChanged(function(L_491_arg0)
+			_G.AutoYama = L_491_arg0
+		end)
+		L_6_.ToggleYama:SetValue(false)
+		spawn(function()
+			while wait() do
+				if _G.AutoYama then
+					if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress") >= 30 then
+						repeat
+							wait(.1)
+							fireclickdetector(game:GetService("Workspace").Map.Waterfall.SealedKatana.Handle.ClickDetector)
+						until game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Yama") or not _G.AutoYama
+					end
+				end
+			end
+		end)
+		local L_485_ = L_5_.Main:AddToggle("ToggleTushita", {
+			Title = "Auto Tushita",
+			Default = false
+		})
+		L_485_:OnChanged(function(L_492_arg0)
+			AutoTushita = L_492_arg0
+		end)
+		L_6_.ToggleTushita:SetValue(false)
+		spawn(function()
+			while wait() do
+				if AutoTushita then
+					if game:GetService("Workspace").Enemies:FindFirstChild("Longma") then
+						for L_493_forvar0, L_494_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+							if L_494_forvar1.Name == ("Longma" or L_494_forvar1.Name == "Longma") and L_494_forvar1.Humanoid.Health > 0 and L_494_forvar1:IsA("Model") and L_494_forvar1:FindFirstChild("Humanoid") and L_494_forvar1:FindFirstChild("HumanoidRootPart") then
+								repeat
+									wait(_G.Fast_Delay)
+									AttackNoCD()
+									AutoHaki()
+									if not game.Players.LocalPlayer.Character:FindFirstChild(SelectWeapon) then
+										wait()
+										EquipTool(SelectWeapon)
+									end
+									FarmPos = L_494_forvar1.HumanoidRootPart.CFrame
+                                                     --Click
+									L_494_forvar1.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+									L_494_forvar1.Humanoid.JumpPower = 0
+									L_494_forvar1.Humanoid.WalkSpeed = 0
+									L_494_forvar1.HumanoidRootPart.CanCollide = false
+									L_494_forvar1.Humanoid:ChangeState(11)
+									Tween(L_494_forvar1.HumanoidRootPart.CFrame * Pos)
+								until not AutoTushita or not L_494_forvar1.Parent or L_494_forvar1.Humanoid.Health <= 0
+							end
+						end
+					else
+						Tween(CFrame.new(- 10238.875976563, 389.7912902832, - 9549.7939453125))
+					end
+				end
+			end
+		end)
+		local L_486_ = L_5_.Main:AddToggle("ToggleHoly", {
+			Title = "Auto Holy Torch",
+			Default = false
+		})
+		L_486_:OnChanged(function(L_495_arg0)
+			_G.Auto_Holy_Torch = L_495_arg0
+		end)
+		L_6_.ToggleHoly:SetValue(false)
+		spawn(function()
+			while wait() do
+				if _G.Auto_Holy_Torch then
+					pcall(function()
+						wait(1)
+						repeat
+							Tween(CFrame.new(-10752, 417, -9366))
+							wait()
+						until not _G.Auto_Holy_Torch or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(-10752, 417, -9366)).Magnitude <= 10
+						wait(1)
+						repeat
+							Tween(CFrame.new(-11672, 334, -9474))
+							wait()
+						until not _G.Auto_Holy_Torch or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(-11672, 334, -9474)).Magnitude <= 10
+						wait(1)
+						repeat
+							Tween(CFrame.new(-12132, 521, -10655))
+							wait()
+						until not _G.Auto_Holy_Torch or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(-12132, 521, -10655)).Magnitude <= 10
+						wait(1)
+						repeat
+							Tween(CFrame.new(-13336, 486, -6985))
+							wait()
+						until not _G.Auto_Holy_Torch or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(-13336, 486, -6985)).Magnitude <= 10
+						wait(1)
+						repeat
+							Tween(CFrame.new(-13489, 332, -7925))
+							wait()
+						until not _G.Auto_Holy_Torch or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(-13489, 332, -7925)).Magnitude <= 10
+					end)
+				end
+			end
+		end)
+	end
 end
+
+
+if Second_Sea then
+	local L_496_ = L_5_.Main:AddToggle("ToggleFactory", {
+		Title = "Auto Farm Factory",
+		Default = false
+	})
+	L_496_:OnChanged(function(L_497_arg0)
+		_G.Factory = L_497_arg0
+	end)
+	L_6_.ToggleFactory:SetValue(false)
+	spawn(function()
+		while wait() do
+			if _G.Factory then
+				if game.Workspace.Enemies:FindFirstChild("Core") then
+					for L_498_forvar0, L_499_forvar1 in pairs(game.Workspace.Enemies:GetChildren()) do
+						if L_499_forvar1.Name == "Core" and L_499_forvar1.Humanoid.Health > 0 then
+							repeat
+								wait(_G.Fast_Delay)
+								AttackNoCD()
+								repeat
+									Tween(CFrame.new(448.46756, 199.356781, - 441.389252))
+									wait()
+								until not _G.Factory or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(448.46756, 199.356781, - 441.389252)).Magnitude <= 10
+								EquipTool(SelectWeapon)
+								AutoHaki()
+								Tween(L_499_forvar1.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
+								L_499_forvar1.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+								L_499_forvar1.HumanoidRootPart.Transparency = 1
+								L_499_forvar1.Humanoid.JumpPower = 0
+								L_499_forvar1.Humanoid.WalkSpeed = 0
+								L_499_forvar1.HumanoidRootPart.CanCollide = false
+								FarmPos = L_499_forvar1.HumanoidRootPart.CFrame
+								MonFarm = L_499_forvar1.Name
+                                    --Click
+							until not L_499_forvar1.Parent or L_499_forvar1.Humanoid.Health <= 0 or _G.Factory == false
+						end
+					end
+				elseif game.ReplicatedStorage:FindFirstChild("Core") then
+					repeat
+						Tween(CFrame.new(448.46756, 199.356781, - 441.389252))
+						wait()
+					until not _G.Factory or (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(448.46756, 199.356781, - 441.389252)).Magnitude <= 10
+				end
+			end
+		end
+	end)
+end
+if Third_Sea then
+	local L_500_ = L_5_.Main:AddToggle("ToggleCakeV2", {
+		Title = "Kill Dought King [Need Spawn]",
+		Default = false
+	})
+	L_500_:OnChanged(function(L_501_arg0)
+		_G.AutoCakeV2 = L_501_arg0
+	end)
+	L_6_.ToggleCakeV2:SetValue(false)
+end
+spawn(function()
+	while wait() do
+		if _G.AutoCakeV2 then
+			pcall(function()
+				if game:GetService("Workspace").Enemies:FindFirstChild("Dough King") then
+					for L_502_forvar0, L_503_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+						if L_503_forvar1.Name == "Dough King" then
+							if L_503_forvar1:FindFirstChild("Humanoid") and L_503_forvar1:FindFirstChild("HumanoidRootPart") and L_503_forvar1.Humanoid.Health > 0 then
+								repeat
+									wait(_G.Fast_Delay)
+									AttackNoCD()
+									AutoHaki()
+									EquipTool(SelectWeapon)
+									L_503_forvar1.HumanoidRootPart.CanCollide = false
+									L_503_forvar1.Humanoid.WalkSpeed = 0
+									L_503_forvar1.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+									Tween(L_503_forvar1.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
+								until not _G.AutoCakeV2 or not L_503_forvar1.Parent or L_503_forvar1.Humanoid.Health <= 0
+							end
+						end
+					end
+				else
+					if game:GetService("ReplicatedStorage"):FindFirstChild("Dough King") then
+						Tween(game:GetService("ReplicatedStorage"):FindFirstChild("Dough King").HumanoidRootPart.CFrame * CFrame.new(2, 20, 2))
+					else
+					end
+				end
+			end)
+		end
+	end
+end)
+
+    
+if Second_Sea or Third_Sea then
+	local L_504_ = L_5_.Main:AddToggle("ToggleHakiColor", {
+		Title = "Buy Haki Color",
+		Default = false
+	})
+	L_504_:OnChanged(function(L_505_arg0)
+		_G.Auto_Buy_Enchancement = L_505_arg0
+	end)
+	L_6_.ToggleHakiColor:SetValue(false)
+	spawn(function()
+		while wait() do
+			if _G.Auto_Buy_Enchancement then
+				local L_506_ = {
+					[1] = "ColorsDealer",
+					[2] = "2"
+				}
+				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(L_506_))
+			end
+		end
+	end)
+end
+
+if Second_Sea then
+	local L_507_ = L_5_.Main:AddToggle("ToggleSwordLengend", {
+		Title = "Buy Sword Lengendary",
+		Default = false
+	})
+	L_507_:OnChanged(function(L_508_arg0)
+		_G.BuyLengendSword = L_508_arg0
+	end)
+	L_6_.ToggleSwordLengend:SetValue(false)
+	spawn(function()
+		while wait(.1) do
+			pcall(function()
+				if _G.BuyLengendSword or Triple_A then
+					local L_509_ = {
+						[1] = "LegendarySwordDealer",
+						[2] = "2"
+					}
+                        -- Triple_A
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(L_509_))
+				else
+					wait(2)
+				end
+			end)
+		end
+	end)
+end
+
+local L_7_ = L_5_.Setting:AddSection("Setting Farming")
+local L_8_ = L_5_.Setting:AddToggle("ToggleFastAttack", {
+	Title = " Enable Fast Attack",
+	Default = true
+})
+L_8_:OnChanged(function(L_510_arg0)
+	_G.FastAttack = L_510_arg0
+end)
+L_6_.ToggleFastAttack:SetValue(true)
+
+spawn(function()
+	while wait(0.4) do
+		pcall(function()
+			if _G.FastAttack then
+				repeat
+					wait(_G.Fast_Delay)
+					AttackNoCD()
+				until not _G.FastAttack
+			end
+		end)
+	end
+end)
+
+local L_9_ = require(game.ReplicatedStorage.Util.CameraShaker)
+L_9_:Stop()
+local L_10_ = L_5_.Setting:AddToggle("ToggleBringMob", {
+	Title = " Enable Bring Mob",
+	Default = true
+})
+L_10_:OnChanged(function(L_511_arg0)
+	_G.BringMob = L_511_arg0
+end)
+L_6_.ToggleBringMob:SetValue(true)
+spawn(function()
+	while wait() do
+		pcall(function()
+			for L_512_forvar0, L_513_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+				if _G.BringMob and bringmob then
+					if L_513_forvar1.Name == MonFarm and L_513_forvar1:FindFirstChild("Humanoid") and L_513_forvar1.Humanoid.Health > 0 then
+						if L_513_forvar1.Name == "Factory Staff" then
+							if (L_513_forvar1.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 500 then
+								L_513_forvar1.Head.CanCollide = false
+								L_513_forvar1.HumanoidRootPart.CanCollide = false
+								L_513_forvar1.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+								L_513_forvar1.HumanoidRootPart.CFrame = FarmPos
+								if L_513_forvar1.Humanoid:FindFirstChild("Animator") then
+									L_513_forvar1.Humanoid.Animator:Destroy()
+								end
+								sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+							end
+						elseif L_513_forvar1.Name == MonFarm then
+							if (L_513_forvar1.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 450 then
+								L_513_forvar1.Head.CanCollide = false
+								L_513_forvar1.HumanoidRootPart.CanCollide = false
+								L_513_forvar1.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+								L_513_forvar1.HumanoidRootPart.CFrame = FarmPos
+								if L_513_forvar1.Humanoid:FindFirstChild("Animator") then
+									L_513_forvar1.Humanoid.Animator:Destroy()
+								end
+								sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+							end
+						end
+					end
+				end
+			end
+		end)
+	end
+end)
+local L_11_ = L_5_.Setting:AddToggle("ToggleBypassTP", {
+	Title = "Enable Bypass Tp",
+	Default = false
+})
+L_11_:OnChanged(function(L_514_arg0)
+	BypassTP = L_514_arg0
+end)
+L_6_.ToggleBypassTP:SetValue(false)
+
+
+local L_12_ = L_5_.Setting:AddToggle("ToggleRemove", {
+	Title = " Enable Remove Dame Text",
+	Default = true
+})
+L_12_:OnChanged(function(L_515_arg0)
+	_G.RemoveDameText = L_515_arg0
+end)
+L_6_.ToggleRemove:SetValue(true)
+spawn(function()
+	while wait() do
+		if _G.RemoveDameText then
+			game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
+		else
+			game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = true
+		end
+	end
+end)
+
+        
+local L_13_ = L_5_.Setting:AddToggle("ToggleRemoveNotify", {
+	Title = " Enable Remove All Notify",
+	Default = false
+})
+L_13_:OnChanged(function(L_516_arg0)
+	RemoveNotify = L_516_arg0
+end)
+L_6_.ToggleRemoveNotify:SetValue(false)
+spawn(function()
+	while wait() do
+		if RemoveNotify then
+			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = false
+		else
+			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
+		end
+	end
+end)
+local L_14_ = L_5_.Setting:AddToggle("ToggleWhite", {
+	Title = " Enable White Screen",
+	Default = false
+})
+L_14_:OnChanged(function(L_517_arg0)
+	_G.WhiteScreen = L_517_arg0
+	if _G.WhiteScreen == true then
+		game:GetService("RunService"):Set3dRenderingEnabled(false)
+	elseif _G.WhiteScreen == false then
+		game:GetService("RunService"):Set3dRenderingEnabled(true)
+	end
+end)
+L_6_.ToggleWhite:SetValue(false)
+local L_15_ = L_5_.Setting:AddSection("Skill Mastery")
+local L_16_ = L_5_.Setting:AddToggle("ToggleZ", {
+	Title = "Skill Z",
+	Default = true
+})
+L_16_:OnChanged(function(L_518_arg0)
+	SkillZ = L_518_arg0
+end)
+L_6_.ToggleZ:SetValue(true)
+
+local L_17_ = L_5_.Setting:AddToggle("ToggleX", {
+	Title = "Skill X",
+	Default = true
+})
+L_17_:OnChanged(function(L_519_arg0)
+	SkillX = L_519_arg0
+end)
+L_6_.ToggleX:SetValue(true)
+
+
+local L_18_ = L_5_.Setting:AddToggle("ToggleC", {
+	Title = "Skill C",
+	Default = true
+})
+L_18_:OnChanged(function(L_520_arg0)
+	SkillC = L_520_arg0
+end)
+L_6_.ToggleC:SetValue(true)
+
+
+local L_19_ = L_5_.Setting:AddToggle("ToggleV", {
+	Title = "Skill V",
+	Default = true
+})
+L_19_:OnChanged(function(L_521_arg0)
+	SkillV = L_521_arg0
+end)
+L_6_.ToggleV:SetValue(true)
+
+
+local L_20_ = L_5_.Setting:AddToggle("ToggleF", {
+	Title = "Skill F",
+	Default = false
+})
+L_20_:OnChanged(function(L_522_arg0)
+	SkillF = L_522_arg0
+end)
+L_6_.ToggleF:SetValue(false)
+
+
+local L_21_ = L_5_.Setting:AddSection("Distance Farm")
+
+local L_22_ = L_5_.Setting:AddSlider("SliderPosX", {
+	Title = "Pos X",
+	Description = "",
+	Default = 10,
+	Min = -60,
+	Max = 60,
+	Rounding = 1,
+	Callback = function(L_523_arg0)
+		posX = L_523_arg0
+	end
+})
+L_22_:OnChanged(function(L_524_arg0)
+	posX = L_524_arg0
+end)
+L_22_:SetValue(10)
+
+local L_23_ = L_5_.Setting:AddSlider("SliderPosY", {
+	Title = "Pos Y",
+	Description = "",
+	Default = 30,
+	Min = -60,
+	Max = 60,
+	Rounding = 1,
+	Callback = function(L_525_arg0)
+		posY = L_525_arg0
+	end
+})
+L_23_:OnChanged(function(L_526_arg0)
+	posY = L_526_arg0
+end)
+L_23_:SetValue(30)
+
+local L_24_ = L_5_.Setting:AddSlider("SliderPosZ", {
+	Title = "Pos Z",
+	Description = "",
+	Default = 10,
+	Min = -60,
+	Max = 60,
+	Rounding = 1,
+	Callback = function(L_527_arg0)
+		posZ = L_527_arg0
+	end
+})
+L_24_:OnChanged(function(L_528_arg0)
+	posZ = L_528_arg0
+end)
+L_24_:SetValue(10)
+
+
+local L_25_ = L_5_.Stats:AddToggle("ToggleMelee", {
+	Title = "Auto Melee",
+	Default = false
+})
+L_25_:OnChanged(function(L_529_arg0)
+	_G.Auto_Stats_Melee = L_529_arg0
+end)
+L_6_.ToggleMelee:SetValue(false)
+
+
+
+
+local L_26_ = L_5_.Stats:AddToggle("ToggleDe", {
+	Title = "Auto Defense",
+	Default = false
+})
+L_26_:OnChanged(function(L_530_arg0)
+	_G.Auto_Stats_Defense = L_530_arg0
+end)
+L_6_.ToggleDe:SetValue(false)
+
+
+
+local L_27_ = L_5_.Stats:AddToggle("ToggleSword", {
+	Title = "Auto Sword",
+	Default = false
+})
+L_27_:OnChanged(function(L_531_arg0)
+	_G.Auto_Stats_Sword = L_531_arg0
+end)
+L_6_.ToggleSword:SetValue(false)
+
+
+
+local L_28_ = L_5_.Stats:AddToggle("ToggleGun", {
+	Title = "Auto Gun",
+	Default = false
+})
+L_28_:OnChanged(function(L_532_arg0)
+	_G.Auto_Stats_Gun = L_532_arg0
+end)
+L_6_.ToggleGun:SetValue(false)
+
+
+local L_29_ = L_5_.Stats:AddToggle("ToggleFruit", {
+	Title = "Auto Demon Fruit",
+	Default = false
+})
+L_29_:OnChanged(function(L_533_arg0)
+	_G.Auto_Stats_Devil_Fruit = L_533_arg0
+end)
+L_6_.ToggleFruit:SetValue(false)
+
+
+spawn(function()
+	while wait() do
+		if _G.Auto_Stats_Devil_Fruit then
+			local L_534_ = {
+				[1] = "AddPoint",
+				[2] = "Demon Fruit",
+				[3] = 3
+			}
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(L_534_))
+		end
+	end
+end)
+
+spawn(function()
+	while wait() do
+		if _G.Auto_Stats_Gun then
+			local L_535_ = {
+				[1] = "AddPoint",
+				[2] = "Gun",
+				[3] = 3
+			}
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(L_535_))
+		end
+	end
+end)
+
+
+spawn(function()
+	while wait() do
+		if _G.Auto_Stats_Sword then
+			local L_536_ = {
+				[1] = "AddPoint",
+				[2] = "Sword",
+				[3] = 3
+			}
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(L_536_))
+		end
+	end
+end)
+
+spawn(function()
+	while wait() do
+		if _G.Auto_Stats_Defense then
+			local L_537_ = {
+				[1] = "AddPoint",
+				[2] = "Defense",
+				[3] = 3
+			}
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(L_537_))
+		end
+	end
+end)
+
+
+spawn(function()
+	while wait() do
+		if _G.Auto_Stats_Melee then
+			local L_538_ = {
+				[1] = "AddPoint",
+				[2] = "Melee",
+				[3] = 3
+			}
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(L_538_))
+		end
+	end
+end)
