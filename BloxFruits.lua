@@ -17,6 +17,54 @@ local L_5_ = {
 		Title = "Main",
 		Icon = "home"
 	}),
+	Stats = L_4_:AddTab({
+		Title = "Stats",
+		Icon = "plus-circle"
+	}),
+	Player = L_4_:AddTab({
+		Title = "Player",
+		Icon = "users"
+	}),
+	Sea = L_4_:AddTab({
+		Title = "Sea Event",
+		Icon = "waves"
+	}),
+	Teleport = L_4_:AddTab({
+		Title = "Teleport",
+		Icon = "palmtree"
+	}),
+		Fruit = L_4_:AddTab({
+		Title = "Fruit",
+		Icon = "cherry"
+	}),
+	Raid = L_4_:AddTab({
+		Title = "Raid",
+		Icon = "swords"
+	}),
+	Status = L_4_:AddTab({
+		Title = "Status Server",
+		Icon = "boxes"
+	}),
+	Race = L_4_:AddTab({
+		Title = "Race",
+		Icon = "chevrons-right"
+	}),
+		Shop = L_4_:AddTab({
+		Title = "Shop",
+		Icon = "shopping-cart"
+	}),
+		Esp = L_4_:AddTab({
+		Title = "Esp",
+		Icon = "wifi"
+	}),
+		Misc = L_4_:AddTab({
+		Title = "Misc",
+		Icon = "list-plus"
+	}),
+	Setting = L_4_:AddTab({
+		Title = "Setting",
+		Icon = "settings"
+	}),
 }
 local L_6_ = L_1_.Options
 do
