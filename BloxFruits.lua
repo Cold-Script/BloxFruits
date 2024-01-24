@@ -2831,6 +2831,732 @@ end
 			end
 		end
 	end)
+
+game:GetService('RunService').RenderStepped:connect(function()
+		if _G.chestsea3 then
+			if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("God's Chalice") then
+				_G.chestsea3 = false
+			elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("God's Chalice") then
+				if game:GetService("Workspace"):FindFirstChild("Chest1") then
+					TPchest( game:GetService("Workspace"):FindFirstChild("Chest1").CFrame)
+				end
+				if game:GetService("Workspace"):FindFirstChild("Chest2") then
+					TPchest( game:GetService("Workspace"):FindFirstChild("Chest2").CFrame)
+				end
+				if game:GetService("Workspace"):FindFirstChild("Chest3") then
+					TPchest( game:GetService("Workspace"):FindFirstChild("Chest3").CFrame)
+				end
+			end
+		end
+	end)
+	if game.PlaceId == 7449423635 then -- sea3
+		spawn(function()
+			while task.wait(3.5) do
+				pcall(function()
+					if not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("God's Chalice") then
+						if _G.chestsea3 then
+							game:GetService("VirtualInputManager"):SendKeyEvent(true, "Q", false, game)
+							game.Players.LocalPlayer.Character.Humanoid.Health = 0
+						end
+						wait(5)
+					end
+				end)
+			end
+		end)
+	end
+	game:GetService('RunService').RenderStepped:connect(function()
+		if _G.chestsea2 then
+			if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") then
+				game:GetService("VirtualInputManager"):SendKeyEvent(true, "Q", false, game)
+				_G.chestsea2 = false
+			elseif not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") then
+				if game:GetService("Workspace"):FindFirstChild("Chest1") then
+					TPchest( game:GetService("Workspace"):FindFirstChild("Chest1").CFrame)
+				end
+				if game:GetService("Workspace"):FindFirstChild("Chest2") then
+					TPchest( game:GetService("Workspace"):FindFirstChild("Chest2").CFrame)
+				end
+				if game:GetService("Workspace"):FindFirstChild("Chest3") then
+					TPchest( game:GetService("Workspace"):FindFirstChild("Chest3").CFrame)
+				end
+			end
+		end
+	end)
+	if game.PlaceId == 4442272183 then -- sea2
+		spawn(function()
+			while task.wait(3.5) do
+				pcall(function()
+					if not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") then
+						if _G.chestsea2 then
+							game.Players.LocalPlayer.Character.Humanoid.Health = 0
+						end
+						wait(5)
+					end
+				end)
+			end
+		end)
+	end
+	function TPchest(L_330_arg0)
+		local L_331_ = (L_330_arg0.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+		if L_331_ >= 0 then
+			Speed = 1200000
+		end
+		local L_332_ = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(L_331_ / Speed), {
+			CFrame = L_330_arg0
+		})
+		L_332_:Play()
+	end
+	if Third_Sea then
+		local L_333_ = L_5_.Misc:AddToggle("ToggleChest", {
+			Title = "Auto Chest (Risk)",
+			Default = false
+		})
+		L_333_:OnChanged(function(L_334_arg0)
+			_G.chestsea3 = L_334_arg0
+		end)
+		L_6_.ToggleChest:SetValue(false)
+	end
+	if Second_Sea then
+		local L_335_ = L_5_.Misc:AddToggle("ToggleChest", {
+			Title = "Auto Chest Stop If Have Items",
+			Default = false
+		})
+		L_335_:OnChanged(function(L_336_arg0)
+			_G.chestsea2 = L_336_arg0
+		end)
+		L_6_.ToggleChest:SetValue(false)
+	end
+	local L_103_ = L_5_.Misc:AddToggle("ToggleChestTween", {
+		Title = "Auto Chest (Safe)",
+		Default = false
+	})
+	L_103_:OnChanged(function(L_337_arg0)
+		AutoFarmChest = L_337_arg0
+	end)
+	L_6_.ToggleChestTween:SetValue(false)
+	_G.MagnitudeAdd = 0
+	spawn(function()
+		while wait() do
+			if AutoFarmChest then
+				for L_338_forvar0, L_339_forvar1 in pairs(game:GetService("Workspace"):GetChildren()) do
+					if L_339_forvar1.Name:find("Chest") then
+						if game:GetService("Workspace"):FindFirstChild(L_339_forvar1.Name) then
+							if (L_339_forvar1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000 + _G.MagnitudeAdd then
+								repeat
+									wait()
+									if game:GetService("Workspace"):FindFirstChild(L_339_forvar1.Name) then
+										Tween(L_339_forvar1.CFrame)
+									end
+								until AutoFarmChest == false or not L_339_forvar1.Parent
+								Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+								_G.MagnitudeAdd = _G.MagnitudeAdd + 1500
+								break
+							end
+						end
+					end
+				end
+			end
+		end
+	end)
+
+
+	local L_104_ = L_5_.Main:AddSection("Mastery Farm")
+	local L_105_ = L_5_.Main:AddDropdown("DropdownMastery", {
+		Title = "Mastery Mode",
+		Values = {
+			"Level",
+			"Recently",
+		},
+		Multi = false,
+		Default = 1,
+	})
+	L_105_:SetValue("Level")
+	L_105_:OnChanged(function(L_350_arg0)
+		TypeMastery = L_350_arg0
+	end)
+	local L_106_ = L_5_.Main:AddToggle("ToggleMasteryFruit", {
+		Title = "Auto BF Mastery",
+		Default = false
+	})
+	L_106_:OnChanged(function(L_351_arg0)
+		AutoFarmMasDevilFruit = L_351_arg0
+	end)
+	L_6_.ToggleMasteryFruit:SetValue(false)
+	local L_107_ = L_5_.Main:AddSlider("SliderHealt", {
+		Title = "Health Mob (%)",
+		Description = "",
+		Default = 25,
+		Min = 0,
+		Max = 100,
+		Rounding = 1,
+		Callback = function(L_352_arg0)
+			KillPercent = L_352_arg0
+		end
+	})
+	L_107_:OnChanged(function(L_353_arg0)
+		KillPercent = L_353_arg0
+	end)
+	L_107_:SetValue(25)
+	spawn(function()
+		while task.wait(1) do
+			if _G.UseSkill then
+				pcall(function()
+					if _G.UseSkill then
+						for L_354_forvar0, L_355_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+							if L_355_forvar1.Name == MonFarm and L_355_forvar1:FindFirstChild("Humanoid") and L_355_forvar1:FindFirstChild("HumanoidRootPart") and L_355_forvar1.Humanoid.Health <= L_355_forvar1.Humanoid.MaxHealth * KillPercent / 100 then
+								repeat
+									game:GetService("RunService").Heartbeat:wait()
+									EquipTool(game.Players.LocalPlayer.Data.DevilFruit.Value)
+									Tween(L_355_forvar1.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
+									PositionSkillMasteryDevilFruit = L_355_forvar1.HumanoidRootPart.Position
+									if game:GetService("Players").LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Data.DevilFruit.Value) then
+										game:GetService("Players").LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Data.DevilFruit.Value).MousePos.Value = PositionSkillMasteryDevilFruit
+										local L_356_ = game:GetService("Players").LocalPlayer.Character:FindFirstChild(game.Players.LocalPlayer.Data.DevilFruit.Value).Level.Value
+										if SkillZ and L_356_ >= 1 then
+											game:service('VirtualInputManager'):SendKeyEvent(true, "Z", false, game)
+											wait(0.1)
+											game:service('VirtualInputManager'):SendKeyEvent(false, "Z", false, game)
+										end
+										if SkillX and L_356_ >= 2 then
+											game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
+											wait(0.2)
+											game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
+										end
+										if SkillC and L_356_ >= 3 then
+											game:service('VirtualInputManager'):SendKeyEvent(true, "C", false, game)
+											wait(0.3)
+											game:service('VirtualInputManager'):SendKeyEvent(false, "C", false, game)
+										end
+										if SkillV and L_356_ >= 4 then
+											game:service('VirtualInputManager'):SendKeyEvent(true, "V", false, game)
+											wait(0.4)
+											game:service('VirtualInputManager'):SendKeyEvent(false, "V", false, game)
+										end
+										if SkillF and L_356_ >= 5 then
+											game:GetService("VirtualInputManager"):SendKeyEvent(true, "F", false, game)
+											wait(0.5)
+											game:GetService("VirtualInputManager"):SendKeyEvent(false, "F", false, game)
+										end
+									end
+								until not AutoFarmMasDevilFruit or not _G.UseSkill or L_355_forvar1.Humanoid.Health == 0
+							end
+						end
+					end
+				end)
+			end
+		end
+	end)
+	spawn(function()
+		while task.wait(.1) do
+			if AutoFarmMasDevilFruit and TypeMastery == 'Level' then
+				pcall(function()
+					CheckLevel(SelectMonster)
+					if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+						if BypassTP then
+							if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude > 2500 then
+								BTP(CFrameQ)
+								wait(0.2)
+							elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude < 2500 then
+								Tween(CFrameQ)
+							end
+						else
+							Tween(CFrameQ)
+						end
+						if (CFrameQ.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
+							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, QuestLv)
+						end
+					elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+						for L_357_forvar0, L_358_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+							if L_358_forvar1:FindFirstChild("Humanoid") and L_358_forvar1:FindFirstChild("HumanoidRootPart") then
+								if L_358_forvar1.Name == Ms then
+									repeat
+										game:GetService("RunService").Heartbeat:wait()
+										if L_358_forvar1.Humanoid.Health <= L_358_forvar1.Humanoid.MaxHealth * KillPercent / 100 then
+											_G.UseSkill = true
+										else
+											_G.UseSkill = false
+											AutoHaki()
+											bringmob = true
+											EquipTool(SelectWeapon)
+											Tween(L_358_forvar1.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
+											L_358_forvar1.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+											L_358_forvar1.HumanoidRootPart.Transparency = 1
+											L_358_forvar1.Humanoid.JumpPower = 0
+											L_358_forvar1.Humanoid.WalkSpeed = 0
+											L_358_forvar1.HumanoidRootPart.CanCollide = false
+											FarmPos = L_358_forvar1.HumanoidRootPart.CFrame
+											MonFarm = L_358_forvar1.Name
+											NormalAttack()
+										end
+									until not AutoFarmMasDevilFruit or not L_358_forvar1.Parent or L_358_forvar1.Humanoid.Health == 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not game:GetService("Workspace").Enemies:FindFirstChild(L_358_forvar1.Name) or not TypeMastery == 'Level'
+									bringmob = false
+									_G.UseSkill = false
+								end
+							end
+						end
+					end
+				end)
+---------Near Mas
+			elseif AutoFarmMasDevilFruit and TypeMastery == 'Recently' then
+				pcall(function()
+					for L_359_forvar0, L_360_forvar1 in pairs(game.Workspace.Enemies:GetChildren()) do
+						if L_360_forvar1.Name and L_360_forvar1:FindFirstChild("Humanoid") and L_360_forvar1:FindFirstChild("HumanoidRootPart") then
+							if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - L_360_forvar1:FindFirstChild("HumanoidRootPart").Position).Magnitude <= 5000 then
+								repeat
+									game:GetService("RunService").Heartbeat:wait()
+									if L_360_forvar1.Humanoid.Health <= L_360_forvar1.Humanoid.MaxHealth * KillPercent / 100 then
+										_G.UseSkill = true
+									else
+										_G.UseSkill = false
+										AutoHaki()
+										bringmob = true
+										EquipTool(SelectWeapon)
+										Tween(L_360_forvar1.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
+										L_360_forvar1.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+										L_360_forvar1.HumanoidRootPart.Transparency = 1
+										L_360_forvar1.Humanoid.JumpPower = 0
+										L_360_forvar1.Humanoid.WalkSpeed = 0
+										L_360_forvar1.HumanoidRootPart.CanCollide = false
+  --v.Humanoid:ChangeState(11)
+  --v.Humanoid:ChangeState(14)
+										FarmPos = L_360_forvar1.HumanoidRootPart.CFrame
+										MonFarm = L_360_forvar1.Name
+										NormalAttack()
+									end
+								until not AutoFarmMasDevilFruit or not MasteryType == 'Recently' or not L_360_forvar1.Parent or L_360_forvar1.Humanoid.Health == 0 or not TypeMastery == 'Recently'
+								bringmob = false
+								_G.UseSkill = false
+							end
+						end
+					end
+				end)
+			end
+		end
+	end)
+	local L_108_ = L_5_.Main:AddSection("Misc Farm")
+	if Third_Sea then
+		local L_361_ = L_5_.Main:AddToggle("ToggleBone", {
+			Title = "Auto Bone",
+			Default = false
+		})
+		L_361_:OnChanged(function(L_366_arg0)
+			_G.AutoBone = L_366_arg0
+		end)
+		L_6_.ToggleBone:SetValue(false)
+		local L_362_ = CFrame.new(- 9515.75, 174.8521728515625, 6079.40625)
+		local L_363_ = CFrame.new(- 9359.453125, 141.32679748535156, 5446.81982421875)
+		spawn(function()
+			while wait() do
+				if _G.AutoBone then
+					pcall(function()
+						local L_367_ = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text
+						if not string.find(L_367_, "Demonic Soul") then
+							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+						end
+						if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+							if BypassTP then
+								if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - L_363_.Position).Magnitude > 2500 then
+									BTP(L_363_)
+								elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - L_362_.Position).Magnitude < 2500 then
+									Tween(L_362_)
+								end
+							else
+								Tween(L_362_)
+							end
+							if (L_362_.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 then
+								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", "HauntedQuest2", 1)
+							end
+						elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Reborn Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Living Zombie") or game:GetService("Workspace").Enemies:FindFirstChild("Demonic Soul") or game:GetService("Workspace").Enemies:FindFirstChild("Posessed Mummy") then
+								for L_368_forvar0, L_369_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+									if L_369_forvar1:FindFirstChild("HumanoidRootPart") and L_369_forvar1:FindFirstChild("Humanoid") and L_369_forvar1.Humanoid.Health > 0 then
+										if L_369_forvar1.Name == "Reborn Skeleton" or L_369_forvar1.Name == "Living Zombie" or L_369_forvar1.Name == "Demonic Soul" or L_369_forvar1.Name == "Posessed Mummy" then
+											if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, "Demonic Soul") then
+												repeat
+													wait(_G.Fast_Delay)
+													AttackNoCD()
+													AutoHaki()
+													bringmob = true
+													EquipTool(SelectWeapon)
+													Tween(L_369_forvar1.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
+													L_369_forvar1.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+													L_369_forvar1.HumanoidRootPart.Transparency = 1
+													L_369_forvar1.Humanoid.JumpPower = 0
+													L_369_forvar1.Humanoid.WalkSpeed = 0
+													L_369_forvar1.HumanoidRootPart.CanCollide = false
+													FarmPos = L_369_forvar1.HumanoidRootPart.CFrame
+													MonFarm = L_369_forvar1.Name
+												until not _G.AutoBone or L_369_forvar1.Humanoid.Health <= 0 or not L_369_forvar1.Parent or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+											else
+												game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+												bringmob = false
+											end
+										end
+									end
+								end
+							else
+							end
+						end
+					end)
+				end
+			end
+		end)
+		local L_364_ = L_5_.Main:AddToggle("ToggleCake", {
+			Title = "Auto Cake Prince",
+			Default = false
+		})
+		L_364_:OnChanged(function(L_370_arg0)
+			_G.CakePrince = L_370_arg0
+		end)
+		L_6_.ToggleCake:SetValue(false)
+		spawn(function()
+			while wait() do
+				if _G.CakePrince then
+					pcall(function()
+						local L_371_ = CFrame.new(- 2142.66821, 71.2588654, - 12327.4619, 0.996939838, - 4.33107843e-08, 0.078172572, 4.20252917e-08, 1, 1.80894251e-08, - 0.078172572, - 1.47488439e-08, 0.996939838)
+						if BypassTP then
+							if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - L_371_.Position).Magnitude > 2000 then
+								BTP(L_371_)
+								wait(3)
+							elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - L_371_.Position).Magnitude < 2000 then
+								Tween(L_371_)
+							end
+						end
+						if game.ReplicatedStorage:FindFirstChild("Cake Prince") or game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then
+							if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince") then
+								for L_372_forvar0, L_373_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+									if L_373_forvar1.Name == "Cake Prince" then
+										repeat
+											wait(_G.Fast_Delay)
+											AttackNoCD()
+											AutoHaki()
+											EquipTool(SelectWeapon)
+											L_373_forvar1.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+											L_373_forvar1.HumanoidRootPart.CanCollide = false
+											Tween(L_373_forvar1.HumanoidRootPart.CFrame * Pos)
+										--Click
+										until _G.CakePrince == false or not L_373_forvar1.Parent or L_373_forvar1.Humanoid.Health <= 0
+										bringmob = false
+									end
+								end
+							else
+								Tween(CFrame.new(- 2009.2802734375, 4532.97216796875, - 14937.3076171875))
+							end
+						else
+							if game.Workspace.Enemies:FindFirstChild("Baking Staff") or game.Workspace.Enemies:FindFirstChild("Head Baker") or game.Workspace.Enemies:FindFirstChild("Cake Guard") or game.Workspace.Enemies:FindFirstChild("Cookie Crafter") then
+								for L_374_forvar0, L_375_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+									if (L_375_forvar1.Name == "Baking Staff" or L_375_forvar1.Name == "Head Baker" or L_375_forvar1.Name == "Cake Guard" or L_375_forvar1.Name == "Cookie Crafter") and L_375_forvar1.Humanoid.Health > 0 then
+										repeat
+											wait(_G.Fast_Delay)
+											AttackNoCD()
+											AutoHaki()
+											bringmob = true
+											EquipTool(SelectWeapon)
+											L_375_forvar1.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+											FarmPos = L_375_forvar1.HumanoidRootPart.CFrame
+											MonFarm = L_375_forvar1.Name
+											Tween(L_375_forvar1.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
+										until _G.CakePrince == false or game:GetService("ReplicatedStorage"):FindFirstChild("Cake Prince") or not L_375_forvar1.Parent or L_375_forvar1.Humanoid.Health <= 0
+										bringmob = false
+									end
+								end
+							else
+								Tween(L_371_)
+							end
+						end
+					end)
+				end
+			end
+		end)
+		local L_365_ = L_5_.Main:AddToggle("ToggleSpawnCake", {
+			Title = "Auto Spawn Cake Prince",
+			Default = true
+		})
+		L_365_:OnChanged(function(L_376_arg0)
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("CakePrinceSpawner", L_376_arg0)
+		end)
+		L_6_.ToggleSpawnCake:SetValue(true)
+	end
+	if Second_Sea then
+		local L_377_ = L_5_.Main:AddToggle("ToggleVatChatKiDi", {
+			Title = "Auto Ectoplasm",
+			Default = false
+		})
+		L_377_:OnChanged(function(L_378_arg0)
+			_G.Ectoplasm = L_378_arg0
+		end)
+		L_6_.ToggleVatChatKiDi:SetValue(false)
+		spawn(function()
+			while wait(.1) do
+				pcall(function()
+					if _G.Ectoplasm then
+						if game:GetService("Workspace").Enemies:FindFirstChild("Ship Deckhand") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Engineer") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Steward") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Officer") then
+							for L_379_forvar0, L_380_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+								if L_380_forvar1.Name == "Ship Steward" or L_380_forvar1.Name == "Ship Engineer" or L_380_forvar1.Name == "Ship Deckhand" or L_380_forvar1.Name == "Ship Officer" and L_380_forvar1:FindFirstChild("Humanoid") then
+									if L_380_forvar1.Humanoid.Health > 0 then
+										repeat
+											wait(_G.Fast_Delay)
+											AttackNoCD()
+											AutoHaki()
+											bringmob = true
+											EquipTool(SelectWeapon)
+											Tween(L_380_forvar1.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
+											L_380_forvar1.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+											L_380_forvar1.HumanoidRootPart.Transparency = 1
+											L_380_forvar1.Humanoid.JumpPower = 0
+											L_380_forvar1.Humanoid.WalkSpeed = 0
+											L_380_forvar1.HumanoidRootPart.CanCollide = false
+											FarmPos = L_380_forvar1.HumanoidRootPart.CFrame
+											MonFarm = L_380_forvar1.Name
+                                        --Click
+										until _G.Ectoplasm == false or not L_380_forvar1.Parent or L_380_forvar1.Humanoid.Health == 0 or not game:GetService("Workspace").Enemies:FindFirstChild(L_380_forvar1.Name)
+										bringmob = false
+									end
+								end
+							end
+						else
+							local L_381_ = (Vector3.new(904.4072265625, 181.05767822266, 33341.38671875) - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+							if L_381_ > 20000 then
+								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+							end
+							Tween(CFrame.new(904.4072265625, 181.05767822266, 33341.38671875))
+						end
+					end
+				end)
+			end
+		end)
+	end
+	local L_109_ = L_5_.Main:AddSection("Boss Farm")
+	if First_Sea then
+		tableBoss = {
+			"The Gorilla King",
+			"Bobby",
+			"Yeti",
+			"Mob Leader",
+			"Vice Admiral",
+			"Warden",
+			"Chief Warden",
+			"Swan",
+			"Magma Admiral",
+			"Fishman Lord",
+			"Wysper",
+			"Thunder God",
+			"Cyborg",
+			"Saber Expert"
+		}
+	elseif Second_Sea then
+		tableBoss = {
+			"Diamond",
+			"Jeremy",
+			"Fajita",
+			"Don Swan",
+			"Smoke Admiral",
+			"Cursed Captain",
+			"Darkbeard",
+			"Order",
+			"Awakened Ice Admiral",
+			"Tide Keeper"
+		}
+	elseif Third_Sea then
+		tableBoss = {
+			"Stone",
+			"Island Empress",
+			"Kilo Admiral",
+			"Captain Elephant",
+			"Beautiful Pirate",
+			"rip_indra True Form",
+			"Longma",
+			"Soul Reaper",
+			"Cake Queen"
+		}
+	end
+	local L_110_ = L_5_.Main:AddDropdown("DropdownBoss", {
+		Title = "Select Boss",
+		Values = tableBoss,
+		Multi = false,
+		Default = 1,
+	})
+	L_110_:SetValue("")
+	L_110_:OnChanged(function(L_382_arg0)
+		_G.SelectBoss = L_382_arg0
+	end)
+
+	local L_111_ = L_5_.Main:AddToggle("ToggleAutoFarmBoss", {
+		Title = "Kill Boss",
+		Default = false
+	})
+	L_111_:OnChanged(function(L_383_arg0)
+		_G.AutoBoss = L_383_arg0
+	end)
+	L_6_.ToggleAutoFarmBoss:SetValue(false)
+	spawn(function()
+		while wait() do
+			if _G.AutoBoss and BypassTP then
+				pcall(function()
+					if game:GetService("Workspace").Enemies:FindFirstChild(_G.SelectBoss) then
+						for L_384_forvar0, L_385_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+							if L_385_forvar1.Name == _G.SelectBoss then
+								if L_385_forvar1:FindFirstChild("Humanoid") and L_385_forvar1:FindFirstChild("HumanoidRootPart") and L_385_forvar1.Humanoid.Health > 0 then
+									repeat
+										wait(_G.Fast_Delay)
+										AttackNoCD()
+										AutoHaki()
+										bringmob = true
+										EquipTool(SelectWeapon)
+										L_385_forvar1.HumanoidRootPart.CanCollide = false
+										L_385_forvar1.Humanoid.WalkSpeed = 0
+										L_385_forvar1.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+										Tween(L_385_forvar1.HumanoidRootPart.CFrame * Pos)
+										sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+									until not _G.AutoBoss or not L_385_forvar1.Parent or L_385_forvar1.Humanoid.Health <= 0
+									bringmob = false
+								end
+							end
+						end
+					elseif game.ReplicatedStorage:FindFirstChild(_G.SelectBoss) then
+						if ((game.ReplicatedStorage:FindFirstChild(_G.SelectBoss).HumanoidRootPart.CFrame).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 1500 then
+							Tween(game.ReplicatedStorage:FindFirstChild(_G.SelectBoss).HumanoidRootPart.CFrame)
+						else
+							BTP(game.ReplicatedStorage:FindFirstChild(_G.SelectBoss).HumanoidRootPart.CFrame)
+						end
+					end
+				end)
+			end
+		end
+	end)
+	spawn(function()
+		while wait() do
+			if _G.AutoBoss and not BypassTP then
+				pcall(function()
+					if game:GetService("Workspace").Enemies:FindFirstChild(_G.SelectBoss) then
+						for L_386_forvar0, L_387_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+							if L_387_forvar1.Name == _G.SelectBoss then
+								if L_387_forvar1:FindFirstChild("Humanoid") and L_387_forvar1:FindFirstChild("HumanoidRootPart") and L_387_forvar1.Humanoid.Health > 0 then
+									repeat
+										wait(_G.Fast_Delay)
+										AttackNoCD()
+										AutoHaki()
+										bringmob = true
+										EquipTool(SelectWeapon)
+										L_387_forvar1.HumanoidRootPart.CanCollide = false
+										L_387_forvar1.Humanoid.WalkSpeed = 0
+										L_387_forvar1.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
+										Tween(L_387_forvar1.HumanoidRootPart.CFrame * Pos)
+										sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
+									until not _G.AutoBoss or not L_387_forvar1.Parent or L_387_forvar1.Humanoid.Health <= 0
+									bringmob = false
+								end
+							end
+						end
+					else
+						if game:GetService("ReplicatedStorage"):FindFirstChild(_G.SelectBoss) then
+							Tween(game:GetService("ReplicatedStorage"):FindFirstChild(_G.SelectBoss).HumanoidRootPart.CFrame * CFrame.new(5, 10, 7))
+						end
+					end
+				end)
+			end
+		end
+	end)
+	local L_112_ = L_5_.Main:AddSection("Material Farm")
+	if First_Sea then
+		MaterialList = {
+			"Scrap Metal",
+			"Leather",
+			"Angel Wings",
+			"Magma Ore",
+			"Fish Tail"
+		}
+	elseif Second_Sea then
+		MaterialList = {
+			"Scrap Metal",
+			"Leather",
+			"Radioactive Material",
+			"Mystic Droplet",
+			"Magma Ore",
+			"Vampire Fang"
+		}
+	elseif Third_Sea then
+		MaterialList = {
+			"Scrap Metal",
+			"Leather",
+			"Demonic Wisp",
+			"Conjured Cocoa",
+			"Dragon Scale",
+			"Gunpowder",
+			"Fish Tail",
+			"Mini Tusk"
+		}
+	end
+	local L_113_ = L_5_.Main:AddDropdown("DropdownMaterial", {
+		Title = "Select",
+		Values = MaterialList,
+		Multi = false,
+		Default = 1,
+	})
+	L_113_:SetValue("Conjured Cocoa")
+	L_113_:OnChanged(function(L_388_arg0)
+		SelectMaterial = L_388_arg0
+	end)
+	local L_114_ = L_5_.Main:AddToggle("ToggleMaterial", {
+		Title = "Auto Material",
+		Default = false
+	})
+	L_114_:OnChanged(function(L_389_arg0)
+		_G.AutoMaterial = L_389_arg0
+	end)
+	L_6_.ToggleMaterial:SetValue(false)
+	spawn(function()
+		while task.wait() do
+			if _G.AutoMaterial then
+				pcall(function()
+					MaterialMon(SelectMaterial)
+					if BypassTP then
+						if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - MPos.Position).Magnitude > 3500 then
+							BTP(MPos)
+						elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - MPos.Position).Magnitude < 3500 then
+							Tween(MPos)
+						end
+					else
+						Tween(MPos)
+					end
+					if game:GetService("Workspace").Enemies:FindFirstChild(MMon) then
+						for L_390_forvar0, L_391_forvar1 in pairs(game.Workspace.Enemies:GetChildren()) do
+							if L_391_forvar1:FindFirstChild("Humanoid") and L_391_forvar1:FindFirstChild("HumanoidRootPart") and L_391_forvar1.Humanoid.Health > 0 then
+								if L_391_forvar1.Name == MMon then
+									repeat
+										wait(_G.Fast_Delay)
+										AttackNoCD()
+										AutoHaki()
+										bringmob = true
+										EquipTool(SelectWeapon)
+										Tween(L_391_forvar1.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
+										L_391_forvar1.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+										L_391_forvar1.HumanoidRootPart.Transparency = 1
+										L_391_forvar1.Humanoid.JumpPower = 0
+										L_391_forvar1.Humanoid.WalkSpeed = 0
+										L_391_forvar1.HumanoidRootPart.CanCollide = false
+										FarmPos = L_391_forvar1.HumanoidRootPart.CFrame
+										MonFarm = L_391_forvar1.Name
+          --Click
+									until not _G.AutoMaterial or not L_391_forvar1.Parent or L_391_forvar1.Humanoid.Health <= 0
+									bringmob = false
+								end
+							end
+						end
+					else
+						for L_392_forvar0, L_393_forvar1 in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+							if string.find(L_393_forvar1.Name, Mon) then
+								if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - L_393_forvar1.Position).Magnitude >= 10 then
+									Tween(L_393_forvar1.CFrame * CFrame.new(posX, posY, posZ))
+								end
+							end
+						end
+					end
+				end)
+			end
+		end
+	end)
 if Third_Sea then
 		local L_394_ = L_5_.Sea:AddSection("Kitsune")
 		local L_395_ = L_5_.Sea:AddToggle("ToggleEspKitsune", {
