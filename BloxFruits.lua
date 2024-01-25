@@ -5747,9 +5747,9 @@ spawn(function()
 			for L_563_forvar0, L_564_forvar1 in pairs(game.Workspace:GetChildren()) do
 				if string.find(L_564_forvar1.Name, "Fruit") then
 					Tween(L_564_forvar1.Handle.CFrame)
-				end
-			end
-		end
-	end
-end)
+				                  end
+		                       end
+	                     end
+	           end
+         end)
 end
