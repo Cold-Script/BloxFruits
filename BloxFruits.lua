@@ -2920,7 +2920,7 @@ local L_94_ = L_5_.Main:AddSection("Farming")
 		L_332_:Play()
 	end
 	if Third_Sea then
-		local L_333_ = L_5_.Misc:AddToggle("ToggleChest", {
+		local L_333_ = L_5_.Main:AddToggle("ToggleChest", {
 			Title = "Auto Chest (Risk)",
 			Default = false
 		})
@@ -2930,7 +2930,7 @@ local L_94_ = L_5_.Main:AddSection("Farming")
 		L_6_.ToggleChest:SetValue(false)
 	end
 	if Second_Sea then
-		local L_335_ = L_5_.Misc:AddToggle("ToggleChest", {
+		local L_335_ = L_5_.Main:AddToggle("ToggleChest", {
 			Title = "Auto Chest Stop If Have Items",
 			Default = false
 		})
@@ -2939,7 +2939,7 @@ local L_94_ = L_5_.Main:AddSection("Farming")
 		end)
 		L_6_.ToggleChest:SetValue(false)
 	end
-	local L_103_ = L_5_.Misc:AddToggle("ToggleChestTween", {
+	local L_103_ = L_5_.Main:AddToggle("ToggleChestTween", {
 		Title = "Auto Chest (Safe)",
 		Default = false
 	})
@@ -3149,8 +3149,18 @@ local L_94_ = L_5_.Main:AddSection("Farming")
 			end
 		end
 	end)
+        local L_1008_ = L_5_.Main:AddSlider("SliderHealt", {
+		Title = "Fullbright (%)",
+		Description = "",
+		Default = 2.5,
+		Min = 0,
+		Max = 25,
+		Rounding = 1,
+		Callback = function(L_352_arg0)
+			game.Lighting.Brightness = L_352_arg0
+		end
+	})
 	local L_108_ = L_5_.Main:AddSection("Misc Farm")
-	if Third_Sea then
 		local L_361_ = L_5_.Main:AddToggle("ToggleBone", {
 			Title = "Auto Bone",
 			Default = false
@@ -3217,8 +3227,6 @@ local L_94_ = L_5_.Main:AddSection("Farming")
 				end
 			end
 		end)							
-
-if Second_Sea then
 		local L_377_ = L_5_.Main:AddToggle("ToggleVatChatKiDi", {
 			Title = "Auto Ectoplasm",
 			Default = false
@@ -3497,3 +3505,88 @@ if Second_Sea then
 			end
 		end
 	end)
+local L_8_ = L_5_.Main:AddToggle("ToggleFastAttack", {
+	Title = " Enable Fast Attack",
+	Default = true
+})
+L_8_:OnChanged(function(L_510_arg0)
+	_G.FastAttack = L_510_arg0
+end)
+L_6_.ToggleFastAttack:SetValue(true)
+
+spawn(function()
+	while wait(0.4) do
+		pcall(function()
+			if _G.FastAttack then
+				repeat
+					wait(_G.Fast_Delay)
+					AttackNoCD()
+				until not _G.FastAttack
+			end
+		end)
+	end
+end)
+
+local L_9_ = require(game.ReplicatedStorage.Util.CameraShaker)
+L_9_:Stop()
+local L_10_ = L_5_.Main:AddToggle("ToggleBringMob", {
+	Title = " Enable Bring Mob",
+	Default = true
+})
+L_10_:OnChanged(function(L_511_arg0)
+	_G.BringMob = L_511_arg0
+end)
+L_6_.ToggleBringMob:SetValue(true)
+spawn(function()
+	while wait() do
+		pcall(function()
+			for L_512_forvar0, L_513_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+				if _G.BringMob and bringmob then
+					if L_513_forvar1.Name == MonFarm and L_513_forvar1:FindFirstChild("Humanoid") and L_513_forvar1.Humanoid.Health > 0 then
+						if L_513_forvar1.Name == "Factory Staff" then
+							if (L_513_forvar1.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 500 then
+								L_513_forvar1.Head.CanCollide = false
+								L_513_forvar1.HumanoidRootPart.CanCollide = false
+								L_513_forvar1.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+								L_513_forvar1.HumanoidRootPart.CFrame = FarmPos
+								if L_513_forvar1.Humanoid:FindFirstChild("Animator") then
+									L_513_forvar1.Humanoid.Animator:Destroy()
+								end
+								sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+							end
+						elseif L_513_forvar1.Name == MonFarm then
+							if (L_513_forvar1.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 450 then
+								L_513_forvar1.Head.CanCollide = false
+								L_513_forvar1.HumanoidRootPart.CanCollide = false
+								L_513_forvar1.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+								L_513_forvar1.HumanoidRootPart.CFrame = FarmPos
+								if L_513_forvar1.Humanoid:FindFirstChild("Animator") then
+									L_513_forvar1.Humanoid.Animator:Destroy()
+								end
+								sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+							end
+						end
+					end
+				end
+			end
+		end)
+	end
+end)
+local L_13_ = L_5_.Main:AddToggle("ToggleRemoveNotify", {
+	Title = " Enable Remove All Notify",
+	Default = false
+})
+L_13_:OnChanged(function(L_516_arg0)
+	RemoveNotify = L_516_arg0
+end)
+L_6_.ToggleRemoveNotify:SetValue(false)
+spawn(function()
+	while wait() do
+		if RemoveNotify then
+			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = 
+false
+		else
+			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
+		end
+	end
+end)
