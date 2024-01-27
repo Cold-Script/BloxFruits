@@ -3140,8 +3140,8 @@ local L_94_ = L_5_.Main:AddSection("Farming")
 			end
 		end
 	end)
+end
 	local L_108_ = L_5_.Main:AddSection("Misc Farm")
-	if Third_Sea then
 		local L_361_ = L_5_.Main:AddToggle("ToggleBone", {
 			Title = "Auto Bone",
 			Default = false
@@ -3208,7 +3208,6 @@ local L_94_ = L_5_.Main:AddSection("Farming")
 				end
 			end
 		end)
-if Second_Sea then
 		local L_377_ = L_5_.Main:AddToggle("ToggleVatChatKiDi", {
 			Title = "Auto Ectoplasm",
 			Default = false
@@ -3572,5 +3571,4 @@ false
 		end
 	end
 end)
-end
 end
