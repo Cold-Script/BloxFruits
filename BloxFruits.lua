@@ -2911,7 +2911,7 @@ local L_94_ = L_5_.Main:AddSection("Farming")
 		L_332_:Play()
 	end
 	if Third_Sea then
-		local L_333_ = L_5_.Misc:AddToggle("ToggleChest", {
+		local L_333_ = L_5_.Main:AddToggle("ToggleChest", {
 			Title = "Auto Chest (Risk)",
 			Default = false
 		})
@@ -2921,7 +2921,7 @@ local L_94_ = L_5_.Main:AddSection("Farming")
 		L_6_.ToggleChest:SetValue(false)
 	end
 	if Second_Sea then
-		local L_335_ = L_5_.Misc:AddToggle("ToggleChest", {
+		local L_335_ = L_5_.Main:AddToggle("ToggleChest", {
 			Title = "Auto Chest Stop If Have Items",
 			Default = false
 		})
@@ -2930,7 +2930,7 @@ local L_94_ = L_5_.Main:AddSection("Farming")
 		end)
 		L_6_.ToggleChest:SetValue(false)
 	end
-	local L_103_ = L_5_.Misc:AddToggle("ToggleChestTween", {
+	local L_103_ = L_5_.Main:AddToggle("ToggleChestTween", {
 		Title = "Auto Chest (Safe)",
 		Default = false
 	})
