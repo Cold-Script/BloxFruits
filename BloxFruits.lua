@@ -3255,7 +3255,7 @@ end
 				end)
 			end
 		end)
-	end
+        end
 	local L_109_ = L_5_.Main:AddSection("Boss Farm")
 	if First_Sea then
 		tableBoss = {
@@ -3571,4 +3571,3 @@ false
 		end
 	end
 end)
-end
