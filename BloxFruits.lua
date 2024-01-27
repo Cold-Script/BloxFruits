@@ -3488,7 +3488,7 @@ if Second_Sea then
 		end
 	end)
 local L_8_ = L_5_.Main:AddToggle("ToggleFastAttack", {
-	Title = " Enable Fast Attack",
+	Title = "Enable Fast Attack",
 	Default = true
 })
 L_8_:OnChanged(function(L_510_arg0)
@@ -3555,8 +3555,8 @@ spawn(function()
 	end
 end)
 local L_13_ = L_5_.Main:AddToggle("ToggleRemoveNotify", {
-	Title = " Enable Remove All Notify",
-	Default = false
+	Title = "Enable Remove All Notify",
+	Default = true
 })
 L_13_:OnChanged(function(L_516_arg0)
 	RemoveNotify = L_516_arg0
@@ -3572,4 +3572,5 @@ false
 		end
 	end
 end)
+end
 end
