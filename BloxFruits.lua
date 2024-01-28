@@ -2568,6 +2568,7 @@ end
 							ame.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_304_arg0
 				
 							w
+
 							ait(.05)
 		
 			
@@ -3147,17 +3148,6 @@ local L_94_ = L_5_.Main:AddSection("Farming")
 			end
 		end
 	end)
-        local L_1008_ = L_5_.Main:AddSlider("SliderHealt", {
-		Title = "Fullbright (%)",
-		Description = "",
-		Default = 2.5,
-		Min = 0,
-		Max = 25,
-		Rounding = 1,
-		Callback = function(L_352_arg0)
-			game.Lighting.Brightness = L_352_arg0
-		end
-	})
 	local L_108_ = L_5_.Main:AddSection("Misc Farm")
 		local L_361_ = L_5_.Main:AddToggle("ToggleBone", {
 			Title = "Auto Bone",
@@ -3224,7 +3214,7 @@ local L_94_ = L_5_.Main:AddSection("Farming")
 					end)
 				end
 			end
-		end)							
+		end)
 		local L_377_ = L_5_.Main:AddToggle("ToggleVatChatKiDi", {
 			Title = "Auto Ectoplasm",
 			Default = false
@@ -3572,7 +3562,7 @@ spawn(function()
 end)
 local L_13_ = L_5_.Main:AddToggle("ToggleRemoveNotify", {
 	Title = " Enable Remove All Notify",
-	Default = false
+	Default = true
 })
 L_13_:OnChanged(function(L_516_arg0)
 	RemoveNotify = L_516_arg0
@@ -3588,3 +3578,21 @@ false
 		end
 	end
 end)
+local L_14_ = L_5_.Main:AddToggle("ToggleRemoveNotify", {
+	Title = "Walk On Water",
+	Default = false
+})
+L_14_:OnChanged(function(L_516_arg0)
+	_G.WalkWater = L_516_arg0
+end)
+spawn(function()
+			while task.wait() do
+				pcall(function()
+					if _G.WalkWater then
+						game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,112,1000)
+					else
+						game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,80,1000)
+					end
+				end)
+			end
+		end)
