@@ -2596,11 +2596,11 @@ end
 
 local L_94_ = L_5_.Main:AddSection("Farming")
 	local L_97_ = L_5_.Main:AddDropdown("DropdownSelectWeapon", {
-		Title = "Select Weapon",
+		Title = "Chọn Vũ Khí",
 		Values = {
-			'Melee',
-			'Sword',
-			'Blox Fruit'
+			'Cận Chiến',
+			'Kiếm',
+			'Trái Cây Ác Quỷ [Ice,Light,Kitsune,T-rex]'
 		},
 		Multi = false,
 		Default = 1,
@@ -2649,7 +2649,7 @@ local L_94_ = L_5_.Main:AddSection("Farming")
 		end
 	end)
 	local L_98_ = L_5_.Main:AddToggle("ToggleLevel", {
-		Title = "Auto Level",
+		Title = "Bắt Đầu Cày Cấp",
 		Default = false
 	})
 	L_98_:OnChanged(function(L_315_arg0)
@@ -2713,7 +2713,7 @@ local L_94_ = L_5_.Main:AddSection("Farming")
 	end)
 end
 local L_10_ = L_5_.Main:AddToggle("ToggleBringMob", {
-	Title = " Enable Bring Mob",
+	Title = "Gom Quái",
 	Default = true
 })
 L_10_:OnChanged(function(L_511_arg0)
@@ -2756,7 +2756,7 @@ spawn(function()
 	end
 end)
 local L_13_ = L_5_.Main:AddToggle("ToggleRemoveNotify", {
-	Title = " Enable Remove All Notify",
+	Title = "Xoá tất cả thông báo",
 	Default = true
 })
 L_13_:OnChanged(function(L_516_arg0)
@@ -2774,7 +2774,7 @@ false
 	end
 end)
 local L_22_ = L_5_.Main:AddSlider("SliderPosX", {
-	Title = "Pos X",
+	Title = "Hướng",
 	Description = "",
 	Default = 10,
 	Min = -60,
@@ -2790,7 +2790,7 @@ end)
 L_22_:SetValue(10)
 
 local L_23_ = L_5_.Main:AddSlider("SliderPosY", {
-	Title = "Pos Y",
+	Title = "Ở trên",
 	Description = "",
 	Default = 30,
 	Min = -60,
@@ -2806,7 +2806,7 @@ end)
 L_23_:SetValue(30)
 
 local L_24_ = L_5_.Main:AddSlider("SliderPosZ", {
-	Title = "Pos Z",
+	Title = "Ở dưới",
 	Description = "",
 	Default = 10,
 	Min = -60,
@@ -2821,7 +2821,7 @@ L_24_:OnChanged(function(L_528_arg0)
 end)
 L_24_:SetValue(10)
 local L_26_ = L_5_.Stats:AddToggle("ToggleDe", {
-	Title = "Auto Defense",
+	Title = "Năng Máu",
 	Default = false
 })
 L_26_:OnChanged(function(L_530_arg0)
@@ -2832,7 +2832,7 @@ L_6_.ToggleDe:SetValue(false)
 
 
 local L_27_ = L_5_.Stats:AddToggle("ToggleSword", {
-	Title = "Auto Sword",
+	Title = "Năng Kiếm",
 	Default = false
 })
 L_27_:OnChanged(function(L_531_arg0)
@@ -2843,7 +2843,7 @@ L_6_.ToggleSword:SetValue(false)
 
 
 local L_28_ = L_5_.Stats:AddToggle("ToggleGun", {
-	Title = "Auto Gun",
+	Title = "Năng Súng",
 	Default = false
 })
 L_28_:OnChanged(function(L_532_arg0)
@@ -2853,7 +2853,7 @@ L_6_.ToggleGun:SetValue(false)
 
 
 local L_29_ = L_5_.Stats:AddToggle("ToggleFruit", {
-	Title = "Auto Demon Fruit",
+	Title = "Năng Trái Ác Quỷ",
 	Default = false
 })
 L_29_:OnChanged(function(L_533_arg0)
@@ -2929,7 +2929,7 @@ spawn(function()
 	end
 end)
 L_5_.Teleport:AddButton({
-	Title = "First Sea",
+	Title = "Dịch Chuyển Cảng 1",
 	Description = "",
 	Callback = function()
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelMain")
@@ -2939,7 +2939,7 @@ L_5_.Teleport:AddButton({
 
 
 L_5_.Teleport:AddButton({
-	Title = "Second Sea",
+	Title = "Dịch Chuyển Cảng 2",
 	Description = "",
 	Callback = function()
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
@@ -2949,7 +2949,7 @@ L_5_.Teleport:AddButton({
 
 
 L_5_.Teleport:AddButton({
-	Title = "Third Sea",
+	Title = "Dịch Chuyển Cảng 3",
 	Description = "",
 	Callback = function()
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelZou")
@@ -3022,7 +3022,7 @@ elseif Third_Sea then
 end
 
 L_5_.Main:AddButton({
-	Title = "Redeem Code",
+	Title = "Nhận tất cả code x2 kinh nghiệm",
 	Description = "Redeem code x2 exp",
 	Callback = function()
 		UseCode()
@@ -3047,7 +3047,7 @@ UseCode("Axiore")
 UseCode("TantaiGaming")
 UseCode("STRAWHATMAINE")
 local L_43_ = L_5_.Teleport:AddDropdown("DropdownIsland", {
-	Title = "Select",
+	Title = "Chọn",
 	Values = IslandList,
 	Multi = false,
 	Default = 1,
@@ -3060,7 +3060,7 @@ end)
 
 
 local L_44_ = L_5_.Teleport:AddToggle("ToggleIsland", {
-	Title = "Teleport",
+	Title = "Dịch Chuyển",
 	Default = false
 })
 L_44_:OnChanged(function(L_555_arg0)
@@ -3170,7 +3170,7 @@ L_44_:OnChanged(function(L_555_arg0)
 end)
 L_6_.ToggleIsland:SetValue(false)
 local L_52_ = L_5_.Esp:AddToggle("ToggleEspPlayer", {
-	Title = "Esp Player",
+	Title = "ESP người chơi",
 	Default = false
 })
 
@@ -3182,7 +3182,7 @@ L_6_.ToggleEspPlayer:SetValue(false)
 
 
 local L_53_ = L_5_.Esp:AddToggle("ToggleEspFruit", {
-	Title = "Esp Devil Fruit",
+	Title = "ESP trái ác quỷ",
 	Default = false
 })
 
@@ -3199,7 +3199,7 @@ L_6_.ToggleEspFruit:SetValue(false)
 
 
 local L_54_ = L_5_.Esp:AddToggle("ToggleEspIsland", {
-	Title = "Esp All Island",
+	Title = "ESP Tất cả Đảo",
 	Default = false
 })
 
@@ -3214,7 +3214,7 @@ L_6_.ToggleEspIsland:SetValue(false)
 
 
 local L_55_ = L_5_.Esp:AddToggle("ToggleEspFlower", {
-	Title = "Esp Flower",
+	Title = "ESP Tất Cả Hoa",
 	Default = false
 })
 
