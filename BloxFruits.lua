@@ -2594,6 +2594,31 @@ do
 	end
  
 local L_94_ = L_5_.Main:AddSection("Farming")
+	local L_95_ = {
+          '1',
+          '0.5',
+          '0.2',
+          '0'
+	}
+	local L_96_ = L_5_.Main:AddDropdown("DropdownDelayAttack", {
+		Title = "Select Fast Attack",
+		Values = L_95_,
+		Multi = false,
+		Default = 1,
+	})
+	L_96_:SetValue("Fast Attack")
+	L_96_:OnChanged(function(L_305_arg0)
+		_G.FastAttack_Mode = L_305_arg0
+		if _G.FastAttack_Mode == "1" then
+			_G.Fast_Delay = 1
+		elseif _G.FastAttack_Mode == "0.5" then
+			_G.Fast_Delay = 0.5
+		elseif _G.FastAttack_Mode == "0.2" then
+			_G.Fast_Delay = 0.2
+          elseif _G.FastAttack_Mode == "0" then
+			_G.Fast_Delay = 0
+		end
+	end)
 	local L_97_ = L_5_.Main:AddDropdown("DropdownSelectWeapon", {
 		Title = "Select Weapon",
 		Values = {
@@ -2632,14 +2657,6 @@ local L_94_ = L_5_.Main:AddSection("Farming")
 						if L_312_forvar1.ToolTip == "Blox Fruit" then
 							if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(L_312_forvar1.Name)) then
 								SelectWeapon = L_312_forvar1.Name
-							end
-						end
-					end
-				else
-					for L_313_forvar0 , L_314_forvar1 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-						if L_314_forvar1.ToolTip == "Melee" then
-							if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(L_314_forvar1.Name)) then
-								SelectWeapon = L_314_forvar1.Name
 							end
 						end
 					end
