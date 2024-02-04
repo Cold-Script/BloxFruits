@@ -2067,3 +2067,529 @@ do
 			end)
 		end
 	end
+--------------------------------------------------------------------------------------------------------------------------------------------
+---------Tween
+	function Tween2(L_234_arg0)
+		local L_235_ = (L_234_arg0.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+		if L_235_ >= 1 then
+			Speed = 300
+		end
+		game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(L_235_ / Speed, Enum.EasingStyle.Linear), {
+			CFrame = L_234_arg0
+		}):Play()
+		if _G.CancelTween2 then
+			game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(L_235_ / Speed, Enum.EasingStyle.Linear), {
+				CFrame = L_234_arg0
+			}):Cancel()
+		end
+		_G.Clip2 = true
+		wait(L_235_ / Speed)
+		_G.Clip2 = false
+	end
+   
+
+--BTP
+	function BTP(L_236_arg0)
+		game.Players.LocalPlayer.Character.Head:Destroy()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_236_arg0
+		wait(0.5)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_236_arg0
+		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+	end
+--BTPZ
+	function BTPZ(L_237_arg0)
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_237_arg0
+		task.wait()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_237_arg0
+	end
+------Bypass TP 2
+	function GetIsLand(...)
+		local L_238_ = {
+			...
+		}
+		local L_239_ = L_238_[1]
+		local L_240_
+		if type(L_239_) == "vector" then
+			L_240_ = L_239_
+		elseif type(L_239_) == "userdata" then
+			L_240_ = L_239_.Position
+		elseif type(L_239_) == "number" then
+			L_240_ = CFrame.new(unpack(L_238_))
+			L_240_ = L_240_.p
+		end
+		local L_241_
+		local L_242_ = math.huge;
+		if game.Players.LocalPlayer.Team then
+			for L_243_forvar0, L_244_forvar1 in pairs(game.Workspace._WorldOrigin.PlayerSpawns:FindFirstChild(tostring(game.Players.LocalPlayer.Team)):GetChildren()) do
+				local L_245_ = (L_240_ - L_244_forvar1:GetModelCFrame().p).Magnitude;
+				if L_245_ < L_242_ then
+					L_242_ = L_245_;
+					L_241_ = L_244_forvar1.Name
+				end
+			end
+			if L_241_ then
+				return L_241_
+			end
+		end
+	end
+	function toTarget(...)
+		local L_246_ = {
+			...
+		}
+		local L_247_ = L_246_[1]
+		local L_248_
+		if type(L_247_) == "vector" then
+			L_248_ = CFrame.new(L_247_)
+		elseif type(L_247_) == "userdata" then
+			L_248_ = L_247_
+		elseif type(L_247_) == "number" then
+			L_248_ = CFrame.new(unpack(L_246_))
+		end
+		if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health == 0 then
+			if tween then
+				tween:Cancel()
+			end
+			repeat
+				wait()
+			until game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health > 0;
+			wait(0.2)
+		end
+		local L_249_ = {}
+		local L_250_ = (L_248_.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position)
+        .Magnitude
+		if L_250_ < 1000 then
+			Speed = 315
+		elseif L_250_ >= 1000 then
+			Speed = 300
+		end
+		if BypassTP then
+			if L_250_ > 3000 and not AutoNextIsland and not (game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip") or game.Players.LocalPlayer.Character:FindFirstChild("Special Microchip") or game.Players.LocalPlayer.Backpack:FindFirstChild("God's Chalice") or game.Players.LocalPlayer.Character:FindFirstChild("God's Chalice") or game.Players.LocalPlayer.Backpack:FindFirstChild("Hallow Essence") or game.Players.LocalPlayer.Character:FindFirstChild("Hallow Essence") or game.Players.LocalPlayer.Character:FindFirstChild("Sweet Chalice") or game.Players.LocalPlayer.Backpack:FindFirstChild("Sweet Chalice")) and not (Name == "Fishman Commando" or Name == "Fishman Warrior") then
+				pcall(function()
+					tween:Cancel()
+					fkwarp = false
+					if game:GetService("Players")["LocalPlayer"].Data:FindFirstChild("SpawnPoint").Value == tostring(GetIsLand(L_248_)) then
+						wait(.1)
+						Com("F_", "TeleportToSpawn")
+					elseif game:GetService("Players")["LocalPlayer"].Data:FindFirstChild("LastSpawnPoint").Value == tostring(GetIsLand(L_248_)) then
+						game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
+						wait(0.1)
+						repeat
+							wait()
+						until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0
+					else
+						if game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0 then
+							if fkwarp == false then
+								game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_248_
+							end
+							fkwarp = true
+						end
+						wait(.08)
+						game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):ChangeState(15)
+						repeat
+							wait()
+						until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0
+						wait(.1)
+						Com("F_", "SetSpawnPoint")
+					end
+					wait(0.2)
+					return
+				end)
+			end
+		end
+		local L_251_ = game:service"TweenService"
+		local L_252_ = TweenInfo.new((L_248_.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position)
+        .Magnitude / Speed, Enum.EasingStyle.Linear)
+		local L_253_, L_254_ = pcall(function()
+			tween = L_251_:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], L_252_, {
+				CFrame = L_248_
+			})
+			tween:Play()
+		end)
+		function L_249_:Stop()
+			tween:Cancel()
+		end
+		function L_249_:Wait()
+			tween.Completed:Wait()
+		end
+		return L_249_
+	end
+
+------
+	function Tween(L_255_arg0)
+		Distance = (L_255_arg0.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+		if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+			game.Players.LocalPlayer.Character.Humanoid.Sit = false
+		end
+		pcall(function()
+			tween = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Distance / 300, Enum.EasingStyle.Linear), {
+				CFrame = L_255_arg0
+			})
+		end)
+		tween:Play()
+		if Distance <= 300 then
+			tween:Cancel()
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_255_arg0
+		end
+		if _G.StopTween == true then
+			tween:Cancel()
+			_G.Clip = false
+		end
+	end
+
+---------
+	function toTargetP(L_256_arg0)
+		if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health <= 0 or not game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") then
+			tween:Cancel()
+			repeat
+				wait()
+			until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") and game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0
+			wait(7)
+			return
+		end
+		if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - L_256_arg0.Position).Magnitude <= 150 then
+			pcall(function()
+				tween:Cancel()
+				game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.CFrame = L_256_arg0
+				return
+			end)
+		end
+		local L_257_ = game:service"TweenService"
+		local L_258_ = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - L_256_arg0.Position).Magnitude / 325, Enum.EasingStyle.Linear)
+		tween = L_257_:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], L_258_, {
+			CFrame = L_256_arg0
+		})
+		tween:Play()
+		local L_259_ = {}
+		function L_259_:Stop()
+			tween:Cancel()
+		end
+		return L_259_
+	end
+
+    --function TP to Boat/Ship
+	function TweenShip(L_260_arg0)
+		local L_261_ = game:service"TweenService"
+		local L_262_ = TweenInfo.new((game:GetService("Workspace").Boats.MarineBrigade.VehicleSeat.CFrame.Position - L_260_arg0.Position).Magnitude / 300, Enum.EasingStyle.Linear)
+		tween = L_261_:Create(game:GetService("Workspace").Boats.MarineBrigade.VehicleSeat, L_262_, {
+			CFrame = L_260_arg0
+		})
+		tween:Play()
+		local L_263_ = {}
+		function L_263_:Stop()
+			tween:Cancel()
+		end
+		return L_263_
+	end
+	function TweenBoat(L_264_arg0)
+		if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health <= 0 or not game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") then
+			tween:Cancel()
+			repeat
+				wait()
+			until game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid") and game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health > 0
+			wait(7)
+			return
+		end
+		local L_265_ = game:service"TweenService"
+		local L_266_ = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - L_264_arg0.Position).Magnitude / 325, Enum.EasingStyle.Linear)
+		tween = L_265_:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], L_266_, {
+			CFrame = L_264_arg0
+		})
+		tween:Play()
+		local L_267_ = {}
+		function L_267_:Stop()
+			tween:Cancel()
+		end
+		return L_267_
+	end
+
+--select weapon
+	function EquipTool(L_268_arg0)
+		if game.Players.LocalPlayer.Backpack:FindFirstChild(L_268_arg0) then
+			local L_269_ = game.Players.LocalPlayer.Backpack:FindFirstChild(L_268_arg0)
+			wait(0.5)
+			game.Players.LocalPlayer.Character.Humanoid:EquipTool(L_269_)
+		end
+	end
+    
+    --aimbot mastery
+
+	spawn(function()
+		local L_270_ = getrawmetatable(game)
+		local L_271_ = L_270_.__namecall
+		setreadonly(L_270_, false)
+		L_270_.__namecall = newcclosure(function(...)
+			local L_272_ = getnamecallmethod()
+			local L_273_ = {
+				...
+			}
+			if tostring(L_272_) == "FireServer" then
+				if tostring(L_273_[1]) == "RemoteEvent" then
+					if tostring(L_273_[2]) ~= "true" and tostring(L_273_[2]) ~= "false" then
+						if _G.UseSkill then
+							if type(L_273_[2]) == "vector" then
+								L_273_[2] = PositionSkillMasteryDevilFruit
+							else
+								L_273_[2] = CFrame.new(PositionSkillMasteryDevilFruit)
+							end
+							return L_271_(unpack(L_273_))
+						end
+					end
+				end
+			end
+			return L_271_(...)
+		end)
+	end)
+--Equip Gun
+	spawn(function()
+		pcall(function()
+			while task.wait() do
+				for L_274_forvar0, L_275_forvar1 in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+					if L_275_forvar1:IsA("Tool") then
+						if L_275_forvar1:FindFirstChild("RemoteFunctionShoot") then
+							CurrentEquipGun = L_275_forvar1.Name
+						end
+					end
+				end
+			end
+		end)
+	end)
+
+-- [Body Gyro]
+	spawn(function()
+		while task.wait() do
+			pcall(function()
+				if _G.TeleportIsland or AutoFarmChest or _G.chestsea2 or _G.chestsea3 or _G.CastleRaid or _G.CollectAzure or _G.TweenToKitsune or _G.AutoCandy or _G.GhostShip or _G.Ship or _G.SailBoat or _G.Auto_Holy_Torch or _G.FindMirageIsland or _G.TeleportPly or _G.Tweenfruit or _G.AutoFishCrew or _G.AutoShark or _G.AutoCakeV2 or _G.AutoMysticIsland or _G.AutoQuestRace or _G.AutoBuyBoat or _G.dao or _G.AutoMirage or AutoFarmAcient or _G.AutoQuestRace or Auto_Law or _G.AutoAllBoss or AutoTushita or _G.AutoHolyTorch or _G.AutoTerrorshark or _G.farmpiranya or _G.DriveMytic or _G.AutoCakeV2V2 or PirateShip or _G.AutoSeaBeast or _G.AutoNear or _G.BossRaid or _G.GrabChest or AutoCitizen or _G.Ectoplasm or AutoEvoRace or AutoBartilo or AutoFactory or BringChestz or BringFruitz or _G.AutoLevel or _G.Clip2 or AutoFarmNoQuest or _G.AutoBone or AutoFarmSelectMonsterQuest or AutoFarmSelectMonsterNoQuest or _G.AutoBoss or AutoFarmBossQuest or AutoFarmMasGun or AutoFarmMasDevilFruit or AutoFarmSelectArea or AutoSecondSea or AutoThirdSea or AutoDeathStep or AutoSuperhuman or AutoSharkman or AutoElectricClaw or AutoDragonTalon or AutoGodhuman or AutoRengoku or AutoBuddySword or AutoPole or AutoHallowSycthe or AutoCavander or AutoTushita or AutoDarkDagger or _G.CakePrince or _G.AutoElite or AutoRainbowHaki or AutoSaber or AutoFarmKen or AutoKenHop or AutoKenV2 or _G.AutoKillPlayerMelee or _G.AutoKillPlayerGun or _G.AutoKillPlayerFruit or AutoDungeon or AutoNextIsland or AutoAdvanceDungeon or Musketeer or RipIndra or Auto_Serpent_Bow or AutoTorch or AutoSoulGuitar or Auto_Cursed_Dual_Katana or _G.AutoMaterial or Auto_Quest_Yama_1 or Auto_Quest_Yama_2 or Auto_Quest_Yama_3 or Auto_Quest_Tushita_1 or Auto_Quest_Tushita_2 or Auto_Quest_Tushita_3 or _G.Factory or _G.SwanGlasses or AutoBartilo or AutoEvoRace or _G.Ectoplasm then
+					if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+						local L_276_ = Instance.new("BodyVelocity")
+						L_276_.Name = "BodyClip"
+						L_276_.Parent = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart
+						L_276_.MaxForce = Vector3.new(100000, 100000, 100000)
+						L_276_.Velocity = Vector3.new(0, 0, 0)
+					end
+				else
+					game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+				end
+			end)
+		end
+	end)
+
+	
+--No CLip Auto Farm
+	spawn(function()
+		pcall(function()
+			game:GetService("RunService").Stepped:Connect(function()
+				if _G.TeleportIsland or _G.CastleRaid or AutoFarmChest or _G.CollectAzure or _G.TweenToKitsune or _G.AutoCandy or _G.GhostShip or _G.Ship or _G.SailBoat or _G.Auto_Holy_Torch or _G.Tweenfruit or _G.FindMirageIsland or _G.TeleportPly or _G.AutoFishCrew or _G.AutoShark or _G.AutoMysticIsland or _G.AutoCakeV2 or _G.AutoQuestRace or _G.AutoBuyBoat or _G.dao or AutoFarmAcient or _G.AutoMirage or Auto_Law or _G.AutoQuestRace or _G.AutoAllBoss or _G.AutoHolyTorch or AutoTushita or _G.farmpiranya or _G.AutoTerrorshark or _G.AutoNear or _G.AutoCakeV2V2 or PirateShip or _G.AutoSeaBeast or _G.DriveMytic or _G.BossRaid or _G.GrabChest or AutoCitizen or _G.Ectoplasm or AutoEvoRace or AutoBartilo or AutoFactory or BringChestz or BringFruitz or _G.AutoLevel or _G.Clip2 or AutoFarmNoQuest or _G.AutoBone or AutoFarmSelectMonsterQuest or AutoFarmSelectMonsterNoQuest or _G.AutoBoss or AutoFarmBossQuest or AutoFarmMasGun or AutoFarmMasDevilFruit or AutoFarmSelectArea or AutoSecondSea or AutoThirdSea or AutoDeathStep or AutoSuperhuman or AutoSharkman or AutoElectricClaw or AutoDragonTalon or AutoGodhuman or AutoRengoku or AutoBuddySword or AutoPole or AutoHallowSycthe or AutoCavander or AutoTushita or AutoDarkDagger or _G.CakePrince or _G.AutoElite or AutoRainbowHaki or AutoSaber or AutoFarmKen or AutoKenHop or AutoKenV2 or _G.AutoKillPlayerMelee or _G.AutoKillPlayerGun or _G.AutoKillPlayerFruit or AutoDungeon or AutoNextIsland or AutoAdvanceDungeon or Musketeer or RipIndra or Auto_Serpent_Bow or AutoTorch or AutoSoulGuitar or Auto_Cursed_Dual_Katana or _G.AutoMaterial or Auto_Quest_Yama_1 or Auto_Quest_Yama_2 or Auto_Quest_Yama_3 or Auto_Quest_Tushita_1 or Auto_Quest_Tushita_2 or Auto_Quest_Tushita_3 or _G.Factory or _G.SwanGlasses or AutoBartilo or AutoEvoRace or _G.Ectoplasm then
+					for L_277_forvar0, L_278_forvar1 in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+						if L_278_forvar1:IsA("BasePart") then
+							L_278_forvar1.CanCollide = false
+						end
+					end
+				end
+			end)
+		end)
+	end)
+
+
+--Check Material
+	function CheckMaterial(L_279_arg0)
+		for L_280_forvar0, L_281_forvar1 in pairs(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventory")) do
+			if type(L_281_forvar1) == "table" then
+				if L_281_forvar1.Type == "Material" then
+					if L_281_forvar1.Name == L_279_arg0 then
+						return L_281_forvar1.Count
+					end
+				end
+			end
+		end
+		return 0
+	end
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+------AttackNoCD
+	local L_88_ = game.Players.LocalPlayer
+	local L_89_ = getupvalues(require(L_88_.PlayerScripts.CombatFramework))
+	local L_90_ = L_89_[2]
+	function GetCurrentBlade()
+		local L_282_ = L_90_.activeController
+		local L_283_ = L_282_.blades[1]
+		if not L_283_ then
+			return
+		end
+		while L_283_.Parent ~= game.Players.LocalPlayer.Character do
+			L_283_ = L_283_.Parent
+		end
+		return L_283_
+	end
+	function AttackNoCD()
+		if not AutoFarmMasDevilFruit or AutoFarmMasGun then
+			if not Auto_Raid then
+				local L_284_ = L_90_.activeController
+				for L_285_forvar0 = 1, 1 do
+					local L_286_ = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
+                        L_88_.Character, {
+						L_88_.Character.HumanoidRootPart
+					}, 60)
+					local L_287_ = {}
+					local L_288_ = {}
+					for L_289_forvar0, L_290_forvar1 in pairs(L_286_) do
+						if L_290_forvar1.Parent:FindFirstChild("HumanoidRootPart") and not L_288_[L_290_forvar1.Parent] then
+							table.insert(L_287_, L_290_forvar1.Parent.HumanoidRootPart)
+							L_288_[L_290_forvar1.Parent] = true
+						end
+					end
+					L_286_ = L_287_
+					if # L_286_ > 0 then
+						local L_291_ = debug.getupvalue(L_284_.attack, 5)
+						local L_292_ = debug.getupvalue(L_284_.attack, 6)
+						local L_293_ = debug.getupvalue(L_284_.attack, 4)
+						local L_294_ = debug.getupvalue(L_284_.attack, 7)
+						local L_295_ = (L_291_ * 798405 + L_293_ * 727595) % L_292_
+						local L_296_ = L_293_ * 798405
+						(function()
+							L_295_ = (L_295_ * L_292_ + L_296_) % 1099511627776
+							L_291_ = math.floor(L_295_ / L_292_)
+							L_293_ = L_295_ - L_291_ * L_292_
+						end)()
+						L_294_ = L_294_ + 1
+						debug.setupvalue(L_284_.attack, 5, L_291_)
+						debug.setupvalue(L_284_.attack, 6, L_292_)
+						debug.setupvalue(L_284_.attack, 4, L_293_)
+						debug.setupvalue(L_284_.attack, 7, L_294_)
+						pcall(function()
+							if L_88_.Character:FindFirstChildOfClass("Tool") and L_284_.blades and L_284_.blades[1] then
+								L_284_.animator.anims.basic[1]:Play(0.01, 0.01, 0.01)
+								game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange", tostring(GetCurrentBlade()))
+								game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(L_295_ / 1099511627776 * 16777215), L_294_)
+								game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", L_286_, L_285_forvar0, "")
+							end
+						end)
+					end
+				end
+			end
+		end
+	end
+    
+--Attack Mastery
+	function NormalAttack()
+		if not _G.NormalAttack then
+			local L_297_ = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework)
+			local L_298_ = debug.getupvalues(L_297_)[2]
+			local L_299_ = require(game.ReplicatedStorage.Util.CameraShaker)
+			L_299_:Stop()
+			L_298_.activeController.attacking = false
+			L_298_.activeController.timeToNextAttack = 0
+			L_298_.activeController.hitboxMagnitude = 180
+			game:GetService'VirtualUser':CaptureController()
+			game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+		end
+	end
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+--Sword Weapon
+	function GetWeaponInventory(L_300_arg0)
+		for L_301_forvar0, L_302_forvar1 in pairs(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventory")) do
+			if type(L_302_forvar1) == "table" then
+				if L_302_forvar1.Type == "Sword" then
+					if L_302_forvar1.Name == L_300_arg0 then
+						return true
+					end
+				end
+			end
+		end
+		return false
+	end
+
+---Method Farm
+	Type1 = 1
+	spawn(function()
+		while wait(.1) do
+			if Type == 1 then
+				Pos = CFrame.new(10, 40, 10)
+			elseif Type == 2 then
+				Pos = CFrame.new(-30, 10, -30)
+			elseif Type == 3 then
+				Pos = CFrame.new(10, 10, -40)
+			elseif Type == 4 then
+				Pos = CFrame.new(-40, 10, 10)
+			end
+		end
+	end)
+	spawn(function()
+		while wait(.1) do
+			Type = 1
+			wait(1)
+			Type = 2
+			wait(1)
+			Type = 3
+			wait(1)
+			Type = 4
+			wait(1)
+		end
+	end)
+--auto turn haki
+	function AutoHaki()
+		if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+		end
+	end
+---Bypass Teleport
+	function BTP(L_303_arg0)
+		repeat
+			wait(0.5)
+			game.Players.LocalPlayer.Character.Humanoid:ChangeState(15)
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_303_arg0
+			task.wait()
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_303_arg0
+		until (L_303_arg0.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 2000
+	end
+	function BTP(L_304_arg0)
+		pcall(function()
+			if (L_304_arg0.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 2000 and not Auto_Raid and game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
+				if NameMon == "FishmanQuest" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
+				elseif Mon == "God's Guard" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(- 4607.82275, 872.54248, - 1667.55688))
+				elseif NameMon == "SkyExp1Quest" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(- 7894.6176757813, 5547.1416015625, - 380.29119873047))
+				elseif NameMon == "ShipQuest1" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+				elseif NameMon == "ShipQuest2" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
+				elseif NameMon == "FrostQuest" then
+					Tween(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+					wait()
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(- 6508.5581054688, 89.034996032715, - 132.83953857422))
+				else
+					repeat
+						wait(0.5)
+						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_304_arg0
+						wait(.05)
+						game.Players.LocalPlayer.Character.Head:Destroy()
+						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = L_304_arg0
+					until (L_304_arg0.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2500 and game.Players.LocalPlayer.Character.Humanoid.Health > 0
+					wait()
+				end
+			end
+		end)
+	end
+
+
+--Remove Effect
+	if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
+		game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
+	end
+	if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
+		game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
+	end
+ 
