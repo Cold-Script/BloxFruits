@@ -4,7 +4,7 @@ local L_2_ = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-sc
 local L_3_ = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 ----------------------------------------------------------------------------------------------------------------------------------------------
 local L_4_ = L_1_:CreateWindow({
-	Title = "Medic Hub [Priemium]",
+	Title = "You Hub [Premium Fram Level]",
 	SubTitle = "By Rechedmcvn",
 	TabWidth = 160,
 	Size = UDim2.fromOffset(530, 350),
