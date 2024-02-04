@@ -1094,3 +1094,976 @@ do
 			end
 		end
 	end
+--// Check Material
+	function MaterialMon()
+		if SelectMaterial == "Radioactive Material" then
+			MMon = "Factory Staff"
+			MPos = CFrame.new(295, 73, -56)
+			SP = "Default"
+		elseif SelectMaterial == "Mystic Droplet" then
+			MMon = "Water Fighter"
+			MPos = CFrame.new(-3385, 239, -10542)
+			SP = "Default"
+		elseif SelectMaterial == "Magma Ore" then
+			if First_Sea then
+				MMon = "Military Spy"
+				MPos = CFrame.new(-5815, 84, 8820)
+				SP = "Default"
+			elseif Second_Sea then
+				MMon = "Magma Ninja"
+				MPos = CFrame.new(-5428, 78, -5959)
+				SP = "Default"
+			end
+		elseif SelectMaterial == "Angel Wings" then
+			MMon = "God's Guard"
+			MPos = CFrame.new(-4698, 845, -1912)
+			SP = "Default"
+			if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(- 7859.09814, 5544.19043, - 381.476196)).Magnitude >= 5000 then
+				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(- 7859.09814, 5544.19043, - 381.476196))
+			end
+		elseif SelectMaterial == "Leather" then
+			if First_Sea then
+				MMon = "Brute"
+				MPos = CFrame.new(-1145, 15, 4350)
+				SP = "Default"
+			elseif Second_Sea then
+				MMon = "Marine Captain"
+				MPos = CFrame.new(- 2010.5059814453125, 73.00115966796875, - 3326.620849609375)
+				SP = "Default"
+			elseif Third_Sea then
+				MMon = "Jungle Pirate"
+				MPos = CFrame.new(- 11975.78515625, 331.7734069824219, - 10620.0302734375)
+				SP = "Default"
+			end
+		elseif SelectMaterial == "Scrap Metal" then
+			if First_Sea then
+				MMon = "Brute"
+				MPos = CFrame.new(-1145, 15, 4350)
+				SP = "Default"
+			elseif Second_Sea then
+				MMon = "Swan Pirate"
+				MPos = CFrame.new(878, 122, 1235)
+				SP = "Default"
+			elseif Third_Sea then
+				MMon = "Jungle Pirate"
+				MPos = CFrame.new(-12107, 332, -10549)
+				SP = "Default"
+			end
+		elseif SelectMaterial == "Fish Tail" then
+			if Third_Sea then
+				MMon = "Fishman Raider"
+				MPos = CFrame.new(-10993, 332, -8940)
+				SP = "Default"
+			elseif First_Sea then
+				MMon = "Fishman Warrior"
+				MPos = CFrame.new(61123, 19, 1569)
+				SP = "Default"
+				if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(61163.8515625, 5.342342376708984, 1819.7841796875)).Magnitude >= 17000 then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance", Vector3.new(61163.8515625, 5.342342376708984, 1819.7841796875))
+				end
+			end
+		elseif SelectMaterial == "Demonic Wisp" then
+			MMon = "Demonic Soul"
+			MPos = CFrame.new(-9507, 172, 6158)
+			SP = "Default"
+		elseif SelectMaterial == "Vampire Fang" then
+			MMon = "Vampire"
+			MPos = CFrame.new(-6033, 7, -1317)
+			SP = "Default"
+		elseif SelectMaterial == "Conjured Cocoa" then
+			MMon = "Chocolate Bar Battler"
+			MPos = CFrame.new(620.6344604492188, 78.93644714355469, - 12581.369140625)
+			SP = "Default"
+		elseif SelectMaterial == "Dragon Scale" then
+			MMon = "Dragon Crew Archer"
+			MPos = CFrame.new(6594, 383, 139)
+			SP = "Default"
+		elseif SelectMaterial == "Gunpowder" then
+			MMon = "Pistol Billionaire"
+			MPos = CFrame.new(-469, 74, 5904)
+			SP = "Default"
+		elseif SelectMaterial == "Mini Tusk" then
+			MMon = "Mythological Pirate"
+			MPos = CFrame.new(-13545, 470, -6917)
+			SP = "Default"
+		end
+	end
+	---------------------Esp
+	function UpdateIslandESP()
+		for L_121_forvar0, L_122_forvar1 in pairs(game:GetService("Workspace")["_WorldOrigin"].Locations:GetChildren()) do
+			pcall(function()
+				if IslandESP then
+					if L_122_forvar1.Name ~= "Sea" then
+						if not L_122_forvar1:FindFirstChild('NameEsp') then
+							local L_123_ = Instance.new('BillboardGui', L_122_forvar1)
+							L_123_.Name = 'NameEsp'
+							L_123_.ExtentsOffset = Vector3.new(0, 1, 0)
+							L_123_.Size = UDim2.new(1, 200, 1, 30)
+							L_123_.Adornee = L_122_forvar1
+							L_123_.AlwaysOnTop = true
+							local L_124_ = Instance.new('TextLabel', L_123_)
+							L_124_.Font = "GothamBold"
+							L_124_.FontSize = "Size14"
+							L_124_.TextWrapped = true
+							L_124_.Size = UDim2.new(1, 0, 1, 0)
+							L_124_.TextYAlignment = 'Top'
+							L_124_.BackgroundTransparency = 1
+							L_124_.TextStrokeTransparency = 0.5
+							L_124_.TextColor3 = Color3.fromRGB(8, 0, 0)
+						else
+							L_122_forvar1['NameEsp'].TextLabel.Text = (L_122_forvar1.Name .. '   \n' .. round((game:GetService('Players').LocalPlayer.Character.Head.Position - L_122_forvar1.Position).Magnitude / 3) .. ' Distance')
+						end
+					end
+				else
+					if L_122_forvar1:FindFirstChild('NameEsp') then
+						L_122_forvar1:FindFirstChild('NameEsp'):Destroy()
+					end
+				end
+			end)
+		end
+	end
+	function isnil(L_125_arg0)
+		return (L_125_arg0 == nil)
+	end
+	local function L_84_func(L_126_arg0)
+		return math.floor(tonumber(L_126_arg0) + 0.5)
+	end
+	Number = math.random(1, 1000000)
+	function UpdatePlayerChams()
+		for L_127_forvar0, L_128_forvar1 in pairs(game:GetService'Players':GetChildren()) do
+			pcall(function()
+				if not isnil(L_128_forvar1.Character) then
+					if ESPPlayer then
+						if not isnil(L_128_forvar1.Character.Head) and not L_128_forvar1.Character.Head:FindFirstChild('NameEsp' .. Number) then
+							local L_129_ = Instance.new('BillboardGui', L_128_forvar1.Character.Head)
+							L_129_.Name = 'NameEsp' .. Number
+							L_129_.ExtentsOffset = Vector3.new(0, 1, 0)
+							L_129_.Size = UDim2.new(1, 200, 1, 30)
+							L_129_.Adornee = L_128_forvar1.Character.Head
+							L_129_.AlwaysOnTop = true
+							local L_130_ = Instance.new('TextLabel', L_129_)
+							L_130_.Font = Enum.Font.GothamSemibold
+							L_130_.FontSize = "Size10"
+							L_130_.TextWrapped = true
+							L_130_.Text = (L_128_forvar1.Name .. ' \n' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_128_forvar1.Character.Head.Position).Magnitude / 3) .. ' Distance')
+							L_130_.Size = UDim2.new(1, 0, 1, 0)
+							L_130_.TextYAlignment = 'Top'
+							L_130_.BackgroundTransparency = 1
+							L_130_.TextStrokeTransparency = 0.5
+							if L_128_forvar1.Team == game.Players.LocalPlayer.Team then
+								L_130_.TextColor3 = Color3.new(0, 0, 254)
+							else
+								L_130_.TextColor3 = Color3.new(255, 0, 0)
+							end
+						else
+							L_128_forvar1.Character.Head['NameEsp' .. Number].TextLabel.Text = (L_128_forvar1.Name .. ' | ' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_128_forvar1.Character.Head.Position).Magnitude / 3) .. ' Distance\nHealth : ' .. L_84_func(L_128_forvar1.Character.Humanoid.Health * 100 / L_128_forvar1.Character.Humanoid.MaxHealth) .. '%')
+						end
+					else
+						if L_128_forvar1.Character.Head:FindFirstChild('NameEsp' .. Number) then
+							L_128_forvar1.Character.Head:FindFirstChild('NameEsp' .. Number):Destroy()
+						end
+					end
+				end
+			end)
+		end
+	end
+	function UpdateChestChams()
+		for L_131_forvar0, L_132_forvar1 in pairs(game.Workspace:GetChildren()) do
+			pcall(function()
+				if string.find(L_132_forvar1.Name, "Chest") then
+					if ChestESP then
+						if string.find(L_132_forvar1.Name, "Chest") then
+							if not L_132_forvar1:FindFirstChild('NameEsp' .. Number) then
+								local L_133_ = Instance.new('BillboardGui', L_132_forvar1)
+								L_133_.Name = 'NameEsp' .. Number
+								L_133_.ExtentsOffset = Vector3.new(0, 1, 0)
+								L_133_.Size = UDim2.new(1, 200, 1, 30)
+								L_133_.Adornee = L_132_forvar1
+								L_133_.AlwaysOnTop = true
+								local L_134_ = Instance.new('TextLabel', L_133_)
+								L_134_.Font = Enum.Font.GothamSemibold
+								L_134_.FontSize = "Size14"
+								L_134_.TextWrapped = true
+								L_134_.Size = UDim2.new(1, 0, 1, 0)
+								L_134_.TextYAlignment = 'Top'
+								L_134_.BackgroundTransparency = 1
+								L_134_.TextStrokeTransparency = 0.5
+								if L_132_forvar1.Name == "Chest1" then
+									L_134_.TextColor3 = Color3.fromRGB(109, 109, 109)
+									L_134_.Text = ("Chest 1" .. ' \n' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_132_forvar1.Position).Magnitude / 3) .. ' Distance')
+								end
+								if L_132_forvar1.Name == "Chest2" then
+									L_134_.TextColor3 = Color3.fromRGB(173, 158, 21)
+									L_134_.Text = ("Chest 2" .. ' \n' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_132_forvar1.Position).Magnitude / 3) .. ' Distance')
+								end
+								if L_132_forvar1.Name == "Chest3" then
+									L_134_.TextColor3 = Color3.fromRGB(85, 255, 255)
+									L_134_.Text = ("Chest 3" .. ' \n' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_132_forvar1.Position).Magnitude / 3) .. ' Distance')
+								end
+							else
+								L_132_forvar1['NameEsp' .. Number].TextLabel.Text = (L_132_forvar1.Name .. '   \n' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_132_forvar1.Position).Magnitude / 3) .. ' Distance')
+							end
+						end
+					else
+						if L_132_forvar1:FindFirstChild('NameEsp' .. Number) then
+							L_132_forvar1:FindFirstChild('NameEsp' .. Number):Destroy()
+						end
+					end
+				end
+			end)
+		end
+	end
+	function UpdateDevilChams()
+		for L_135_forvar0, L_136_forvar1 in pairs(game.Workspace:GetChildren()) do
+			pcall(function()
+				if DevilFruitESP then
+					if string.find(L_136_forvar1.Name, "Fruit") then
+						if not L_136_forvar1.Handle:FindFirstChild('NameEsp' .. Number) then
+							local L_137_ = Instance.new('BillboardGui', L_136_forvar1.Handle)
+							L_137_.Name = 'NameEsp' .. Number
+							L_137_.ExtentsOffset = Vector3.new(0, 1, 0)
+							L_137_.Size = UDim2.new(1, 200, 1, 30)
+							L_137_.Adornee = L_136_forvar1.Handle
+							L_137_.AlwaysOnTop = true
+							local L_138_ = Instance.new('TextLabel', L_137_)
+							L_138_.Font = Enum.Font.GothamSemibold
+							L_138_.FontSize = "Size14"
+							L_138_.TextWrapped = true
+							L_138_.Size = UDim2.new(1, 0, 1, 0)
+							L_138_.TextYAlignment = 'Top'
+							L_138_.BackgroundTransparency = 1
+							L_138_.TextStrokeTransparency = 0.5
+							L_138_.TextColor3 = Color3.fromRGB(255, 255, 255)
+							L_138_.Text = (L_136_forvar1.Name .. ' \n' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_136_forvar1.Handle.Position).Magnitude / 3) .. ' Distance')
+						else
+							L_136_forvar1.Handle['NameEsp' .. Number].TextLabel.Text = (L_136_forvar1.Name .. '   \n' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_136_forvar1.Handle.Position).Magnitude / 3) .. ' Distance')
+						end
+					end
+				else
+					if L_136_forvar1.Handle:FindFirstChild('NameEsp' .. Number) then
+						L_136_forvar1.Handle:FindFirstChild('NameEsp' .. Number):Destroy()
+					end
+				end
+			end)
+		end
+	end
+	function UpdateFlowerChams()
+		for L_139_forvar0, L_140_forvar1 in pairs(game.Workspace:GetChildren()) do
+			pcall(function()
+				if L_140_forvar1.Name == "Flower2" or L_140_forvar1.Name == "Flower1" then
+					if FlowerESP then
+						if not L_140_forvar1:FindFirstChild('NameEsp' .. Number) then
+							local L_141_ = Instance.new('BillboardGui', L_140_forvar1)
+							L_141_.Name = 'NameEsp' .. Number
+							L_141_.ExtentsOffset = Vector3.new(0, 1, 0)
+							L_141_.Size = UDim2.new(1, 200, 1, 30)
+							L_141_.Adornee = L_140_forvar1
+							L_141_.AlwaysOnTop = true
+							local L_142_ = Instance.new('TextLabel', L_141_)
+							L_142_.Font = Enum.Font.GothamSemibold
+							L_142_.FontSize = "Size14"
+							L_142_.TextWrapped = true
+							L_142_.Size = UDim2.new(1, 0, 1, 0)
+							L_142_.TextYAlignment = 'Top'
+							L_142_.BackgroundTransparency = 1
+							L_142_.TextStrokeTransparency = 0.5
+							L_142_.TextColor3 = Color3.fromRGB(255, 0, 0)
+							if L_140_forvar1.Name == "Flower1" then
+								L_142_.Text = ("Blue Flower" .. ' \n' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_140_forvar1.Position).Magnitude / 3) .. ' Distance')
+								L_142_.TextColor3 = Color3.fromRGB(0, 0, 255)
+							end
+							if L_140_forvar1.Name == "Flower2" then
+								L_142_.Text = ("Red Flower" .. ' \n' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_140_forvar1.Position).Magnitude / 3) .. ' Distance')
+								L_142_.TextColor3 = Color3.fromRGB(255, 0, 0)
+							end
+						else
+							L_140_forvar1['NameEsp' .. Number].TextLabel.Text = (L_140_forvar1.Name .. '   \n' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_140_forvar1.Position).Magnitude / 3) .. ' Distance')
+						end
+					else
+						if L_140_forvar1:FindFirstChild('NameEsp' .. Number) then
+							L_140_forvar1:FindFirstChild('NameEsp' .. Number):Destroy()
+						end
+					end
+				end
+			end)
+		end
+	end
+	function UpdateRealFruitChams()
+		for L_143_forvar0, L_144_forvar1 in pairs(game.Workspace.AppleSpawner:GetChildren()) do
+			if L_144_forvar1:IsA("Tool") then
+				if RealFruitESP then
+					if not L_144_forvar1.Handle:FindFirstChild('NameEsp' .. Number) then
+						local L_145_ = Instance.new('BillboardGui', L_144_forvar1.Handle)
+						L_145_.Name = 'NameEsp' .. Number
+						L_145_.ExtentsOffset = Vector3.new(0, 1, 0)
+						L_145_.Size = UDim2.new(1, 200, 1, 30)
+						L_145_.Adornee = L_144_forvar1.Handle
+						L_145_.AlwaysOnTop = true
+						local L_146_ = Instance.new('TextLabel', L_145_)
+						L_146_.Font = Enum.Font.GothamSemibold
+						L_146_.FontSize = "Size14"
+						L_146_.TextWrapped = true
+						L_146_.Size = UDim2.new(1, 0, 1, 0)
+						L_146_.TextYAlignment = 'Top'
+						L_146_.BackgroundTransparency = 1
+						L_146_.TextStrokeTransparency = 0.5
+						L_146_.TextColor3 = Color3.fromRGB(255, 0, 0)
+						L_146_.Text = (L_144_forvar1.Name .. ' \n' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_144_forvar1.Handle.Position).Magnitude / 3) .. ' Distance')
+					else
+						L_144_forvar1.Handle['NameEsp' .. Number].TextLabel.Text = (L_144_forvar1.Name .. ' ' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_144_forvar1.Handle.Position).Magnitude / 3) .. ' Distance')
+					end
+				else
+					if L_144_forvar1.Handle:FindFirstChild('NameEsp' .. Number) then
+						L_144_forvar1.Handle:FindFirstChild('NameEsp' .. Number):Destroy()
+					end
+				end
+			end
+		end
+		for L_147_forvar0, L_148_forvar1 in pairs(game.Workspace.PineappleSpawner:GetChildren()) do
+			if L_148_forvar1:IsA("Tool") then
+				if RealFruitESP then
+					if not L_148_forvar1.Handle:FindFirstChild('NameEsp' .. Number) then
+						local L_149_ = Instance.new('BillboardGui', L_148_forvar1.Handle)
+						L_149_.Name = 'NameEsp' .. Number
+						L_149_.ExtentsOffset = Vector3.new(0, 1, 0)
+						L_149_.Size = UDim2.new(1, 200, 1, 30)
+						L_149_.Adornee = L_148_forvar1.Handle
+						L_149_.AlwaysOnTop = true
+						local L_150_ = Instance.new('TextLabel', L_149_)
+						L_150_.Font = Enum.Font.GothamSemibold
+						L_150_.FontSize = "Size14"
+						L_150_.TextWrapped = true
+						L_150_.Size = UDim2.new(1, 0, 1, 0)
+						L_150_.TextYAlignment = 'Top'
+						L_150_.BackgroundTransparency = 1
+						L_150_.TextStrokeTransparency = 0.5
+						L_150_.TextColor3 = Color3.fromRGB(255, 174, 0)
+						L_150_.Text = (L_148_forvar1.Name .. ' \n' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_148_forvar1.Handle.Position).Magnitude / 3) .. ' Distance')
+					else
+						L_148_forvar1.Handle['NameEsp' .. Number].TextLabel.Text = (L_148_forvar1.Name .. ' ' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_148_forvar1.Handle.Position).Magnitude / 3) .. ' Distance')
+					end
+				else
+					if L_148_forvar1.Handle:FindFirstChild('NameEsp' .. Number) then
+						L_148_forvar1.Handle:FindFirstChild('NameEsp' .. Number):Destroy()
+					end
+				end
+			end
+		end
+		for L_151_forvar0, L_152_forvar1 in pairs(game.Workspace.BananaSpawner:GetChildren()) do
+			if L_152_forvar1:IsA("Tool") then
+				if RealFruitESP then
+					if not L_152_forvar1.Handle:FindFirstChild('NameEsp' .. Number) then
+						local L_153_ = Instance.new('BillboardGui', L_152_forvar1.Handle)
+						L_153_.Name = 'NameEsp' .. Number
+						L_153_.ExtentsOffset = Vector3.new(0, 1, 0)
+						L_153_.Size = UDim2.new(1, 200, 1, 30)
+						L_153_.Adornee = L_152_forvar1.Handle
+						L_153_.AlwaysOnTop = true
+						local L_154_ = Instance.new('TextLabel', L_153_)
+						L_154_.Font = Enum.Font.GothamSemibold
+						L_154_.FontSize = "Size14"
+						L_154_.TextWrapped = true
+						L_154_.Size = UDim2.new(1, 0, 1, 0)
+						L_154_.TextYAlignment = 'Top'
+						L_154_.BackgroundTransparency = 1
+						L_154_.TextStrokeTransparency = 0.5
+						L_154_.TextColor3 = Color3.fromRGB(251, 255, 0)
+						L_154_.Text = (L_152_forvar1.Name .. ' \n' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_152_forvar1.Handle.Position).Magnitude / 3) .. ' Distance')
+					else
+						L_152_forvar1.Handle['NameEsp' .. Number].TextLabel.Text = (L_152_forvar1.Name .. ' ' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_152_forvar1.Handle.Position).Magnitude / 3) .. ' Distance')
+					end
+				else
+					if L_152_forvar1.Handle:FindFirstChild('NameEsp' .. Number) then
+						L_152_forvar1.Handle:FindFirstChild('NameEsp' .. Number):Destroy()
+					end
+				end
+			end
+		end
+	end
+	function UpdateIslandESP()
+		for L_155_forvar0, L_156_forvar1 in pairs(game:GetService("Workspace")["_WorldOrigin"].Locations:GetChildren()) do
+			pcall(function()
+				if IslandESP then
+					if L_156_forvar1.Name ~= "Sea" then
+						if not L_156_forvar1:FindFirstChild('NameEsp') then
+							local L_157_ = Instance.new('BillboardGui', L_156_forvar1)
+							L_157_.Name = 'NameEsp'
+							L_157_.ExtentsOffset = Vector3.new(0, 1, 0)
+							L_157_.Size = UDim2.new(1, 200, 1, 30)
+							L_157_.Adornee = L_156_forvar1
+							L_157_.AlwaysOnTop = true
+							local L_158_ = Instance.new('TextLabel', L_157_)
+							L_158_.Font = "GothamBold"
+							L_158_.FontSize = "Size14"
+							L_158_.TextWrapped = true
+							L_158_.Size = UDim2.new(1, 0, 1, 0)
+							L_158_.TextYAlignment = 'Top'
+							L_158_.BackgroundTransparency = 1
+							L_158_.TextStrokeTransparency = 0.5
+							L_158_.TextColor3 = Color3.fromRGB(7, 236, 240)
+						else
+							L_156_forvar1['NameEsp'].TextLabel.Text = (L_156_forvar1.Name .. '   \n' .. L_84_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_156_forvar1.Position).Magnitude / 3) .. ' Distance')
+						end
+					end
+				else
+					if L_156_forvar1:FindFirstChild('NameEsp') then
+						L_156_forvar1:FindFirstChild('NameEsp'):Destroy()
+					end
+				end
+			end)
+		end
+	end
+	function isnil(L_159_arg0)
+		return (L_159_arg0 == nil)
+	end
+	local function L_85_func(L_160_arg0)
+		return math.floor(tonumber(L_160_arg0) + 0.5)
+	end
+	Number = math.random(1, 1000000)
+	function UpdatePlayerChams()
+		for L_161_forvar0, L_162_forvar1 in pairs(game:GetService'Players':GetChildren()) do
+			pcall(function()
+				if not isnil(L_162_forvar1.Character) then
+					if ESPPlayer then
+						if not isnil(L_162_forvar1.Character.Head) and not L_162_forvar1.Character.Head:FindFirstChild('NameEsp' .. Number) then
+							local L_163_ = Instance.new('BillboardGui', L_162_forvar1.Character.Head)
+							L_163_.Name = 'NameEsp' .. Number
+							L_163_.ExtentsOffset = Vector3.new(0, 1, 0)
+							L_163_.Size = UDim2.new(1, 200, 1, 30)
+							L_163_.Adornee = L_162_forvar1.Character.Head
+							L_163_.AlwaysOnTop = true
+							local L_164_ = Instance.new('TextLabel', L_163_)
+							L_164_.Font = Enum.Font.GothamSemibold
+							L_164_.FontSize = "Size14"
+							L_164_.TextWrapped = true
+							L_164_.Text = (L_162_forvar1.Name .. ' \n' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_162_forvar1.Character.Head.Position).Magnitude / 3) .. ' Distance')
+							L_164_.Size = UDim2.new(1, 0, 1, 0)
+							L_164_.TextYAlignment = 'Top'
+							L_164_.BackgroundTransparency = 1
+							L_164_.TextStrokeTransparency = 0.5
+							if L_162_forvar1.Team == game.Players.LocalPlayer.Team then
+								L_164_.TextColor3 = Color3.new(0, 255, 0)
+							else
+								L_164_.TextColor3 = Color3.new(255, 0, 0)
+							end
+						else
+							L_162_forvar1.Character.Head['NameEsp' .. Number].TextLabel.Text = (L_162_forvar1.Name .. ' | ' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_162_forvar1.Character.Head.Position).Magnitude / 3) .. ' Distance\nHealth : ' .. L_85_func(L_162_forvar1.Character.Humanoid.Health * 100 / L_162_forvar1.Character.Humanoid.MaxHealth) .. '%')
+						end
+					else
+						if L_162_forvar1.Character.Head:FindFirstChild('NameEsp' .. Number) then
+							L_162_forvar1.Character.Head:FindFirstChild('NameEsp' .. Number):Destroy()
+						end
+					end
+				end
+			end)
+		end
+	end
+	function UpdateChestChams()
+		for L_165_forvar0, L_166_forvar1 in pairs(game.Workspace:GetChildren()) do
+			pcall(function()
+				if string.find(L_166_forvar1.Name, "Chest") then
+					if ChestESP then
+						if string.find(L_166_forvar1.Name, "Chest") then
+							if not L_166_forvar1:FindFirstChild('NameEsp' .. Number) then
+								local L_167_ = Instance.new('BillboardGui', L_166_forvar1)
+								L_167_.Name = 'NameEsp' .. Number
+								L_167_.ExtentsOffset = Vector3.new(0, 1, 0)
+								L_167_.Size = UDim2.new(1, 200, 1, 30)
+								L_167_.Adornee = L_166_forvar1
+								L_167_.AlwaysOnTop = true
+								local L_168_ = Instance.new('TextLabel', L_167_)
+								L_168_.Font = Enum.Font.GothamSemibold
+								L_168_.FontSize = "Size14"
+								L_168_.TextWrapped = true
+								L_168_.Size = UDim2.new(1, 0, 1, 0)
+								L_168_.TextYAlignment = 'Top'
+								L_168_.BackgroundTransparency = 1
+								L_168_.TextStrokeTransparency = 0.5
+								if L_166_forvar1.Name == "Chest1" then
+									L_168_.TextColor3 = Color3.fromRGB(109, 109, 109)
+									L_168_.Text = ("Chest 1" .. ' \n' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_166_forvar1.Position).Magnitude / 3) .. ' Distance')
+								end
+								if L_166_forvar1.Name == "Chest2" then
+									L_168_.TextColor3 = Color3.fromRGB(173, 158, 21)
+									L_168_.Text = ("Chest 2" .. ' \n' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_166_forvar1.Position).Magnitude / 3) .. ' Distance')
+								end
+								if L_166_forvar1.Name == "Chest3" then
+									L_168_.TextColor3 = Color3.fromRGB(85, 255, 255)
+									L_168_.Text = ("Chest 3" .. ' \n' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_166_forvar1.Position).Magnitude / 3) .. ' Distance')
+								end
+							else
+								L_166_forvar1['NameEsp' .. Number].TextLabel.Text = (L_166_forvar1.Name .. '   \n' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_166_forvar1.Position).Magnitude / 3) .. ' Distance')
+							end
+						end
+					else
+						if L_166_forvar1:FindFirstChild('NameEsp' .. Number) then
+							L_166_forvar1:FindFirstChild('NameEsp' .. Number):Destroy()
+						end
+					end
+				end
+			end)
+		end
+	end
+	function UpdateDevilChams()
+		for L_169_forvar0, L_170_forvar1 in pairs(game.Workspace:GetChildren()) do
+			pcall(function()
+				if DevilFruitESP then
+					if string.find(L_170_forvar1.Name, "Fruit") then
+						if not L_170_forvar1.Handle:FindFirstChild('NameEsp' .. Number) then
+							local L_171_ = Instance.new('BillboardGui', L_170_forvar1.Handle)
+							L_171_.Name = 'NameEsp' .. Number
+							L_171_.ExtentsOffset = Vector3.new(0, 1, 0)
+							L_171_.Size = UDim2.new(1, 200, 1, 30)
+							L_171_.Adornee = L_170_forvar1.Handle
+							L_171_.AlwaysOnTop = true
+							local L_172_ = Instance.new('TextLabel', L_171_)
+							L_172_.Font = Enum.Font.GothamSemibold
+							L_172_.FontSize = "Size14"
+							L_172_.TextWrapped = true
+							L_172_.Size = UDim2.new(1, 0, 1, 0)
+							L_172_.TextYAlignment = 'Top'
+							L_172_.BackgroundTransparency = 1
+							L_172_.TextStrokeTransparency = 0.5
+							L_172_.TextColor3 = Color3.fromRGB(255, 255, 255)
+							L_172_.Text = (L_170_forvar1.Name .. ' \n' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_170_forvar1.Handle.Position).Magnitude / 3) .. ' Distance')
+						else
+							L_170_forvar1.Handle['NameEsp' .. Number].TextLabel.Text = (L_170_forvar1.Name .. '   \n' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_170_forvar1.Handle.Position).Magnitude / 3) .. ' Distance')
+						end
+					end
+				else
+					if L_170_forvar1.Handle:FindFirstChild('NameEsp' .. Number) then
+						L_170_forvar1.Handle:FindFirstChild('NameEsp' .. Number):Destroy()
+					end
+				end
+			end)
+		end
+	end
+	function UpdateFlowerChams()
+		for L_173_forvar0, L_174_forvar1 in pairs(game.Workspace:GetChildren()) do
+			pcall(function()
+				if L_174_forvar1.Name == "Flower2" or L_174_forvar1.Name == "Flower1" then
+					if FlowerESP then
+						if not L_174_forvar1:FindFirstChild('NameEsp' .. Number) then
+							local L_175_ = Instance.new('BillboardGui', L_174_forvar1)
+							L_175_.Name = 'NameEsp' .. Number
+							L_175_.ExtentsOffset = Vector3.new(0, 1, 0)
+							L_175_.Size = UDim2.new(1, 200, 1, 30)
+							L_175_.Adornee = L_174_forvar1
+							L_175_.AlwaysOnTop = true
+							local L_176_ = Instance.new('TextLabel', L_175_)
+							L_176_.Font = Enum.Font.GothamSemibold
+							L_176_.FontSize = "Size14"
+							L_176_.TextWrapped = true
+							L_176_.Size = UDim2.new(1, 0, 1, 0)
+							L_176_.TextYAlignment = 'Top'
+							L_176_.BackgroundTransparency = 1
+							L_176_.TextStrokeTransparency = 0.5
+							L_176_.TextColor3 = Color3.fromRGB(255, 0, 0)
+							if L_174_forvar1.Name == "Flower1" then
+								L_176_.Text = ("Blue Flower" .. ' \n' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_174_forvar1.Position).Magnitude / 3) .. ' Distance')
+								L_176_.TextColor3 = Color3.fromRGB(0, 0, 255)
+							end
+							if L_174_forvar1.Name == "Flower2" then
+								L_176_.Text = ("Red Flower" .. ' \n' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_174_forvar1.Position).Magnitude / 3) .. ' Distance')
+								L_176_.TextColor3 = Color3.fromRGB(255, 0, 0)
+							end
+						else
+							L_174_forvar1['NameEsp' .. Number].TextLabel.Text = (L_174_forvar1.Name .. '   \n' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_174_forvar1.Position).Magnitude / 3) .. ' Distance')
+						end
+					else
+						if L_174_forvar1:FindFirstChild('NameEsp' .. Number) then
+							L_174_forvar1:FindFirstChild('NameEsp' .. Number):Destroy()
+						end
+					end
+				end
+			end)
+		end
+	end
+	function UpdateRealFruitChams()
+		for L_177_forvar0, L_178_forvar1 in pairs(game.Workspace.AppleSpawner:GetChildren()) do
+			if L_178_forvar1:IsA("Tool") then
+				if RealFruitESP then
+					if not L_178_forvar1.Handle:FindFirstChild('NameEsp' .. Number) then
+						local L_179_ = Instance.new('BillboardGui', L_178_forvar1.Handle)
+						L_179_.Name = 'NameEsp' .. Number
+						L_179_.ExtentsOffset = Vector3.new(0, 1, 0)
+						L_179_.Size = UDim2.new(1, 200, 1, 30)
+						L_179_.Adornee = L_178_forvar1.Handle
+						L_179_.AlwaysOnTop = true
+						local L_180_ = Instance.new('TextLabel', L_179_)
+						L_180_.Font = Enum.Font.GothamSemibold
+						L_180_.FontSize = "Size14"
+						L_180_.TextWrapped = true
+						L_180_.Size = UDim2.new(1, 0, 1, 0)
+						L_180_.TextYAlignment = 'Top'
+						L_180_.BackgroundTransparency = 1
+						L_180_.TextStrokeTransparency = 0.5
+						L_180_.TextColor3 = Color3.fromRGB(255, 0, 0)
+						L_180_.Text = (L_178_forvar1.Name .. ' \n' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_178_forvar1.Handle.Position).Magnitude / 3) .. ' Distance')
+					else
+						L_178_forvar1.Handle['NameEsp' .. Number].TextLabel.Text = (L_178_forvar1.Name .. ' ' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_178_forvar1.Handle.Position).Magnitude / 3) .. ' Distance')
+					end
+				else
+					if L_178_forvar1.Handle:FindFirstChild('NameEsp' .. Number) then
+						L_178_forvar1.Handle:FindFirstChild('NameEsp' .. Number):Destroy()
+					end
+				end
+			end
+		end
+		for L_181_forvar0, L_182_forvar1 in pairs(game.Workspace.PineappleSpawner:GetChildren()) do
+			if L_182_forvar1:IsA("Tool") then
+				if RealFruitESP then
+					if not L_182_forvar1.Handle:FindFirstChild('NameEsp' .. Number) then
+						local L_183_ = Instance.new('BillboardGui', L_182_forvar1.Handle)
+						L_183_.Name = 'NameEsp' .. Number
+						L_183_.ExtentsOffset = Vector3.new(0, 1, 0)
+						L_183_.Size = UDim2.new(1, 200, 1, 30)
+						L_183_.Adornee = L_182_forvar1.Handle
+						L_183_.AlwaysOnTop = true
+						local L_184_ = Instance.new('TextLabel', L_183_)
+						L_184_.Font = Enum.Font.GothamSemibold
+						L_184_.FontSize = "Size14"
+						L_184_.TextWrapped = true
+						L_184_.Size = UDim2.new(1, 0, 1, 0)
+						L_184_.TextYAlignment = 'Top'
+						L_184_.BackgroundTransparency = 1
+						L_184_.TextStrokeTransparency = 0.5
+						L_184_.TextColor3 = Color3.fromRGB(255, 174, 0)
+						L_184_.Text = (L_182_forvar1.Name .. ' \n' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_182_forvar1.Handle.Position).Magnitude / 3) .. ' Distance')
+					else
+						L_182_forvar1.Handle['NameEsp' .. Number].TextLabel.Text = (L_182_forvar1.Name .. ' ' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_182_forvar1.Handle.Position).Magnitude / 3) .. ' Distance')
+					end
+				else
+					if L_182_forvar1.Handle:FindFirstChild('NameEsp' .. Number) then
+						L_182_forvar1.Handle:FindFirstChild('NameEsp' .. Number):Destroy()
+					end
+				end
+			end
+		end
+		for L_185_forvar0, L_186_forvar1 in pairs(game.Workspace.BananaSpawner:GetChildren()) do
+			if L_186_forvar1:IsA("Tool") then
+				if RealFruitESP then
+					if not L_186_forvar1.Handle:FindFirstChild('NameEsp' .. Number) then
+						local L_187_ = Instance.new('BillboardGui', L_186_forvar1.Handle)
+						L_187_.Name = 'NameEsp' .. Number
+						L_187_.ExtentsOffset = Vector3.new(0, 1, 0)
+						L_187_.Size = UDim2.new(1, 200, 1, 30)
+						L_187_.Adornee = L_186_forvar1.Handle
+						L_187_.AlwaysOnTop = true
+						local L_188_ = Instance.new('TextLabel', L_187_)
+						L_188_.Font = Enum.Font.GothamSemibold
+						L_188_.FontSize = "Size14"
+						L_188_.TextWrapped = true
+						L_188_.Size = UDim2.new(1, 0, 1, 0)
+						L_188_.TextYAlignment = 'Top'
+						L_188_.BackgroundTransparency = 1
+						L_188_.TextStrokeTransparency = 0.5
+						L_188_.TextColor3 = Color3.fromRGB(251, 255, 0)
+						L_188_.Text = (L_186_forvar1.Name .. ' \n' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_186_forvar1.Handle.Position).Magnitude / 3) .. ' Distance')
+					else
+						L_186_forvar1.Handle['NameEsp' .. Number].TextLabel.Text = (L_186_forvar1.Name .. ' ' .. L_85_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_186_forvar1.Handle.Position).Magnitude / 3) .. ' Distance')
+					end
+				else
+					if L_186_forvar1.Handle:FindFirstChild('NameEsp' .. Number) then
+						L_186_forvar1.Handle:FindFirstChild('NameEsp' .. Number):Destroy()
+					end
+				end
+			end
+		end
+	end
+	spawn(function()
+		while wait() do
+			pcall(function()
+				if MobESP then
+					for L_189_forvar0, L_190_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+						if L_190_forvar1:FindFirstChild('HumanoidRootPart') then
+							if not L_190_forvar1:FindFirstChild("MobEap") then
+								local L_192_ = Instance.new("BillboardGui")
+								local L_193_ = Instance.new("TextLabel")
+								L_192_.Parent = L_190_forvar1
+								L_192_.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+								L_192_.Active = true
+								L_192_.Name = "MobEap"
+								L_192_.AlwaysOnTop = true
+								L_192_.LightInfluence = 1.000
+								L_192_.Size = UDim2.new(0, 200, 0, 50)
+								L_192_.StudsOffset = Vector3.new(0, 2.5, 0)
+								L_193_.Parent = L_192_
+								L_193_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+								L_193_.BackgroundTransparency = 1.000
+								L_193_.Size = UDim2.new(0, 200, 0, 50)
+								L_193_.Font = Enum.Font.GothamBold
+								L_193_.TextColor3 = Color3.fromRGB(7, 236, 240)
+								L_193_.Text.Size = 35
+							end
+							local L_191_ = math.floor((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - L_190_forvar1.HumanoidRootPart.Position).Magnitude)
+							L_190_forvar1.MobEap.TextLabel.Text = L_190_forvar1.Name .. " - " .. L_191_ .. " Distance"
+						end
+					end
+				else
+					for L_194_forvar0, L_195_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+						if L_195_forvar1:FindFirstChild("MobEap") then
+							L_195_forvar1.MobEap:Destroy()
+						end
+					end
+				end
+			end)
+		end
+	end)
+	spawn(function()
+		while wait() do
+			pcall(function()
+				if SeaESP then
+					for L_196_forvar0, L_197_forvar1 in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
+						if L_197_forvar1:FindFirstChild('HumanoidRootPart') then
+							if not L_197_forvar1:FindFirstChild("Seaesps") then
+								local L_199_ = Instance.new("BillboardGui")
+								local L_200_ = Instance.new("TextLabel")
+								L_199_.Parent = L_197_forvar1
+								L_199_.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+								L_199_.Active = true
+								L_199_.Name = "Seaesps"
+								L_199_.AlwaysOnTop = true
+								L_199_.LightInfluence = 1.000
+								L_199_.Size = UDim2.new(0, 200, 0, 50)
+								L_199_.StudsOffset = Vector3.new(0, 2.5, 0)
+								L_200_.Parent = L_199_
+								L_200_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+								L_200_.BackgroundTransparency = 1.000
+								L_200_.Size = UDim2.new(0, 200, 0, 50)
+								L_200_.Font = Enum.Font.GothamBold
+								L_200_.TextColor3 = Color3.fromRGB(7, 236, 240)
+								L_200_.Text.Size = 35
+							end
+							local L_198_ = math.floor((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - L_197_forvar1.HumanoidRootPart.Position).Magnitude)
+							L_197_forvar1.Seaesps.TextLabel.Text = L_197_forvar1.Name .. " - " .. L_198_ .. " Distance"
+						end
+					end
+				else
+					for L_201_forvar0, L_202_forvar1 in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
+						if L_202_forvar1:FindFirstChild("Seaesps") then
+							L_202_forvar1.Seaesps:Destroy()
+						end
+					end
+				end
+			end)
+		end
+	end)
+	spawn(function()
+		while wait() do
+			pcall(function()
+				if NpcESP then
+					for L_203_forvar0, L_204_forvar1 in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+						if L_204_forvar1:FindFirstChild('HumanoidRootPart') then
+							if not L_204_forvar1:FindFirstChild("NpcEspes") then
+								local L_206_ = Instance.new("BillboardGui")
+								local L_207_ = Instance.new("TextLabel")
+								L_206_.Parent = L_204_forvar1
+								L_206_.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+								L_206_.Active = true
+								L_206_.Name = "NpcEspes"
+								L_206_.AlwaysOnTop = true
+								L_206_.LightInfluence = 1.000
+								L_206_.Size = UDim2.new(0, 200, 0, 50)
+								L_206_.StudsOffset = Vector3.new(0, 2.5, 0)
+								L_207_.Parent = L_206_
+								L_207_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+								L_207_.BackgroundTransparency = 1.000
+								L_207_.Size = UDim2.new(0, 200, 0, 50)
+								L_207_.Font = Enum.Font.GothamBold
+								L_207_.TextColor3 = Color3.fromRGB(7, 236, 240)
+								L_207_.Text.Size = 35
+							end
+							local L_205_ = math.floor((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - L_204_forvar1.HumanoidRootPart.Position).Magnitude)
+							L_204_forvar1.NpcEspes.TextLabel.Text = L_204_forvar1.Name .. " - " .. L_205_ .. " Distance"
+						end
+					end
+				else
+					for L_208_forvar0, L_209_forvar1 in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+						if L_209_forvar1:FindFirstChild("NpcEspes") then
+							L_209_forvar1.NpcEspes:Destroy()
+						end
+					end
+				end
+			end)
+		end
+	end)
+	function isnil(L_210_arg0)
+		return (L_210_arg0 == nil)
+	end
+	local function L_86_func(L_211_arg0)
+		return math.floor(tonumber(L_211_arg0) + 0.5)
+	end
+	Number = math.random(1, 1000000)
+	function UpdateIslandMirageESP()
+		for L_212_forvar0, L_213_forvar1 in pairs(game:GetService("Workspace")["_WorldOrigin"].Locations:GetChildren()) do
+			pcall(function()
+				if MirageIslandESP then
+					if L_213_forvar1.Name == "Mirage Island" then
+						if not L_213_forvar1:FindFirstChild('NameEsp') then
+							local L_214_ = Instance.new('BillboardGui', L_213_forvar1)
+							L_214_.Name = 'NameEsp'
+							L_214_.ExtentsOffset = Vector3.new(0, 1, 0)
+							L_214_.Size = UDim2.new(1, 200, 1, 30)
+							L_214_.Adornee = L_213_forvar1
+							L_214_.AlwaysOnTop = true
+							local L_215_ = Instance.new('TextLabel', L_214_)
+							L_215_.Font = "Code"
+							L_215_.FontSize = "Size14"
+							L_215_.TextWrapped = true
+							L_215_.Size = UDim2.new(1, 0, 1, 0)
+							L_215_.TextYAlignment = 'Top'
+							L_215_.BackgroundTransparency = 1
+							L_215_.TextStrokeTransparency = 0.5
+							L_215_.TextColor3 = Color3.fromRGB(80, 245, 245)
+						else
+							L_213_forvar1['NameEsp'].TextLabel.Text = (L_213_forvar1.Name .. '   \n' .. L_86_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_213_forvar1.Position).Magnitude / 3) .. ' M')
+						end
+					end
+				else
+					if L_213_forvar1:FindFirstChild('NameEsp') then
+						L_213_forvar1:FindFirstChild('NameEsp'):Destroy()
+					end
+				end
+			end)
+		end
+	end
+	function isnil(L_216_arg0)
+		return (L_216_arg0 == nil)
+	end
+	local function L_87_func(L_217_arg0)
+		return math.floor(tonumber(L_217_arg0) + 0.5)
+	end
+	Number = math.random(1, 1000000)
+	function UpdateAfdESP()
+		for L_218_forvar0, L_219_forvar1 in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+			pcall(function()
+				if AfdESP then
+					if L_219_forvar1.Name == "Advanced Fruit Dealer" then
+						if not L_219_forvar1:FindFirstChild('NameEsp') then
+							local L_220_ = Instance.new('BillboardGui', L_219_forvar1)
+							L_220_.Name = 'NameEsp'
+							L_220_.ExtentsOffset = Vector3.new(0, 1, 0)
+							L_220_.Size = UDim2.new(1, 200, 1, 30)
+							L_220_.Adornee = L_219_forvar1
+							L_220_.AlwaysOnTop = true
+							local L_221_ = Instance.new('TextLabel', L_220_)
+							L_221_.Font = "Code"
+							L_221_.FontSize = "Size14"
+							L_221_.TextWrapped = true
+							L_221_.Size = UDim2.new(1, 0, 1, 0)
+							L_221_.TextYAlignment = 'Top'
+							L_221_.BackgroundTransparency = 1
+							L_221_.TextStrokeTransparency = 0.5
+							L_221_.TextColor3 = Color3.fromRGB(80, 245, 245)
+						else
+							L_219_forvar1['NameEsp'].TextLabel.Text = (L_219_forvar1.Name .. '   \n' .. L_87_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_219_forvar1.Position).Magnitude / 3) .. ' M')
+						end
+					end
+				else
+					if L_219_forvar1:FindFirstChild('NameEsp') then
+						L_219_forvar1:FindFirstChild('NameEsp'):Destroy()
+					end
+				end
+			end)
+		end
+	end
+	function UpdateAuraESP()
+		for L_222_forvar0, L_223_forvar1 in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+			pcall(function()
+				if AuraESP then
+					if L_223_forvar1.Name == "Master of Enhancement" then
+						if not L_223_forvar1:FindFirstChild('NameEsp') then
+							local L_224_ = Instance.new('BillboardGui', L_223_forvar1)
+							L_224_.Name = 'NameEsp'
+							L_224_.ExtentsOffset = Vector3.new(0, 1, 0)
+							L_224_.Size = UDim2.new(1, 200, 1, 30)
+							L_224_.Adornee = L_223_forvar1
+							L_224_.AlwaysOnTop = true
+							local L_225_ = Instance.new('TextLabel', L_224_)
+							L_225_.Font = "Code"
+							L_225_.FontSize = "Size14"
+							L_225_.TextWrapped = true
+							L_225_.Size = UDim2.new(1, 0, 1, 0)
+							L_225_.TextYAlignment = 'Top'
+							L_225_.BackgroundTransparency = 1
+							L_225_.TextStrokeTransparency = 0.5
+							L_225_.TextColor3 = Color3.fromRGB(80, 245, 245)
+						else
+							L_223_forvar1['NameEsp'].TextLabel.Text = (L_223_forvar1.Name .. '   \n' .. L_87_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_223_forvar1.Position).Magnitude / 3) .. ' M')
+						end
+					end
+				else
+					if L_223_forvar1:FindFirstChild('NameEsp') then
+						L_223_forvar1:FindFirstChild('NameEsp'):Destroy()
+					end
+				end
+			end)
+		end
+	end
+	function UpdateLSDESP()
+		for L_226_forvar0, L_227_forvar1 in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+			pcall(function()
+				if LADESP then
+					if L_227_forvar1.Name == "Legendary Sword Dealer" then
+						if not L_227_forvar1:FindFirstChild('NameEsp') then
+							local L_228_ = Instance.new('BillboardGui', L_227_forvar1)
+							L_228_.Name = 'NameEsp'
+							L_228_.ExtentsOffset = Vector3.new(0, 1, 0)
+							L_228_.Size = UDim2.new(1, 200, 1, 30)
+							L_228_.Adornee = L_227_forvar1
+							L_228_.AlwaysOnTop = true
+							local L_229_ = Instance.new('TextLabel', L_228_)
+							L_229_.Font = "Code"
+							L_229_.FontSize = "Size14"
+							L_229_.TextWrapped = true
+							L_229_.Size = UDim2.new(1, 0, 1, 0)
+							L_229_.TextYAlignment = 'Top'
+							L_229_.BackgroundTransparency = 1
+							L_229_.TextStrokeTransparency = 0.5
+							L_229_.TextColor3 = Color3.fromRGB(80, 245, 245)
+						else
+							L_227_forvar1['NameEsp'].TextLabel.Text = (L_227_forvar1.Name .. '   \n' .. L_87_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_227_forvar1.Position).Magnitude / 3) .. ' M')
+						end
+					end
+				else
+					if L_227_forvar1:FindFirstChild('NameEsp') then
+						L_227_forvar1:FindFirstChild('NameEsp'):Destroy()
+					end
+				end
+			end)
+		end
+	end
+	function UpdateGeaESP()
+		for L_230_forvar0, L_231_forvar1 in pairs(game:GetService("Workspace").Map.MysticIsland:GetChildren()) do
+			pcall(function()
+				if GearESP then
+					if L_231_forvar1.Name == "MeshPart" then
+						if not L_231_forvar1:FindFirstChild('NameEsp') then
+							local L_232_ = Instance.new('BillboardGui', L_231_forvar1)
+							L_232_.Name = 'NameEsp'
+							L_232_.ExtentsOffset = Vector3.new(0, 1, 0)
+							L_232_.Size = UDim2.new(1, 200, 1, 30)
+							L_232_.Adornee = L_231_forvar1
+							L_232_.AlwaysOnTop = true
+							local L_233_ = Instance.new('TextLabel', L_232_)
+							L_233_.Font = "Code"
+							L_233_.FontSize = "Size14"
+							L_233_.TextWrapped = true
+							L_233_.Size = UDim2.new(1, 0, 1, 0)
+							L_233_.TextYAlignment = 'Top'
+							L_233_.BackgroundTransparency = 1
+							L_233_.TextStrokeTransparency = 0.5
+							L_233_.TextColor3 = Color3.fromRGB(80, 245, 245)
+						else
+							L_231_forvar1['NameEsp'].TextLabel.Text = (L_231_forvar1.Name .. '   \n' .. L_87_func((game:GetService('Players').LocalPlayer.Character.Head.Position - L_231_forvar1.Position).Magnitude / 3) .. ' M')
+						end
+					end
+				else
+					if L_231_forvar1:FindFirstChild('NameEsp') then
+						L_231_forvar1:FindFirstChild('NameEsp'):Destroy()
+					end
+				end
+			end)
+		end
+	end
