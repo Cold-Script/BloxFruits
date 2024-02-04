@@ -2593,3 +2593,228 @@ do
 		game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
 	end
  
+local L_94_ = L_5_.Main:AddSection("Farming")
+	local L_97_ = L_5_.Main:AddDropdown("DropdownSelectWeapon", {
+		Title = "Select Weapon",
+		Values = {
+			'Melee',
+			'Sword',
+			'Blox Fruit'
+		},
+		Multi = false,
+		Default = 1,
+	})
+	L_97_:SetValue('Melee')
+	L_97_:OnChanged(function(L_306_arg0)
+		ChooseWeapon = L_306_arg0
+	end)
+	task.spawn(function()
+		while wait() do
+			pcall(function()
+				if ChooseWeapon == "Melee" then
+					for L_307_forvar0 , L_308_forvar1 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+						if L_308_forvar1.ToolTip == "Melee" then
+							if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(L_308_forvar1.Name)) then
+								SelectWeapon = L_308_forvar1.Name
+							end
+						end
+					end
+				elseif ChooseWeapon == "Sword" then
+					for L_309_forvar0 , L_310_forvar1 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+						if L_310_forvar1.ToolTip == "Sword" then
+							if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(L_310_forvar1.Name)) then
+								SelectWeapon = L_310_forvar1.Name
+							end
+						end
+					end
+				elseif ChooseWeapon == " Blox Fruit" then
+					for L_311_forvar0 , L_312_forvar1 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+						if L_312_forvar1.ToolTip == "Blox Fruit" then
+							if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(L_312_forvar1.Name)) then
+								SelectWeapon = L_312_forvar1.Name
+							end
+						end
+					end
+				else
+					for L_313_forvar0 , L_314_forvar1 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+						if L_314_forvar1.ToolTip == "Melee" then
+							if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(L_314_forvar1.Name)) then
+								SelectWeapon = L_314_forvar1.Name
+							end
+						end
+					end
+				end
+			end)
+		end
+	end)
+	local L_98_ = L_5_.Main:AddToggle("ToggleLevel", {
+		Title = "Auto Level",
+		Default = false
+	})
+	L_98_:OnChanged(function(L_315_arg0)
+		_G.AutoLevel = L_315_arg0
+	end)
+	L_6_.ToggleLevel:SetValue(false)
+	spawn(function()
+		while task.wait() do
+			if _G.AutoLevel then
+				pcall(function()
+					CheckLevel()
+					if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+						if BypassTP then
+							if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude > 2500 then
+								BTP(CFrameQ)
+							elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude < 2500 then
+								Tween(CFrameQ)
+							end
+						else
+							Tween(CFrameQ)
+						end
+						if (CFrameQ.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
+							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, QuestLv)
+						end
+					elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+						for L_316_forvar0, L_317_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+							if L_317_forvar1:FindFirstChild("Humanoid") and L_317_forvar1:FindFirstChild("HumanoidRootPart") and L_317_forvar1.Humanoid.Health > 0 then
+								if L_317_forvar1.Name == Ms then
+									repeat
+										wait(_G.Fast_Delay)
+										AttackNoCD()
+										bringmob = true
+										AutoHaki()
+										EquipTool(SelectWeapon)
+										Tween(L_317_forvar1.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
+										L_317_forvar1.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+										L_317_forvar1.HumanoidRootPart.Transparency = 1
+										L_317_forvar1.Humanoid.JumpPower = 0
+										L_317_forvar1.Humanoid.WalkSpeed = 0
+										L_317_forvar1.HumanoidRootPart.CanCollide = false
+										FarmPos = L_317_forvar1.HumanoidRootPart.CFrame
+										MonFarm = L_317_forvar1.Name
+          --Click
+									until not _G.AutoLevel or not L_317_forvar1.Parent or L_317_forvar1.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(L_317_forvar1.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
+									bringmob = false
+								end
+							end
+						end
+						for L_318_forvar0, L_319_forvar1 in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+							if string.find(L_319_forvar1.Name, NameMon) then
+								if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - L_319_forvar1.Position).Magnitude >= 10 then
+									Tween(L_319_forvar1.CFrame * CFrame.new(posX, posY, posZ))
+								end
+							end
+						end
+					end
+				end)
+			end
+		end
+	end)
+end
+local L_10_ = L_5_.Main:AddToggle("ToggleBringMob", {
+	Title = " Enable Bring Mob",
+	Default = true
+})
+L_10_:OnChanged(function(L_511_arg0)
+	_G.BringMob = L_511_arg0
+end)
+L_6_.ToggleBringMob:SetValue(true)
+spawn(function()
+	while wait() do
+		pcall(function()
+			for L_512_forvar0, L_513_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+				if _G.BringMob and bringmob then
+					if L_513_forvar1.Name == MonFarm and L_513_forvar1:FindFirstChild("Humanoid") and L_513_forvar1.Humanoid.Health > 0 then
+						if L_513_forvar1.Name == "Factory Staff" then
+							if (L_513_forvar1.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 500 then
+								L_513_forvar1.Head.CanCollide = false
+								L_513_forvar1.HumanoidRootPart.CanCollide = false
+								L_513_forvar1.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+								L_513_forvar1.HumanoidRootPart.CFrame = FarmPos
+								if L_513_forvar1.Humanoid:FindFirstChild("Animator") then
+									L_513_forvar1.Humanoid.Animator:Destroy()
+								end
+								sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+							end
+						elseif L_513_forvar1.Name == MonFarm then
+							if (L_513_forvar1.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 450 then
+								L_513_forvar1.Head.CanCollide = false
+								L_513_forvar1.HumanoidRootPart.CanCollide = false
+								L_513_forvar1.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+								L_513_forvar1.HumanoidRootPart.CFrame = FarmPos
+								if L_513_forvar1.Humanoid:FindFirstChild("Animator") then
+									L_513_forvar1.Humanoid.Animator:Destroy()
+								end
+								sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+							end
+						end
+					end
+				end
+			end
+		end)
+	end
+end)
+local L_13_ = L_5_.Main:AddToggle("ToggleRemoveNotify", {
+	Title = " Enable Remove All Notify",
+	Default = true
+})
+L_13_:OnChanged(function(L_516_arg0)
+	RemoveNotify = L_516_arg0
+end)
+L_6_.ToggleRemoveNotify:SetValue(true)
+spawn(function()
+	while wait() do
+		if RemoveNotify then
+			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = 
+false
+		else
+			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
+		end
+	end
+end)
+local L_22_ = L_5_.Main:AddSlider("SliderPosX", {
+	Title = "Pos X",
+	Description = "",
+	Default = 10,
+	Min = -60,
+	Max = 60,
+	Rounding = 1,
+	Callback = function(L_523_arg0)
+		posX = L_523_arg0
+	end
+})
+L_22_:OnChanged(function(L_524_arg0)
+	posX = L_524_arg0
+end)
+L_22_:SetValue(10)
+
+local L_23_ = L_5_.Main:AddSlider("SliderPosY", {
+	Title = "Pos Y",
+	Description = "",
+	Default = 30,
+	Min = -60,
+	Max = 60,
+	Rounding = 1,
+	Callback = function(L_525_arg0)
+		posY = L_525_arg0
+	end
+})
+L_23_:OnChanged(function(L_526_arg0)
+	posY = L_526_arg0
+end)
+L_23_:SetValue(30)
+
+local L_24_ = L_5_.Main:AddSlider("SliderPosZ", {
+	Title = "Pos Z",
+	Description = "",
+	Default = 10,
+	Min = -60,
+	Max = 60,
+	Rounding = 1,
+	Callback = function(L_527_arg0)
+		posZ = L_527_arg0
+	end
+})
+L_24_:OnChanged(function(L_528_arg0)
+	posZ = L_528_arg0
+end)
