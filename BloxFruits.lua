@@ -2652,7 +2652,7 @@ local L_94_ = L_5_.Main:AddSection("Farming")
 							end
 						end
 					end
-				elseif ChooseWeapon == " Blox Fruit" then
+				elseif ChooseWeapon == "Blox Fruit" then
 					for L_311_forvar0 , L_312_forvar1 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 						if L_312_forvar1.ToolTip == "Blox Fruit" then
 							if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(L_312_forvar1.Name)) then
@@ -2826,7 +2826,7 @@ L_22_:SetValue(10)
 local L_23_ = L_5_.Main:AddSlider("SliderPosY", {
 	Title = "Pos Y",
 	Description = "",
-	Default = 30,
+	Default = -40,
 	Min = -60,
 	Max = 60,
 	Rounding = 1,
