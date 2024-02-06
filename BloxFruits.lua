@@ -2771,6 +2771,30 @@ spawn(function()
 		end)
 	end
 end)
+local L_8_ = L_5_.Main:AddToggle("ToggleFastAttack", {
+	Title = " Enable Fast Attack",
+	Default = true
+})
+L_8_:OnChanged(function(L_510_arg0)
+	_G.FastAttack = L_510_arg0
+end)
+L_6_.ToggleFastAttack:SetValue(true)
+
+spawn(function()
+	while wait(0.00035) do
+		pcall(function()
+			if _G.FastAttack then
+				repeat
+					wait(_G.Fast_Delay)
+					AttackNoCD()
+				until not _G.FastAttack
+			end
+		end)
+	end
+end)
+local L_9_ = require(game.ReplicatedStorage.Util.CameraShaker)
+L_9_:Stop()
+
 local L_13_ = L_5_.Main:AddToggle("ToggleRemoveNotify", {
 	Title = " Enable Remove All Notify",
 	Default = true
@@ -2837,7 +2861,7 @@ local L_23_ = L_5_.Main:AddSlider("SliderPosY", {
 L_23_:OnChanged(function(L_526_arg0)
 	posY = L_526_arg0
 end)
-L_23_:SetValue(30)
+L_23_:SetValue(-40)
 
 local L_24_ = L_5_.Main:AddSlider("SliderPosZ", {
 	Title = "Pos Z",
@@ -2854,6 +2878,14 @@ L_24_:OnChanged(function(L_528_arg0)
 	posZ = L_528_arg0
 end)
 L_24_:SetValue(10)
+local L_29_ = L_5_.Stats:AddToggle("ToggleMelee", {
+	Title = "Auto Melee",
+	Default = false
+})
+L_29_:OnChanged(function(L_533_arg0)
+	_G.Auto_Stats_Melee = L_533_arg0
+end)
+L_6_.ToggleMelee:SetValue(false)
 local L_26_ = L_5_.Stats:AddToggle("ToggleDe", {
 	Title = "Auto Defense",
 	Default = false
@@ -3080,6 +3112,7 @@ UseCode("Sub2Daigrock")
 UseCode("Axiore")
 UseCode("TantaiGaming")
 UseCode("STRAWHATMAINE")
+UseCode("KittGaming")
 local L_43_ = L_5_.Teleport:AddDropdown("DropdownIsland", {
 	Title = "Select",
 	Values = IslandList,
