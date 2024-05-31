@@ -1,4 +1,28 @@
-
+local L_1_ = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local L_2_ = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local L_3_ = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+----------------------------------------------------------------------------------------------------------------------------------------------
+local L_4_ = L_1_:CreateWindow({
+	Title = "Cày B$ Script",
+	SubTitle = "RECHEDMCVN",
+	TabWidth = 160,
+	Size = UDim2.fromOffset(530, 350),
+	Acrylic = true,
+	Theme = "Dark",
+	MinimizeKey = Enum.KeyCode.End
+})
+local L_5_  = {
+	Main = L_4_:AddTab({
+		Title = "Main",
+		Icon = "palmtree"
+	}),
+	Main2 = L_4_:AddTab({
+		Title = "Fram",
+		Icon = "swords"
+	}),
+}
+local L_6_ = L_1_.Options
+do
 --------------------------------------------------------------------------------------------------------------------------------------------
 --Place Id Check
 	local L_82_ = game.PlaceId
@@ -2560,209 +2584,7 @@
 		game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
 	end
 
-	task.spawn(function()
-		while wait() do
-			pcall(function()
-				if ChooseWeapon == "Melee" then
-					for L_307_forvar0 , L_308_forvar1 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-						if L_308_forvar1.ToolTip == "Melee" then
-							if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(L_308_forvar1.Name)) then
-								SelectWeapon = L_308_forvar1.Name
-							end
-						end
-					end
-				elseif ChooseWeapon == "Sword" then
-					for L_309_forvar0 , L_310_forvar1 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-						if L_310_forvar1.ToolTip == "Sword" then
-							if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(L_310_forvar1.Name)) then
-								SelectWeapon = L_310_forvar1.Name
-							end
-						end
-					end
-				elseif ChooseWeapon == "Blox Fruit" then
-					for L_311_forvar0 , L_312_forvar1 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-						if L_312_forvar1.ToolTip == "Blox Fruit" then
-							if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(L_312_forvar1.Name)) then
-								SelectWeapon = L_312_forvar1.Name
-							end
-						end
-					end
-				end
-			end)
-		end
-	end)
-	spawn(function()
-		while task.wait() do
-			if _G.AutoLevel then
-				pcall(function()
-					CheckLevel()
-					if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-						if BypassTP then
-							if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude > 2500 then
-								BTP(CFrameQ)
-							elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude < 2500 then
-								Tween(CFrameQ)
-							end
-						else
-							Tween(CFrameQ)
-						end
-						if (CFrameQ.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
-							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, QuestLv)
-						end
-					elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-						for L_316_forvar0, L_317_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-							if L_317_forvar1:FindFirstChild("Humanoid") and L_317_forvar1:FindFirstChild("HumanoidRootPart") and L_317_forvar1.Humanoid.Health > 0 then
-								if L_317_forvar1.Name == Ms then
-									repeat
-										wait(_G.Fast_Delay)
-										AttackNoCD()
-										bringmob = true
-										AutoHaki()
-										EquipTool(SelectWeapon)
-										Tween(L_317_forvar1.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
-										L_317_forvar1.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-										L_317_forvar1.HumanoidRootPart.Transparency = 1
-										L_317_forvar1.Humanoid.JumpPower = 0
-										L_317_forvar1.Humanoid.WalkSpeed = 0
-										L_317_forvar1.HumanoidRootPart.CanCollide = false
-										FarmPos = L_317_forvar1.HumanoidRootPart.CFrame
-										MonFarm = L_317_forvar1.Name
-          --Click
-									until not _G.AutoLevel or not L_317_forvar1.Parent or L_317_forvar1.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(L_317_forvar1.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
-									bringmob = false
-								end
-							end
-						end
-						for L_318_forvar0, L_319_forvar1 in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
-							if string.find(L_319_forvar1.Name, NameMon) then
-								if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - L_319_forvar1.Position).Magnitude >= 10 then
-									Tween(L_319_forvar1.CFrame * CFrame.new(posX, posY, posZ))
-								end
-							end
-						end
-					end
-				end)
-			end
-		end
-	end)
-end
-spawn(function()
-	while wait() do
-		pcall(function()
-			for L_512_forvar0, L_513_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-				if _G.BringMob and bringmob then
-					if L_513_forvar1.Name == MonFarm and L_513_forvar1:FindFirstChild("Humanoid") and L_513_forvar1.Humanoid.Health > 0 then
-						if L_513_forvar1.Name == "Factory Staff" then
-							if (L_513_forvar1.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 500 then
-								L_513_forvar1.Head.CanCollide = false
-								L_513_forvar1.HumanoidRootPart.CanCollide = false
-								L_513_forvar1.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-								L_513_forvar1.HumanoidRootPart.CFrame = FarmPos
-								if L_513_forvar1.Humanoid:FindFirstChild("Animator") then
-									L_513_forvar1.Humanoid.Animator:Destroy()
-								end
-								sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-							end
-						elseif L_513_forvar1.Name == MonFarm then
-							if (L_513_forvar1.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 450 then
-								L_513_forvar1.Head.CanCollide = false
-								L_513_forvar1.HumanoidRootPart.CanCollide = false
-								L_513_forvar1.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-								L_513_forvar1.HumanoidRootPart.CFrame = FarmPos
-								if L_513_forvar1.Humanoid:FindFirstChild("Animator") then
-									L_513_forvar1.Humanoid.Animator:Destroy()
-								end
-								sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-							end
-						end
-					end
-				end
-			end
-		end)
-	end
-end)
-
-spawn(function()
-	while wait(0.00035) do
-		pcall(function()
-			if _G.FastAttack then
-				repeat
-					wait(_G.Fast_Delay)
-					AttackNoCD()
-				until not _G.FastAttack
-			end
-		end)
-	end
-end)
-local L_9_ = require(game.ReplicatedStorage.Util.CameraShaker)
-L_9_:Stop()
-
-spawn(function()
-	while wait() do
-		if _G.RemoveNotify then
-			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = 
-false
-		else
-			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
-		end
-	end
-end)
-
-spawn(function()
-			while task.wait() do
-				pcall(function()
-					if _G.WalkWater then
-						game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,112,1000)
-					else
-						game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,80,1000)
-					end
-				end)
-			end
-		end)
-
-UseCode()
-function UseCode(true)
-	game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(true)
-end
-UseCode("Sub2Fer999")
-UseCode("Enyu_is_Pro")
-UseCode("Magicbus")
-UseCode("JCWK")
-UseCode("Starcodeheo")
-UseCode("Bluxxy")
-UseCode("THEGREATACE")
-UseCode("SUB2GAMERROBOT_EXP1")
-UseCode("StrawHatMaine")
-UseCode("Sub2OfficialNoobie")
-UseCode("SUB2NOOBMASTER123")
-UseCode("Sub2Daigrock")
-UseCode("Axiore")
-UseCode("TantaiGaming")
-UseCode("STRAWHATMAINE")
-UseCode("KittGaming")
-spawn(function()
-	while wait(2) do
-		if _G.FlowerESP then
-			UpdateFlowerChams()
-		end
-		if _G.DevilFruitESP then
-			UpdateDevilChams()
-		end
-		if _G.ChestESP then
-			UpdateChestChams()
-		end
-		if _G.ESPPlayer then
-			UpdatePlayerChams()
-		end
-		if _G.RealFruitESP then
-			UpdateRealFruitChams()
-		end
-	end
-end)
-
-
-
+	
 
 
 
