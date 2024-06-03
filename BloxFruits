@@ -3,21 +3,17 @@ local L_2_ = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-sc
 local L_3_ = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 ----------------------------------------------------------------------------------------------------------------------------------------------
 local L_4_ = L_1_:CreateWindow({
-	Title = "Cày B$ Script",
-	SubTitle = "RECHEDMCVN",
+	Title = "Fram Chest",
+	SubTitle = "By RECHEDMCVN",
 	TabWidth = 160,
-	Size = UDim2.fromOffset(530, 350),
+	Size = UDim2.fromOffset(350, 550),
 	Acrylic = true,
 	Theme = "Dark",
 	MinimizeKey = Enum.KeyCode.End
 })
 local L_5_  = {
-	Main = L_4_:AddTab({
-		Title = "Main",
-		Icon = "palmtree"
-	}),
-	Setting = L_4_:AddTab({
-		Title = "Fram",
+	Misc = L_4_:AddTab({
+		Title = "Fram Chest",
 		Icon = "swords"
 	}),
 }
@@ -2586,473 +2582,52 @@ do
 
 	
 
-local L_94_ = L_5_.Main:AddSection("Farming")
-	local L_95_ = {
-		'1',
-		'0.9',
-		'0.8',
-          '0.7',
-          '0.6',
-          '0.5',
-          '0.4',
-          '0.3',
-          '0.2',
-          '0.1'
-	}
-	local L_96_ = L_5_.Main:AddDropdown("DropdownDelayAttack", {
-		Title = "Select Fast Attack",
-		Values = L_95_,
-		Multi = false,
-		Default = 1,
-	})
-	L_96_:SetValue("Fast Attack")
-	L_96_:OnChanged(function(L_305_arg0)
-		_G.FastAttack_Mode = L_305_arg0
-		if _G.FastAttack_Mode == "1" then
-			_G.Fast_Delay = 1
-		elseif _G.FastAttack_Mode == "0.9" then
-			_G.Fast_Delay = 0.9
-		elseif _G.FastAttack_Mode == "0.8" then
-			_G.Fast_Delay = 0.8
-          elseif _G.FastAttack_Mode == "0.7" then
-			_G.Fast_Delay = 0.7
-		elseif _G.FastAttack_Mode == "0.6" then
-			_G.Fast_Delay = 0.6
-          elseif _G.FastAttack_Mode == "0.5" then
-			_G.Fast_Delay = 0.5
-		elseif _G.FastAttack_Mode == "0.4" then
-			_G.Fast_Delay = 0.4
-          elseif _G.FastAttack_Mode == "0.3" then
-			_G.Fast_Delay = 0.3
-		elseif _G.FastAttack_Mode == "0.2" then
-			_G.Fast_Delay = 0.2
-         elseif _G.FastAttack_Mode == "0.1" then
-			_G.Fast_Delay = 0.1
-		end
-	end)
-	local L_97_ = L_5_.Main:AddDropdown("DropdownSelectWeapon", {
-		Title = "Select Weapon",
-		Values = {
-			'Melee',
-			'Sword',
-			'Blox Fruit'
-		},
-		Multi = false,
-		Default = 1,
-	})
-	L_97_:SetValue('Melee')
-	L_97_:OnChanged(function(L_306_arg0)
-		ChooseWeapon = L_306_arg0
-	end)
-	task.spawn(function()
-		while wait() do
-			pcall(function()
-				if ChooseWeapon == "Melee" then
-					for L_307_forvar0 , L_308_forvar1 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-						if L_308_forvar1.ToolTip == "Melee" then
-							if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(L_308_forvar1.Name)) then
-								SelectWeapon = L_308_forvar1.Name
-							end
-						end
-					end
-				elseif ChooseWeapon == "Sword" then
-					for L_309_forvar0 , L_310_forvar1 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-						if L_310_forvar1.ToolTip == "Sword" then
-							if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(L_310_forvar1.Name)) then
-								SelectWeapon = L_310_forvar1.Name
-							end
-						end
-					end
-				elseif ChooseWeapon == " Blox Fruit" then
-					for L_311_forvar0 , L_312_forvar1 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-						if L_312_forvar1.ToolTip == "Blox Fruit" then
-							if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(L_312_forvar1.Name)) then
-								SelectWeapon = L_312_forvar1.Name
-							end
-						end
-					end
-				else
-					for L_313_forvar0 , L_314_forvar1 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-						if L_314_forvar1.ToolTip == "Melee" then
-							if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(L_314_forvar1.Name)) then
-								SelectWeapon = L_314_forvar1.Name
-							end
-						end
-					end
+local L_94_ = L_5_.Misc:AddSection("Farming")
+game:GetService('RunService').RenderStepped:connect(function()
+		if _G.chest1 then
+				if game:GetService("Workspace"):FindFirstChild("Chest1") then
+					TPchest( game:GetService("Workspace"):FindFirstChild("Chest1").CFrame)
 				end
-			end)
-		end
-	end)
-	local L_98_ = L_5_.Main:AddToggle("ToggleLevel", {
-		Title = "Auto Level/Money",
-		Default = false
-	})
-	L_98_:OnChanged(function(L_315_arg0)
-		_G.AutoLevel = L_315_arg0
-	end)
-	L_6_.ToggleLevel:SetValue(false)
-	spawn(function()
-		while task.wait() do
-			if _G.AutoLevel then
-				pcall(function()
-					CheckLevel()
-					if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-						if BypassTP then
-							if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude > 2500 then
-								BTP(CFrameQ)
-							elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude < 2500 then
-								Tween(CFrameQ)
-							end
-						else
-							Tween(CFrameQ)
-						end
-						if (CFrameQ.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
-							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, QuestLv)
-						end
-					elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-						for L_316_forvar0, L_317_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-							if L_317_forvar1:FindFirstChild("Humanoid") and L_317_forvar1:FindFirstChild("HumanoidRootPart") and L_317_forvar1.Humanoid.Health > 0 then
-								if L_317_forvar1.Name == Ms then
-									repeat
-										wait(_G.Fast_Delay)
-										AttackNoCD()
-										bringmob = true
-										AutoHaki()
-										EquipTool(SelectWeapon)
-										Tween(L_317_forvar1.HumanoidRootPart.CFrame * CFrame.new(0, 15, 0))
-										L_317_forvar1.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-										L_317_forvar1.HumanoidRootPart.Transparency = 1
-										L_317_forvar1.Humanoid.JumpPower = 0
-										L_317_forvar1.Humanoid.WalkSpeed = 0
-										L_317_forvar1.HumanoidRootPart.CanCollide = false
-										FarmPos = L_317_forvar1.HumanoidRootPart.CFrame
-										MonFarm = L_317_forvar1.Name
-          --Click
-									until not _G.AutoLevel or not L_317_forvar1.Parent or L_317_forvar1.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(L_317_forvar1.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
-									bringmob = false
-								end
-							end
-						end
-						for L_318_forvar0, L_319_forvar1 in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
-							if string.find(L_319_forvar1.Name, NameMon) then
-								if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - L_319_forvar1.Position).Magnitude >= 10 then
-									Tween(L_319_forvar1.CFrame * CFrame.new(posX, posY, posZ))
-								end
-							end
-						end
-					end
-				end)
-			end
-		end
-	end)
-local L_102_ = L_5_.Main:AddToggle("ToggleCastleRaid", {
-		Title = "Auto Castle Raid",
-		Default = false
-	})
-	L_102_:OnChanged(function(L_326_arg0)
-		_G.CastleRaid = L_326_arg0
-	end)
-	L_6_.ToggleCastleRaid:SetValue(false)
-	spawn(function()
-		while wait() do
-			if _G.CastleRaid then
-				pcall(function()
-					local L_327_ = CFrame.new(- 5496.17432, 313.768921, - 2841.53027, 0.924894512, 7.37058015e-09, 0.380223751, 3.5881019e-08, 1, - 1.06665446e-07, - 0.380223751, 1.12297109e-07, 0.924894512)
-					if (CFrame.new(- 5539.3115234375, 313.800537109375, - 2972.372314453125).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 500 then
-						for L_328_forvar0, L_329_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-							if _G.CastleRaid and L_329_forvar1:FindFirstChild("HumanoidRootPart") and L_329_forvar1:FindFirstChild("Humanoid") and L_329_forvar1.Humanoid.Health > 0 then
-								if (L_329_forvar1.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2000 then
-									repeat
-										wait(_G.Fast_Delay)
-										AttackNoCD()
-										bringmob = true
-										AutoHaki()
-										EquipTool(SelectWeapon)
-										L_329_forvar1.HumanoidRootPart.CanCollide = false
-										L_329_forvar1.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-										Tween(L_329_forvar1.HumanoidRootPart.CFrame * CFrame.new(posX, posY, posZ))
-									until L_329_forvar1.Humanoid.Health <= 0 or not L_329_forvar1.Parent or not _G.CastleRaid
-									bringmob = false
-								end
-							end
-						end
-					else
-						if BypassTP then
-							if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - L_327_.Position).Magnitude > 2500 then
-								BTP(L_327_)
-							elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - L_327_.Position).Magnitude < 2500 then
-								Tween(L_327_)
-							end
-						end
-					end
-				end)
-			end
-		end
-	end)
-local L_109_ = L_5_.Main:AddSection("Boss Farm")
-	if First_Sea then
-		tableBoss = {
-			"The Gorilla King",
-			"Bobby",
-			"Yeti",
-			"Mob Leader",
-			"Vice Admiral",
-			"Warden",
-			"Chief Warden",
-			"Swan",
-			"Magma Admiral",
-			"Fishman Lord",
-			"Wysper",
-			"Thunder God",
-			"Cyborg",
-			"Saber Expert"
-		}
-	elseif Second_Sea then
-		tableBoss = {
-			"Diamond",
-			"Jeremy",
-			"Fajita",
-			"Don Swan",
-			"Smoke Admiral",
-			"Cursed Captain",
-			"Darkbeard",
-			"Order",
-			"Awakened Ice Admiral",
-			"Tide Keeper"
-		}
-	elseif Third_Sea then
-		tableBoss = {
-			"Stone",
-			"Island Empress",
-			"Kilo Admiral",
-			"Captain Elephant",
-			"Beautiful Pirate",
-			"rip_indra True Form",
-			"Longma",
-			"Soul Reaper",
-			"Cake Queen"
-		}
-	end
-	local L_110_ = L_5_.Main:AddDropdown("DropdownBoss", {
-		Title = "Select Boss",
-		Values = tableBoss,
-		Multi = false,
-		Default = 1,
-	})
-	L_110_:SetValue("")
-	L_110_:OnChanged(function(L_382_arg0)
-		_G.SelectBoss = L_382_arg0
-	end)
-
-	local L_111_ = L_5_.Main:AddToggle("ToggleAutoFarmBoss", {
-		Title = "Kill Boss",
-		Default = false
-	})
-	L_111_:OnChanged(function(L_383_arg0)
-		_G.AutoBoss = L_383_arg0
-	end)
-	L_6_.ToggleAutoFarmBoss:SetValue(false)
-	spawn(function()
-		while wait() do
-			if _G.AutoBoss and BypassTP then
-				pcall(function()
-					if game:GetService("Workspace").Enemies:FindFirstChild(_G.SelectBoss) then
-						for L_384_forvar0, L_385_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-							if L_385_forvar1.Name == _G.SelectBoss then
-								if L_385_forvar1:FindFirstChild("Humanoid") and L_385_forvar1:FindFirstChild("HumanoidRootPart") and L_385_forvar1.Humanoid.Health > 0 then
-									repeat
-										wait(_G.Fast_Delay)
-										AttackNoCD()
-										AutoHaki()
-										bringmob = true
-										EquipTool(SelectWeapon)
-										L_385_forvar1.HumanoidRootPart.CanCollide = false
-										L_385_forvar1.Humanoid.WalkSpeed = 0
-										L_385_forvar1.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-										Tween(L_385_forvar1.HumanoidRootPart.CFrame * Pos)
-										sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-									until not _G.AutoBoss or not L_385_forvar1.Parent or L_385_forvar1.Humanoid.Health <= 0
-									bringmob = false
-								end
-							end
-						end
-					elseif game.ReplicatedStorage:FindFirstChild(_G.SelectBoss) then
-						if ((game.ReplicatedStorage:FindFirstChild(_G.SelectBoss).HumanoidRootPart.CFrame).Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 1500 then
-							Tween(game.ReplicatedStorage:FindFirstChild(_G.SelectBoss).HumanoidRootPart.CFrame)
-						else
-							BTP(game.ReplicatedStorage:FindFirstChild(_G.SelectBoss).HumanoidRootPart.CFrame)
-						end
-					end
-				end)
-			end
-		end
-	end)
-	spawn(function()
-		while wait() do
-			if _G.AutoBoss and not BypassTP then
-				pcall(function()
-					if game:GetService("Workspace").Enemies:FindFirstChild(_G.SelectBoss) then
-						for L_386_forvar0, L_387_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-							if L_387_forvar1.Name == _G.SelectBoss then
-								if L_387_forvar1:FindFirstChild("Humanoid") and L_387_forvar1:FindFirstChild("HumanoidRootPart") and L_387_forvar1.Humanoid.Health > 0 then
-									repeat
-										wait(_G.Fast_Delay)
-										AttackNoCD()
-										AutoHaki()
-										bringmob = true
-										EquipTool(SelectWeapon)
-										L_387_forvar1.HumanoidRootPart.CanCollide = false
-										L_387_forvar1.Humanoid.WalkSpeed = 0
-										L_387_forvar1.HumanoidRootPart.Size = Vector3.new(80, 80, 80)
-										Tween(L_387_forvar1.HumanoidRootPart.CFrame * Pos)
-										sethiddenproperty(game:GetService("Players").LocalPlayer, "SimulationRadius", math.huge)
-									until not _G.AutoBoss or not L_387_forvar1.Parent or L_387_forvar1.Humanoid.Health <= 0
-									bringmob = false
-								end
-							end
-						end
-					else
-						if game:GetService("ReplicatedStorage"):FindFirstChild(_G.SelectBoss) then
-							Tween(game:GetService("ReplicatedStorage"):FindFirstChild(_G.SelectBoss).HumanoidRootPart.CFrame * CFrame.new(5, 10, 7))
-						end
-					end
-				end)
-			end
-		end
-	end)
-local L_8_ = L_5_.Setting:AddToggle("ToggleFastAttack", {
-	Title = " Enable Fast Attack",
-	Default = true
-})
-L_8_:OnChanged(function(L_510_arg0)
-	_G.FastAttack = L_510_arg0
-end)
-L_6_.ToggleFastAttack:SetValue(true)
-
-spawn(function()
-	while wait(0.4) do
-		pcall(function()
-			if _G.FastAttack then
-				repeat
-					wait(_G.Fast_Delay)
-					AttackNoCD()
-				until not _G.FastAttack
-			end
+                           end
+                      end)
+local L_335_ = L_5_.Misc:AddToggle("ToggleChest", {
+			Title = "Auto Chest Iron",
+			Default = false
+		})
+		L_335_:OnChanged(function(L_336_arg0)
+			_G.chest1 = L_336_arg0
 		end)
+		L_6_.ToggleChest:SetValue(false)
 	end
-end)
-
-local L_9_ = require(game.ReplicatedStorage.Util.CameraShaker)
-L_9_:Stop()
-local L_10_ = L_5_.Setting:AddToggle("ToggleBringMob", {
-	Title = " Enable Bring Mob",
-	Default = true
-})
-L_10_:OnChanged(function(L_511_arg0)
-	_G.BringMob = L_511_arg0
-end)
-L_6_.ToggleBringMob:SetValue(true)
-spawn(function()
-	while wait() do
-		pcall(function()
-			for L_512_forvar0, L_513_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-				if _G.BringMob and bringmob then
-					if L_513_forvar1.Name == MonFarm and L_513_forvar1:FindFirstChild("Humanoid") and L_513_forvar1.Humanoid.Health > 0 then
-						if L_513_forvar1.Name == "Factory Staff" then
-							if (L_513_forvar1.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 500 then
-								L_513_forvar1.Head.CanCollide = false
-								L_513_forvar1.HumanoidRootPart.CanCollide = false
-								L_513_forvar1.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-								L_513_forvar1.HumanoidRootPart.CFrame = FarmPos
-								if L_513_forvar1.Humanoid:FindFirstChild("Animator") then
-									L_513_forvar1.Humanoid.Animator:Destroy()
-								end
-								sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-							end
-						elseif L_513_forvar1.Name == MonFarm then
-							if (L_513_forvar1.HumanoidRootPart.Position - FarmPos.Position).Magnitude <= 450 then
-								L_513_forvar1.Head.CanCollide = false
-								L_513_forvar1.HumanoidRootPart.CanCollide = false
-								L_513_forvar1.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
-								L_513_forvar1.HumanoidRootPart.CFrame = FarmPos
-								if L_513_forvar1.Humanoid:FindFirstChild("Animator") then
-									L_513_forvar1.Humanoid.Animator:Destroy()
-								end
-								sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-							end
-						end
-					end
+game:GetService('RunService').RenderStepped:connect(function()
+		if _G.chest2 then
+				if game:GetService("Workspace"):FindFirstChild("Chest2") then
+					TPchest( game:GetService("Workspace"):FindFirstChild("Chest2").CFrame)
 				end
-			end
+                           end
+                      end)
+local L_335_ = L_5_.Misc:AddToggle("ToggleChest", {
+			Title = "Auto Chest Gold",
+			Default = false
+		})
+		L_335_:OnChanged(function(L_336_arg0)
+			_G.chest2 = L_336_arg0
 		end)
+		L_6_.ToggleChest:SetValue(false)
 	end
-end)
-local L_11_ = L_5_.Setting:AddToggle("ToggleBypassTP", {
-	Title = "Enable Bypass Tp",
-	Default = false
-})
-L_11_:OnChanged(function(L_514_arg0)
-	BypassTP = L_514_arg0
-end)
-L_6_.ToggleBypassTP:SetValue(false)
-
-
-local L_12_ = L_5_.Setting:AddToggle("ToggleRemove", {
-	Title = " Enable Remove Dame Text",
-	Default = true
-})
-L_12_:OnChanged(function(L_515_arg0)
-	_G.RemoveDameText = L_515_arg0
-end)
-L_6_.ToggleRemove:SetValue(true)
-spawn(function()
-	while wait() do
-		if _G.RemoveDameText then
-			game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
-		else
-			game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = true
-		end
+game:GetService('RunService').RenderStepped:connect(function()
+		if _G.chest3 then
+				if game:GetService("Workspace"):FindFirstChild("Chest3") then
+					TPchest( game:GetService("Workspace"):FindFirstChild("Chest3").CFrame)
+				end
+                           end
+                      end)
+local L_335_ = L_5_.Misc:AddToggle("ToggleChest", {
+			Title = "Auto Chest Diamond",
+			Default = false
+		})
+		L_335_:OnChanged(function(L_336_arg0)
+			_G.chest3 = L_336_arg0
+		end)
+		L_6_.ToggleChest:SetValue(false)
 	end
-end)
-
-        
-local L_13_ = L_5_.Setting:AddToggle("ToggleRemoveNotify", {
-	Title = " Enable Remove All Notify",
-	Default = false
-})
-L_13_:OnChanged(function(L_516_arg0)
-	RemoveNotify = L_516_arg0
-end)
-L_6_.ToggleRemoveNotify:SetValue(false)
-spawn(function()
-	while wait() do
-		if RemoveNotify then
-			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = false
-		else
-			game.Players.LocalPlayer.PlayerGui.Notifications.Enabled = true
-		end
-	end
-end)
-local L_14_ = L_5_.Setting:AddToggle("ToggleWhite", {
-	Title = " Enable White Screen",
-	Default = false
-})
-L_14_:OnChanged(function(L_517_arg0)
-	_G.WhiteScreen = L_517_arg0
-	if _G.WhiteScreen == true then
-		game:GetService("RunService"):Set3dRenderingEnabled(false)
-	elseif _G.WhiteScreen == false then
-		game:GetService("RunService"):Set3dRenderingEnabled(true)
-	end
-end)
-end
-
-
-
-
-
-
-
-
-
