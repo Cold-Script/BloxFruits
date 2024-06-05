@@ -12,7 +12,7 @@ local L_4_ = L_1_:CreateWindow({
 	MinimizeKey = Enum.KeyCode.End
 })
 local L_5_  = {
-	        Main = L_4_:AddTab({
+	        Misc = L_4_:AddTab({
 		Title = "Main",
 		Icon = "swords"
 	}),
