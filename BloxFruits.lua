@@ -12,12 +12,8 @@ local L_4_ = L_1_:CreateWindow({
 	MinimizeKey = Enum.KeyCode.End
 })
 local L_5_  = {
-	Teleport = L_4_:AddTab({
-		Title = "Teleport",
-		Icon = "palmtree"
-	}),
-	Raid = L_4_:AddTab({
-		Title = "Raid",
+	        Main = L_4_:AddTab({
+		Title = "Main",
 		Icon = "swords"
 	}),
 }
