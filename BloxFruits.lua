@@ -3,7 +3,7 @@ local L_2_ = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-sc
 local L_3_ = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 ----------------------------------------------------------------------------------------------------------------------------------------------
 local L_4_ = L_1_:CreateWindow({
-	Title = "Script",
+	Title = "Script Fram Chest",
 	SubTitle = "RECHEDMCVN",
 	TabWidth = 160,
 	Size = UDim2.fromOffset(530, 350),
