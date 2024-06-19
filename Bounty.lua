@@ -17,6 +17,7 @@ function AntiBan()
 		end
 	end
 	AntiBan()
+while wait() do
 local plr = game.Players.LocalPlayer
 
 local CbFw = debug.getupvalues(require(plr.PlayerScripts.CombatFramework))
@@ -84,5 +85,6 @@ else
 end
 while cac() do 
 	AttackNoCD()
-end
+	end
 Library:Notify("100% Anti Ban!!")
+end
