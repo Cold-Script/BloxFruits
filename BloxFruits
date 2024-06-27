@@ -2572,9 +2572,63 @@ do
 	end
 
 	
-Home.Button({Name="Fram"})
-Home.Toggle({Name="Teleport Monters [Quest]"})
-Home.Toggle({Name="Nobody"})
+
+Home.Toggle({Name="Teleport Monters [Quest]",Enabled=false,Callback=function(v2)_G.AutoLevel=v2 end})
+spawn(function()
+		while task.wait() do
+			if _G.AutoLevel then
+				pcall(function()
+					CheckLevel()
+					if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+						game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+						if BypassTP then
+							if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude > 2500 then
+								BTP(CFrameQ)
+							elseif (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - CFrameQ.Position).Magnitude < 2500 then
+								Tween(CFrameQ)
+							end
+						else
+							Tween(CFrameQ)
+						end
+						if (CFrameQ.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
+							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest", NameQuest, QuestLv)
+						end
+					elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+						for L_316_forvar0, L_317_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+							if L_317_forvar1:FindFirstChild("Humanoid") and L_317_forvar1:FindFirstChild("HumanoidRootPart") and L_317_forvar1.Humanoid.Health > 0 then
+								if L_317_forvar1.Name == Ms then
+									repeat
+										wait(_G.Fast_Delay)
+										AttackNoCD()
+										bringmob = true
+										AutoHaki()
+										EquipTool(SelectWeapon)
+										Tween(L_317_forvar1.HumanoidRootPart.CFrame * CFrame.new(posX, -30, posZ))
+										L_317_forvar1.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+										L_317_forvar1.HumanoidRootPart.Transparency = 1
+										L_317_forvar1.Humanoid.JumpPower = 0
+										L_317_forvar1.Humanoid.WalkSpeed = 0
+										L_317_forvar1.HumanoidRootPart.CanCollide = false
+										FarmPos = L_317_forvar1.HumanoidRootPart.CFrame
+										MonFarm = L_317_forvar1.Name
+          --Click
+									until not _G.AutoLevel or not L_317_forvar1.Parent or L_317_forvar1.Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild(L_317_forvar1.Name) or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
+									bringmob = false
+								end
+							end
+						end
+						for L_318_forvar0, L_319_forvar1 in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+							if string.find(L_319_forvar1.Name, NameMon) then
+								if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - L_319_forvar1.Position).Magnitude >= 10 then
+									Tween(L_319_forvar1.CFrame * CFrame.new(posX, posY, posZ))
+								end
+							end
+						end
+					end
+				end)
+			end
+		end
+	end)
 Home.Toggle({Name="Noclip",Enabled=false,Callback=function(v3)for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
 			if child:IsA("BasePart") and child.CanCollide == true then
 				child.CanCollide = false
@@ -2582,3 +2636,93 @@ Home.Toggle({Name="Noclip",Enabled=false,Callback=function(v3)for _, child in pa
 		end
 	end})
 Home.Toggle({Name="Enable 120 Field Of View",Enabled=false,Callback=function(v4)if v4 then workspace.CurrentCamera.FieldOfView=120 else workspace.CurrentCamera.FieldOfView=70 end end})
+Home.Button({Name="Nobody",Func=function()game.Players.LocalPlayer.Character.LowerTorso.Size = Vector3.new(0)
+game.Players.LocalPlayer.Character.Head.Size = Vector3.new(0)
+game.Players.LocalPlayer.Character.RightFoot.Size = Vector3.new(0)
+game.Players.LocalPlayer.Character.LeftFoot.Size = Vector3.new(0)
+game.Players.LocalPlayer.Character.RightUpperArm.Size = Vector3.new(0)
+game.Players.LocalPlayer.Character.LeftUpperArm.Size = Vector3.new(0)
+game.Players.LocalPlayer.Character.RightLowerArm.Size = Vector3.new(0)
+game.Players.LocalPlayer.Character.LeftLowerArm.Size = Vector3.new(0)
+game.Players.LocalPlayer.Character.RightHand.Size = Vector3.new(0)
+game.Players.LocalPlayer.Character.LeftHand.Size = Vector3.new(0)
+game.Players.LocalPlayer.Character.RightUpperLeg.Size = Vector3.new(0)
+game.Players.LocalPlayer.Character.LeftUpperLeg.Size = Vector3.new(0)
+game.Players.LocalPlayer.Character.RightLowerLeg.Size = Vector3.new(0)
+game.Players.LocalPlayer.Character.LeftLowerLeg.Size = Vector3.new(0)end})
+Home.Button({Name="Hitbox + Super Fast Attack",Func=function()local EFast = true
+local Delay = 0
+local plr = game.Players.LocalPlayer
+
+local CbFw = debug.getupvalues(require(plr.PlayerScripts.CombatFramework))
+local CbFw2 = CbFw[2]
+
+function GetCurrentBlade() 
+    local p13 = CbFw2.activeController
+    local ret = p13.blades[1]
+    if not ret then return end
+    while ret.Parent~=game.Players.LocalPlayer.Character do ret=ret.Parent end
+    return ret
+end
+function AttackNoCD() 
+    local AC = CbFw2.activeController
+    for i = 1, 1 do 
+        local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
+            plr.Character,
+            {plr.Character.HumanoidRootPart},
+            60
+        )
+        local cac = {}
+        local hash = {}
+        for k, v in pairs(bladehit) do
+            if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
+                table.insert(cac, v.Parent.HumanoidRootPart)
+                hash[v.Parent] = true
+            end
+        end
+        bladehit = cac
+        if #bladehit > 0 then
+            local u8 = debug.getupvalue(AC.attack, 5)
+            local u9 = debug.getupvalue(AC.attack, 6)
+            local u7 = debug.getupvalue(AC.attack, 4)
+            local u10 = debug.getupvalue(AC.attack, 7)
+            local u12 = (u8 * 798405 + u7 * 727595) % u9
+            local u13 = u7 * 798405
+            (function()
+                u12 = (u12 * u9 + u13) % 1099511627776
+                u8 = math.floor(u12 / u9)
+                u7 = u12 - u8 * u9
+            end)()
+            u10 = u10 + 1
+            debug.setupvalue(AC.attack, 5, u8)
+            debug.setupvalue(AC.attack, 6, u9)
+            debug.setupvalue(AC.attack, 4, u7)
+            debug.setupvalue(AC.attack, 7, u10)
+            pcall(function()
+                for k, v in pairs(AC.animator.anims.basic) do
+                    v:Play()
+                end                  
+            end)
+            if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then 
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
+                game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
+                game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "") 
+            end
+        end
+    end
+end
+local cac
+if EFast then 
+	cac=task.wait
+else
+	cac=wait
+end
+pcall(function()
+     spawn(function()
+	game:GetService("RunService").RenderStepped:Connect(function()
+           cac(Delay)
+	AttackNoCD()
+   end)
+ end)
+end)
+end})
