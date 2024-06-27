@@ -1,23 +1,14 @@
-local L_1_ = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-local L_2_ = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
-local L_3_ = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
-----------------------------------------------------------------------------------------------------------------------------------------------
-local L_4_ = L_1_:CreateWindow({
-	Title = "Fram Chest",
-	SubTitle = "By RECHEDMCVN",
-	TabWidth = 160,
-	Size = UDim2.fromOffset(350, 550),
-	Acrylic = true,
-	Theme = "Dark",
-	MinimizeKey = Enum.KeyCode.End
+local Library = loadstring(game:HttpGet'https://raw.githubusercontent.com/windswim/miami-nights/main/Resources/Glass%20UI/Mint_0_1')("Glass UI | Version Mint 0_1");
+local Window, LocalStore = Library:Create({
+    Name = "YOU HUB | Level Fram",
+    Description = "Level Fram Version",
+    Theme = "Genshi" -- Midnight, Rubicon, Genshi, Winter
 })
-local L_5_  = {
-	Misc = L_4_:AddTab({
-		Title = "Fram Chest",
-		Icon = "swords"
-	}),
-}
-local L_6_ = L_1_.Options
+
+local Home = Window.Tab({
+    Name = "Fram"
+})
+
 do
 --------------------------------------------------------------------------------------------------------------------------------------------
 --Place Id Check
@@ -2581,53 +2572,13 @@ do
 	end
 
 	
-
-local L_94_ = L_5_.Misc:AddSection("Farming")
-game:GetService('RunService').RenderStepped:connect(function()
-		if _G.chest1 then
-				if game:GetService("Workspace"):FindFirstChild("Chest1") then
-					TPchest( game:GetService("Workspace"):FindFirstChild("Chest1").CFrame)
-				end
-                           end
-                      end)
-local L_335_ = L_5_.Misc:AddToggle("ToggleChest", {
-			Title = "Auto Chest Iron",
-			Default = false
-		})
-		L_335_:OnChanged(function(L_336_arg0)
-			_G.chest1 = L_336_arg0
-		end)
-		L_6_.ToggleChest:SetValue(false)
-	end
-game:GetService('RunService').RenderStepped:connect(function()
-		if _G.chest2 then
-				if game:GetService("Workspace"):FindFirstChild("Chest2") then
-					TPchest( game:GetService("Workspace"):FindFirstChild("Chest2").CFrame)
-				end
-                           end
-                      end)
-local L_335_ = L_5_.Misc:AddToggle("ToggleChest", {
-			Title = "Auto Chest Gold",
-			Default = false
-		})
-		L_335_:OnChanged(function(L_336_arg0)
-			_G.chest2 = L_336_arg0
-		end)
-		L_6_.ToggleChest:SetValue(false)
-	end
-game:GetService('RunService').RenderStepped:connect(function()
-		if _G.chest3 then
-				if game:GetService("Workspace"):FindFirstChild("Chest3") then
-					TPchest( game:GetService("Workspace"):FindFirstChild("Chest3").CFrame)
-				end
-                           end
-                      end)
-local L_335_ = L_5_.Misc:AddToggle("ToggleChest", {
-			Title = "Auto Chest Diamond",
-			Default = false
-		})
-		L_335_:OnChanged(function(L_336_arg0)
-			_G.chest3 = L_336_arg0
-		end)
-		L_6_.ToggleChest:SetValue(false)
-	end
+Home.Button({Name="Fram"})
+Home.Toggle({Name="Teleport Monters [Quest]"})
+Home.Toggle({Name="Nobody"})
+Home.Toggle({Name="Noclip",Enabled=false,Callback=function(v3)for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+			if child:IsA("BasePart") and child.CanCollide == true then
+				child.CanCollide = false
+			end
+		end
+	end})
+Home.Toggle({Name="Enable 120 Field Of View",Enabled=false,Callback=function(v4)if v4 then workspace.CurrentCamera.FieldOfView=120 else workspace.CurrentCamera.FieldOfView=70 end end})
